@@ -1,0 +1,151 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+use \App;
+
+Route::get('/', 'CompeticaoController@index');
+
+//Users
+Route::get('user/create', ['as' => 'create.user', 'uses' => 'UserController@create']);
+Route::post('store', 'UserController@store');
+Route::put('update/{id}', ['as' => 'update.user', 'uses' => 'UserController@update']);
+Route::get('edit/{id}', ['as' => 'edit.user', 'uses' => 'UserController@edit']);
+Route::delete('delete/{id}', ['as' => 'delete.user', 'uses' => 'UserController@destroy']);
+Route::get('listuser', ['as' => 'list.users', 'uses' => 'UserController@index']);
+Route::get('users', ['as' => 'users', 'uses' => 'UserController@users']);
+Route::get('show/{id}', ['as' => 'show.user', 'uses' => 'UserController@show']);
+Route::get('user/userrepository/{id}', ['as' => 'user.userrepository', 'uses' => 'UserController@userrepository']);
+
+
+//Repositorys -> repository
+Route::get('repository/create', ['as' => 'create.repository', 'uses' => 'RepositoryController@create']);
+Route::post('repository/store', 'RepositoryController@store');
+Route::get('repository/index', 'RepositoryController@index');
+
+//UserRepository
+Route::get('userrepository/{user_id}', ['as' => 'userrepository.user', 'uses' => 'UserRepositoryController@edit']);
+Route::post('userrepository/store', ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
+Route::get('userrepository/show/{user_id}', ['as' => 'user.userrepositoryshow', 'uses' => 'UserRepositoryController@show']);
+Route::get('listuserrepository', ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
+Route::get('listuserrepository/delete/{id}', ['as' => 'delete.userrepositorys', 'uses' => 'UserRepositoryController@destroy']);
+
+//COMPETICAO
+Route::get('competition/show/{id}', ['as' => 'competition.show', 'uses' => 'CompetitionController@show']);
+Route::get('competition/index', ['as' => 'competition.index', 'uses' => 'CompetitionController@listCompetition']);
+Route::get('competition/list', ['as' => 'competition.list', 'uses' => 'CompetitionController@index']);
+Route::get('register/competition', ['as' => 'competition.register', 'uses' => 'CompetitionController@create']);
+Route::post('competition/store', ['as' => 'competition.store', 'uses' => 'CompetitionController@store']);
+Route::get('competition/edit/{id}', ['as' => 'competition.edit', 'uses' => 'CompetitionController@edit']);
+Route::put('competition/update/{id}', ['as' => 'competition.update', 'uses' => 'CompetitionController@update']);
+Route::delete('competition/destroy/{id}', ['as' => 'competition.destroy', 'uses' => 'CompetitionController@destroy']);
+Route::get('competition/users/{competition_id}', ['as' => 'competition.user', 'uses' => 'CompetitionController@competitionUsers']);
+
+Route::get('competition/competitionUser/{competition_id}',
+    ['as' => 'competition.competitionUser',
+        'uses' => 'CompetitionController@competitionUser'
+    ]
+);
+
+//PROBLEM
+Route::get('problem/create/{competition_id}', ['as' => 'problem.create', 'uses' => 'ProblemController@create']);
+Route::get('problem/show/{id}', ['as' => 'problem.show', 'uses' => 'ProblemController@show']);
+Route::get('problem/destroy/{id}', ['as' => 'problem.show', 'uses' => 'ProblemController@destroy']);
+Route::post('problem/store', ['as' => 'problem.store', 'uses' => 'ProblemController@store']);
+Route::get(
+    'problem/showProblemCompetition/{problem_id}',
+    ['as' => 'problem.showProblemCompetition',
+        'uses' => 'ProblemController@showProblemCompetition'
+    ]
+);
+
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+//LOGIN
+Route::get('logout', 'CompeticaoController@logout');
+
+
+
+
+
+
+//TESTES
+//Route::get('user/teste', ['as' => 'teste', 'uses' => 'UserController@teste']);
+Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
+    return '
+<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">Dropdown link</a></li>
+      <li><a href="#">Dropdown link</a></li>
+    </ul>
+  </div>
+  </div>
+';
+}]);
+
+
+
+Route::post('oauth/acess_token',function(){
+    return Response::json(Authorizer::issueAccessToken());
+});
+
+
+Route::group(['before' => 'oauth'], function () {
+
+    Route::get('teste/{user_id}', ['as' => 'user.teste', 'uses' => function ($user_id) {
+        return App\User::find($user_id);
+    }]);
+    //Route::resource('post', 'ApiController', ['except' => ['create', 'edit']]);
+});
+
+//Route::get('teste', function () {
+//    return 'Hello World';
+//});
+
+Route::get('dashboard', function () {
+
+    $userrepository = new \App\UserRepository();
+    $userrepository->username = 'Menoto';
+
+    $user = \App\User::find(32);
+//    $repository = \App\Repository::find(1);
+
+//    $repository->userRepository();
+//    $user->userRepository();
+
+//    $repository->userRepository()->save($userrepository);
+//
+//    $user->userRepository()->save($userrepository);
+
+//    $casandra = array();
+
+    $ur = $user->userRepository;
+
+    foreach ($ur as $value) {
+        $value->repository;
+    }
+//    var_dump($casandra);
+
+    return $user;//array(1=>$user,2=>$user->userRepository);
+});

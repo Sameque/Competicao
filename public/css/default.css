@@ -1,0 +1,100 @@
+
+
+.glyphicon {
+/*    font-size: 100px;*/
+}
+
+.formCad {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+
+    /*background-color:#0000C2;*/
+}
+.formLog {
+    margin-top: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+
+    /*background-color: #c7254e;*/
+}
+.formCad h2{
+    text-align: center;
+}
+.listUser {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+.formCompetition{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    align-content: center;
+    /*background-color: #28a4c9;*/
+}
+.title{
+    width: auto;
+    margin-left: 10px;
+    margin-right: auto;
+    /*min-font-size: 3px;*/
+
+}
+.btn{
+    font-size: 15px ;
+}
+
+.navBarLeft{
+    width: 200px;
+    /*background-color: #c7254e;*/
+    float: left;
+}
+.inputNameCompetiton{
+    width: 395px;
+    padding-left: 15px;
+}
+.navBarTop{
+
+}
+.listCompetition{
+    width: auto;
+    height: auto;
+    margin-top: 50px;
+    margin-left: 50px;
+    align-content: center;
+    /*background-color: #c7254e;*/
+}
+.listCompetition table{
+
+}
+.teste {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+.listProblem{
+    /*width: 500px;*/
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.formProblem {
+    margin-left: auto;
+    width: 450px;
+    margin-right: auto;
+    margin-bottom: 100px;
+    align-content: center;
+    /*background-color: #28a4c9;*/
+}
+.competitionName{
+    /*background-color: #28a4c9;*/
+    width: 360px;
+}
