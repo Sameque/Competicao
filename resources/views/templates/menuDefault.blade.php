@@ -28,7 +28,7 @@
             </li>
             <li>
                 <?php
-                echo link_to('#', $title = 'Submissão', $attributes = array(), $secure = null);
+                echo link_to('submission', $title = 'Submissão', $attributes = array(), $secure = null);
                 ?>
             </li>
             <li>

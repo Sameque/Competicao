@@ -21,8 +21,7 @@
                 <div class="row">
                     <div class="inputNameCompetiton">
                         <label for="name">Nome da Competição</label>
-                        <input name="name" id="name" type="text" class="form-control"
-                               ng-model="competition.name"
+                        <input name="name" type="text" class="form-control"
                                ng-required="true"
                                placeholder='Digite o Nome da Competição'/>
                         </br >
@@ -30,24 +29,21 @@
                     <div class="col-md-6 ">
 
                         <label for="dateBegin">Data Início</label>
-                        <input name="dateBegin" id="dateBegin" type="date" value="<% old('dateBegin') %>"
-                               class="form-control" ng-model="competition.dateBegin">
+                        <input name="dateBegin" type="date"
+                               class="form-control">
                         <br/>
                         <label for="dateEnd">Data de Termino</label>
-                        <input name="dateEnd" id="dateEnd" type="date" class="form-control"
-                               ng-model="competition.dateEnd"/>
+                        <input name="dateEnd" type="date" class="form-control"/>
                         </br >
 
                     </div>
                     <div class="col-md-6 ">
 
                         <label for="hoursBegin">Horário de Inicio</label>
-                        <input name="hoursBegin" id="hoursBegin" type="time" class="form-control"
-                               ng-model="competition.hoursBegin"/>
+                        <input name="hoursBegin" type="time" class="form-control"/>
                         </br >
                         <label for="hoursEnd">Hóra de Termino</label>
-                        <input name="hoursEnd" id="hoursEnd" type="time" class="form-control"
-                               ng-model="competition.hoursEnd"/>
+                        <input name="hoursEnd" type="time" class="form-control"/>
                         </br >
                     </div>
                 </div>

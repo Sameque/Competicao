@@ -93,36 +93,26 @@ angular.module("competicao").controller("userrepositoryCtrl", function ($scope, 
 
 
 angular.module("competicao").controller("competitionCtrl", function ($scope, $http) {
-
-    var loadUsers = function () {
-        //$scope.competition.hoursBegin;
-
-        $scope.users = [
-            {name: 'jose'},
-            {name: 'Felipe'},
-            {name: 'Tonho'},
-            {name: 'Fulaniho de tal pereira assdsdssadfsafsafaffasdfasdfs   '}
-        ];
-    };
-
-    var loadProblens = function () {
-        $scope.problem = [
-            {name: 'AK25'},
-            {name: 'Casinha'},
-            {name: 'Padras'}
-        ];
-    };
-
-    $scope.destroy = function (data) {
-        var url = 'http://localhost:8000/competition/destroy/' + global_id;
-        $http.delete(url).success(function (data) {
-            alert(data);
+    $scope.competition_id = global_id;
+    var loadUsermCompetition = function () {
+        var url = 'http://localhost:8000/competition/users/' + $scope.competition_id;//global_id;
+        $http.get(url).success(function (data) {
+            $scope.users = data;
         }).error(function () {
-            alert('Opss!!! ' + data);
-        });
+            alert('OpS!!! :( ' + data);
+        })
     };
-    loadProblens();
-    loadUsers();
+
+    var loadProblemCompetition = function () {
+        var url = 'http://localhost:8000/problem/showProblemCompetition/' + global_id;
+        $http.get(url).success(function (data) {
+            $scope.problems = data;
+        }).error(function () {
+            alert('OpS :( ' + data);
+        })
+    };
+    loadProblemCompetition();
+    loadUsermCompetition();
 });
 
 
@@ -148,10 +138,10 @@ angular.module("competicao").controller("problemCtrl", function ($scope, $http) 
 
 angular.module("competicao").controller("competitionUserCtrl", function ($scope, $http) {
 
+    $scope.competition_id = global_id;
     var loadUsermCompetition = function () {
-        var url = 'http://localhost:8000/competition/users/' + global_id;
+        var url = 'http://localhost:8000/competition/users/' + $scope.competition_id;//global_id;
         $http.get(url).success(function (data) {
-            //alert(data);
             $scope.users = data;
         }).error(function () {
             alert('OpS!!! :( ' + data);

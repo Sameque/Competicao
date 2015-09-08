@@ -6,6 +6,7 @@ use App\Competition;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers;
 
 class CompetitionController extends Controller
 {
@@ -29,6 +30,13 @@ class CompetitionController extends Controller
         $competition = Competition::find($competiton_id);
 //        $competition->users()->attach(48);
         return $competition->users;
+    }
+
+    public function competitionUserStore(Request $request)
+    {
+        $competition = Competition::find($request->input('competition_id'));
+        $competition->users()->attach($request->input('user_id'));
+        return $this->competitionUser($competition->id);
     }
 
 
@@ -57,14 +65,12 @@ class CompetitionController extends Controller
     public function store(Request $request)
     {
         $competition = new Competition($request->all());
-//        dd($competition);
-        //UserRepository($request->all());
-        $competition->save();
 
-//        $id = $competition->id;
+        $competition->dateBegin = date('Y-m-d', strtotime($request->input('dateBegin')));
+        $competition->dateEnd = date('Y-m-d', strtotime($request->input('dateEnd')));
+
+        $competition->save();
         return $this->edit($competition->id);
-//        return view('edit.competition', compact('competition'));
-//        return view('edit.competition', compact('id'));
     }
 
     /**
@@ -105,8 +111,12 @@ class CompetitionController extends Controller
     {
         $competition = Competition::find($id);
         $competition->fill($request->all());
-        $competition->save();
 
+//        $competition->dateBegin = date('Y-d-m', strtotime($request->input('dateBegin')));
+//        $competition->dateEnd = date('Y-d-m', strtotime($request->input('dateEnd')));
+
+        $competition->save();
+//        dd($competition);
         return view('edit.competition', compact('competition'));
     }
 
@@ -116,12 +126,35 @@ class CompetitionController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($competition_id)
     {
-        return $id;
-//        $competition = Competition::find($id);
-//        $name = $competition->name;
-//        $competition->delete();
-//        return 'Competição '.$name.' Apagada';
+        $competition = Competition::find($competition_id);
+        $problemController = new ProblemController();
+
+        foreach ($competition->problems as $i) {
+            $temp[] = $problemController->toDestroy($i->id);
+        }
+
+        foreach ($competition->users as $i) {
+            $temp[] = $this->toUserDestroy($competition_id,$i->id);
+        }
+
+        $competition->delete();
+
+        return view('list.competition');
+    }
+
+    public function userDestroy($competition_id,$user_id)
+    {
+        $this->toUserDestroy($competition_id,$user_id);
+
+        return view('register.competitionUser', compact('competition_id'));
+    }
+
+    public function toUserDestroy($competition_id,$user_id)
+    {
+        $competition = Competition::find($competition_id);
+        $competition->users()->detach($user_id);
+        return $competition_id;
     }
 }

@@ -37,7 +37,7 @@
                         echo '</br>'.'</div>'.'<div class="col-md-6">';
 
                         echo Form::label('dateBegin', 'Data Início');
-                        echo Form::date('dateBegin', null, [
+                        echo Form::date('dateBegin', null,[
                                 'class' => 'form-control',
                                 'ng-required' => 'true'
                         ]);
@@ -71,29 +71,25 @@
                 echo link_to_route('problem.create', $title = '+ Problemas', $parameters = array($competition->id), $attributes = array('class' => 'btn btn-success btn-block'));
                 echo ' <br/>';
                 echo link_to_route('competition.competitionUser', $title = '+ Usuário', $parameters = array($competition->id), $attributes = array('class' => 'btn btn-success btn-block'));
+                echo ' <br/>';
+                //echo link_to_route(null, $title = 'Atualizar', $parameters = array($competition->id), $attributes = array('class' => 'btn btn-success btn-block'));
 
+
+                echo Form::open(['route' => ['competition.destroy',$competition->id], 'method' => 'DELETE']);
+                echo Form::submit('Apagar', array('class' => 'btn btn-danger btn-block'));
                 ?>
 
-
-                <br/>
-                <a href="#" class="btn btn-block btn-success" method="DELETE">Atualizar</a>
-                <br/>
-                <a ng-click="destroy(<% $competition->id %>)" class="btn btn-block btn-danger" method="DELETE">Apagar</a>
 
             </div>
             <div class="col-md-4 ">
                 <div class="listCompetition">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered table-responsive">
                         <thead>
                         <th colspan="2">Problemas</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="i in problem">
+                        <tr ng-repeat="i in problems    ">
                             <td>{{i.name}}</td>
-                            <td>
-                                <a href="/listuserrepository/delete/{{i.id}}" class="btn btn-danger center-block"
-                                   method="DELETE">Apagar</a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -105,17 +101,13 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <thead>
-                            <th colspan="2">Participantes</th>
+                            <th >Participantes</th>
                             </thead>
                         </tr>
 
                         <tbody>
                         <tr ng-repeat="i in users">
                             <td>{{i.name}}</td>
-                            <td>
-                                <a href="/listuserrepository/delete/{{i.id}}" class="btn btn-danger center-block"
-                                   method="DELETE">Apagar</a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>

@@ -44,9 +44,20 @@ Route::get('competition/index', ['as' => 'competition.index', 'uses' => 'Competi
 Route::get('competition/list', ['as' => 'competition.list', 'uses' => 'CompetitionController@index']);
 Route::get('register/competition', ['as' => 'competition.register', 'uses' => 'CompetitionController@create']);
 Route::post('competition/store', ['as' => 'competition.store', 'uses' => 'CompetitionController@store']);
+Route::post('competition/user/store',
+    ['as' => 'competition.user.store',
+        'uses' => 'CompetitionController@competitionUserStore'
+    ]
+);
+
 Route::get('competition/edit/{id}', ['as' => 'competition.edit', 'uses' => 'CompetitionController@edit']);
 Route::put('competition/update/{id}', ['as' => 'competition.update', 'uses' => 'CompetitionController@update']);
 Route::delete('competition/destroy/{id}', ['as' => 'competition.destroy', 'uses' => 'CompetitionController@destroy']);
+Route::get('competition/user/destroy/{competition_id}/{user_id}',
+    ['as' => 'competition.user.destroy',
+        'uses' => 'CompetitionController@userDestroy'
+    ]
+);
 Route::get('competition/users/{competition_id}', ['as' => 'competition.user', 'uses' => 'CompetitionController@competitionUsers']);
 
 Route::get('competition/competitionUser/{competition_id}',
@@ -66,6 +77,10 @@ Route::get(
         'uses' => 'ProblemController@showProblemCompetition'
     ]
 );
+
+//SUBMISSIOn
+Route::get('submission', ['as' => 'submission', 'uses' => 'SubmissionController@index']);
+
 
 
 // Authentication routes...

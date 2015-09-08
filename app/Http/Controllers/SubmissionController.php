@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Competition;
 use App\Http\Requests;
-use App\Problem;
 use Illuminate\Http\Request;
+use Symfony\Component\DomCrawler\Crawler;
 
-class ProblemController extends Controller
+class SubmissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,37 @@ class ProblemController extends Controller
      */
     public function index()
     {
-        //
+//        return view('register.submission');
+
+//        $html1 = '<html>
+//                    <body>
+//
+//                        <h1>Samer</h1>
+//                        <h1>jose</h1>
+//                    <div>
+//                        <div>
+//                            <p class="message">Hello World!</p>
+//                        </div>
+//
+//                        <p>Hello Crawler!</p>
+//                     </div>
+//                     </body>
+//                </html>';
+
+        $html = 'http://br.spoj.com/';
+
+        $crawler = new Crawler(null,$html,null);
+//        $crawler = $crawler->filterXPath('descendant-or-self::body/p');
+//        $crawler = $crawler->filter('body > div');
+        $crawler->addHtmlContent('http://br.spoj.com/');
+        foreach ($crawler as $domElement) {
+            echo $domElement->nodeValue . '<br/>';
+        }
+
+        foreach ($crawler as $domElement) {
+//            var_dump($domElement);
+        }
+
     }
 
     /**
@@ -24,9 +53,9 @@ class ProblemController extends Controller
      *
      * @return Response
      */
-    public function create($competition_id)
+    public function create()
     {
-        return view('register.problem', compact('competition_id'));
+        //
     }
 
     /**
@@ -37,13 +66,7 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
-        $problem = new Problem($request->all());
-//        $competition = Competition::find($request->input('competition_id'));
-        $problem->save();
-
-        $competition_id = $problem->competition_id;
-
-        return view('register.problem', compact('competition_id'));
+        //
     }
 
     /**
@@ -54,15 +77,7 @@ class ProblemController extends Controller
      */
     public function show($id)
     {
-        $problem = Problem::find($id);
-        $problem->repository;
-        return $problem;
-    }
-
-    public function showProblemCompetition($competition_id)
-    {
-        $competition = Competition::find($competition_id);
-        return $competition->problems;
+        //
     }
 
     /**
@@ -96,16 +111,6 @@ class ProblemController extends Controller
      */
     public function destroy($id)
     {
-        $competition_id = $this->toDestroy($id);
-        return view('register.problem', compact('competition_id'));
+        //
     }
-
-    public function toDestroy($id)
-    {
-        $problem = Problem::find($id);
-        $competition_id = $problem->competition_id;
-        $problem->delete();
-        return $competition_id;
-    }
-
 }

@@ -13,6 +13,7 @@
                 <th>Data Fim</th>
                 <th>Hora Fim</th>
                 <th>Problemas</th>
+                <th>Usuários</th>
                 <th>Editar</th>
 
             </tr>
@@ -25,13 +26,19 @@
                 <td>{{i.dateEnd}}</td>
                 <td>{{i.hoursEnd}}</td>
                 <td>
-                    <a href="/problem/create/{{i.id}}" class="btn btn-primary" method="Poblemas">
+                    <a href="/problem/create/{{i.id}}" class="btn btn-primary" method="GET">
                         <i class="glyphicon glyphicon-th-list"></i>
                     </a>
                 </td>
 
                 <td>
-                    <a href="/competition/edit/{{i.id}}" class="btn btn-success" method="Poblemas">
+                    <a href="/competition/competitionUser/{{i.id}}" class="btn btn-primary" method="GET">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                    </a>
+                </td>
+
+                <td>
+                    <a href="/competition/edit/{{i.id}}" class="btn btn-success" method="GET">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </a>
                 </td>
