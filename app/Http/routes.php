@@ -79,6 +79,7 @@ Route::get(
 );
 
 //SUBMISSIOn
+Route::get('crawler', ['as' => 'submission', 'uses' => 'SubmissionController@crawler']);
 Route::get('submission', ['as' => 'submission', 'uses' => 'SubmissionController@index']);
 
 

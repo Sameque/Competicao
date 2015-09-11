@@ -15,29 +15,65 @@ class SubmissionController extends Controller
      */
     public function index()
     {
+        return view('register.submission');
+    }
+
+    public function crawler()
+    {
 //        return view('register.submission');
 
-//        $html1 = '<html>
+//        $html = '<html>
 //                    <body>
-//
 //                        <h1>Samer</h1>
 //                        <h1>jose</h1>
-//                    <div>
 //                        <div>
-//                            <p class="message">Hello World!</p>
-//                        </div>
+//                            <div>
+//                                <p class="message">Hello World!</p>
+//                            </div>
 //
-//                        <p>Hello Crawler!</p>
-//                     </div>
-//                     </body>
+//                            <p>Hello Crawler!</p>
+//                        </div>
+//                    </body>
 //                </html>';
 
-        $html = 'http://br.spoj.com/';
+//        $postdata = http_build_query(
+//            array(
+//                'email' => 'a@a.com',
+//                'password' => '123456'
+//
+//            )
+//        );
+//
+//        $opts = array('http' =>
+//            array(
+//                'method'  => 'POST',
+////                'header'  => 'Content-type: application/x-www-form-urlencoded',
+////                '_Token'=>'94c94a8120d8012be561267e05cb8ac74be1cb46%3A',
+//                'content' => $postdata
+//
+//            )
+//        );
 
-        $crawler = new Crawler(null,$html,null);
+
+//        $context  = stream_context_create($opts);
+
+//        $html = file_get_contents('http://uniararas.br/');
+
+//        $html = file_get_contents('http://www.spoj.com/');
+//        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
+        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/problems/view/1002/');
+//        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
+
+//        dd( file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1013'));
+
+//        $html = Crawler::xpathLiteral($this->index());
+//        $html = 'http://br.spoj.com/';
+
+        var_dump($result);
+        $crawler = new Crawler($result);
 //        $crawler = $crawler->filterXPath('descendant-or-self::body/p');
-//        $crawler = $crawler->filter('body > div');
-        $crawler->addHtmlContent('http://br.spoj.com/');
+//        $crawler = $crawler->filter('body > div > div > div > div > div');
+//        $crawler->addHtmlContent('http://br.spoj.com/');
         foreach ($crawler as $domElement) {
             echo $domElement->nodeValue . '<br/>';
         }
