@@ -25,6 +25,7 @@
         }
         ?>
     </div>
+    <br/>
     @include('templates.menuDefault')
 </header>
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+//use App\CrawleRepository\ValidateUsers;
+use App;
 use App\Http\Requests;
+use App\UserRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -61,7 +64,7 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://www.spoj.com/');
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
-        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/problems/view/1002/');
+//        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
 
 //        dd( file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1013'));
@@ -69,19 +72,28 @@ class SubmissionController extends Controller
 //        $html = Crawler::xpathLiteral($this->index());
 //        $html = 'http://br.spoj.com/';
 
-        var_dump($result);
-        $crawler = new Crawler($result);
+//        var_dump($result);
+//        $crawler = new Crawler($result);
 //        $crawler = $crawler->filterXPath('descendant-or-self::body/p');
 //        $crawler = $crawler->filter('body > div > div > div > div > div');
 //        $crawler->addHtmlContent('http://br.spoj.com/');
-        foreach ($crawler as $domElement) {
-            echo $domElement->nodeValue . '<br/>';
-        }
+//        foreach ($crawler as $domElement) {
+//            echo $domElement->nodeValue . '<br/>';
+//        }
+//
+//        foreach ($crawler as $domElement) {
+////            var_dump($domElement);
+//        }
 
-        foreach ($crawler as $domElement) {
-//            var_dump($domElement);
-        }
+        $userRepository = UserRepository::find(12);
 
+        $validateUser = App::make('ValidateRepository');
+        $user = App\UserRepository::find(5);
+        dd($validateUser->validate($user));
+
+        $resp = $validateUser->validate($userRepository);
+
+        return $resp;
     }
 
     /**
@@ -89,6 +101,11 @@ class SubmissionController extends Controller
      *
      * @return Response
      */
+    public function validuser()
+    {
+        //
+    }
+
     public function create()
     {
         //

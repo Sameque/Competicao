@@ -41,6 +41,7 @@ class UserRepositoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $userrepository = new UserRepository($request->all());
 
         $user = User::find($request->input('user_id'));

@@ -18,7 +18,7 @@
         <div class="row formCompetition">
 
             <div class="title">
-                <h2>Cadastro de Competicao</h2></br>
+                <h2>Cadastro de Competição</h2></br>
             </div>
 
             <div class="col-md-4">

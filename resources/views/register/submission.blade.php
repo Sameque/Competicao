@@ -13,9 +13,9 @@
 
     <div ng-controller="competitionUserCtrl">
 
-        <h2 class="title">Submissão</h2></br>
+        <h2 class="title">Submissão</h2>
         <div class="row">
-            <div class="col-md-5 ">
+            <div class="col-md-1">
                 <div class="listProblem">
                     <table class="table table-striped table-bordered ">
                         <thead>
@@ -33,20 +33,20 @@
 
             </div>
 
-            <div class=" col-md-7">
+            <div class=" col-md-11">
                 <div class="formCad">
 
 
-                    <div class="formProblem">
-                        </br>
-                        <br/>
+                    <div class="">
+
+
                         <?php
                         echo Form::model('', array('name' => 'cadForm1', 'url' => 'submission/submit', 'method' => 'POST'));
                         ?>
 
                         <br/>
                         <label for="code">Código do Programa</label><br/>
-                        <textarea type="textarea"  rows="10" cols="50" class="form-control">Digite seu código </textarea> <br/>
+                        <textarea type="textarea"  rows="15" cols="10" class="form-control">Digite seu código </textarea> <br/>
                         <label for="repository_id">Problema</label>
                         <select name="user_id" id="user_id" class="form-control"
                                 ng-model="competition.users">

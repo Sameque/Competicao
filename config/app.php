@@ -138,15 +138,20 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
+
+        //ValidateRepository
 //        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
 //        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
-
+//        App\CrawleRepository\ValidateUsers::class,
+//    App\Providers\CrawlerRepository::class,
     ],
 
     /*

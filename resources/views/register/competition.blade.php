@@ -6,10 +6,11 @@
         <div class="row formCompetition">
 
             <div class="title">
-                <h2>Cadastro de Competicao</h2></br>
+                <h2>Cadastro de Competição</h2></br>
             </div>
 
             <div class="col-md-4">
+
             </div>
             <div class="col-md-4">
                 <br/>
@@ -42,7 +43,7 @@
                         <label for="hoursBegin">Horário de Inicio</label>
                         <input name="hoursBegin" type="time" class="form-control"/>
                         </br >
-                        <label for="hoursEnd">Hóra de Termino</label>
+                        <label for="hoursEnd">Horário de Termino</label>
                         <input name="hoursEnd" type="time" class="form-control"/>
                         </br >
                     </div>
