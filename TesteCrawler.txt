@@ -40,3 +40,24 @@ object(DOMElement)#225 (18) {
 	["baseURI"]=> NULL 
 	["textContent"]=> string(4) "jose" 
 }
+
+Seleção
+W Pré-processamento
+W Transformação
+W Data mining (aprendizagem)
+W Interpretação e Avaliação
+
+saveHTML
+
+http://br.spoj.com/submit/SOMA/id=14956333
+
+15092565
+15092565
+
+#include <stdio.h>
+int main(){int i,a,b,x;b=0;scanf("%d", &x);for (i=0; i<x; i++){scanf("%d",&a);b=b+a;}printf("%d", b);return 0;}
+
+wget
+httpdaump wget
+
+

@@ -1,7 +1,6 @@
 @extends('templates.default')
 @section('content')
     <h1>Home</h1>
-
     <div class="navBarLeft">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class="active">

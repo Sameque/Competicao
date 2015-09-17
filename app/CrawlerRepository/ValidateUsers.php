@@ -15,12 +15,20 @@ class ValidateUsers
 {
     public function validate($user)
     {
-        if($user->repository_id = 1){
-            return 'Spoj';
-        }elseif ($user->repository_id = 2){
-            return 'Uri';
-        }elseif ($user->repository_id = 3){
-            return 'Uva';
-        }else return 'Fudeu';
+        $validator = null;
+        $validated = false;
+
+        if ($user->repository_id = 1) {
+            $validate = new ValidateUsersSpoj();
+        } elseif ($user->repository_id = 2) {
+            $validate = new ValidateUsersUri();
+        } elseif ($user->repository_id = 3) {
+            $validate = new ValidateUsersUva();
+        } else $validate = null;
+//        dd($validate);
+
+        $validated = $validate->validateUser($user);
+
+        return $validated;
     }
 }

@@ -11,7 +11,7 @@
                 <th>Email</th>
                 <th>CPF</th>
                 <th>RG</th>
-                <th>Ano Formação.</th>
+                <th>Ano Formação</th>
                 <th>Nivel de Acesso</th>
                 <th>Editar</th>
 

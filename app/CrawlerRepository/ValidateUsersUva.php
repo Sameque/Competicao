@@ -11,7 +11,7 @@
 namespace App\CrawlerRepository;
 //namespace App;
 
-class ValidateUsersSpoj
+class ValidateUsersUva
 {
     private $url = 'http://';
 

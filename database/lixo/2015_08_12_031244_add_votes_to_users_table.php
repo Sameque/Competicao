@@ -13,7 +13,6 @@ class AddVotesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-//            $table->dropColumn('ra');
 //            $table->dropColumn('yearBeginning');
             //tive que dar up date na tabela de migration
             $table->string('email');
@@ -31,12 +30,12 @@ class AddVotesToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('email');
-            $table->dropColumn('cpf');
-            $table->dropColumn('rg');
-            $table->dropColumn('yearCourse');
-            $table->dropColumn('birthDate');
+        Schema::table('users', function ($table) {
+//            $table->dropColumn('email');
+//            $table->dropColumn('cpf');
+//            $table->dropColumn('rg');
+//            $table->dropColumn('yearCourse');
+//            $table->dropColumn('birthDate');
         });
     }
 }

@@ -13,12 +13,12 @@
             </div>
 
             <div>
-                Password
+                Senha
                 <input type="password" name="password" id="password" class="form-control">
             </div>
 
             <div>
-                <input type="checkbox" name="remember"> Remember Me
+                <input type="checkbox" name="remember">Relembrar
             </div>
 
             <div>

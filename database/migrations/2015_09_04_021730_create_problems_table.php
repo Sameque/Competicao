@@ -16,7 +16,6 @@ class CreateProblemsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code');
-            $table->string('url');
             $table->integer('dificult');
             $table->integer('repository_id');
             $table->integer('competition_id');

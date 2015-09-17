@@ -17,6 +17,16 @@ class ValidateUsersSpoj
 
     public function validateUser($userRepository)
     {
+        $urlValidate = $this->url.$userRepository->username.'/';
 
+        if($this->getUrl($urlValidate) != '200' ){
+            return false;
+        } else
+            return true;
+    }
+
+    private function getUrl($url) {
+        $headers = get_headers($url);
+        return substr($headers[0], 9, 3);
     }
 }

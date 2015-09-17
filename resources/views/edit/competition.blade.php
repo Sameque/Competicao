@@ -14,7 +14,6 @@
     <div ng-controller="userrepositoryLoadCtrl"></div>
 
     <div ng-controller="competitionCtrl" xmlns="http://www.w3.org/1999/html">
-<% $competition %>
         <div class="row formCompetition">
 
             <div class="title">
@@ -25,25 +24,29 @@
                 <br/>
                 <?php
                 echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
-                    echo '<br/>'.'<div class="row">'.'<div class="inputNameCompetiton">';
+                    echo '<div class="row">'
+                                .'<div class="inputNameCompetiton">';
 
                         echo Form::label('name', 'Nome da Competição') . '<br/>';
                         echo Form::text('name', null, [
-                                'class' => 'form-control competitionName',
+                                'class' => 'form-control',
                                 'ng-required' => 'true',
                                 'placeholder' => 'Digite o Nome da Competição',
                                 'id' => 'name'
                         ]);
-                        echo '</br>'.'</div>'.'<div class="col-md-6">';
+                        echo '</br>'
+                                .'</div>'
+                                .'<div class="col-md-6">';
 
-                        echo Form::label('dateBegin', 'Data Início');
+
+                        echo Form::label('dateBegin', 'Data de Início');
                         echo Form::date('dateBegin', null,[
                                 'class' => 'form-control',
                                 'ng-required' => 'true'
                         ]);
 
                         echo '<br/>';
-                        echo Form::label('dateEnd', 'Data Início');
+                        echo Form::label('dateEnd', 'Data de Termino');
                         echo Form::date('dateEnd', null, [
                                 'class' => 'form-control',
                                 'ng-required' => 'true'

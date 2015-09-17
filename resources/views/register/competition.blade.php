@@ -3,11 +3,22 @@
 
     <div ng-controller="competitionCtrl" xmlns="http://www.w3.org/1999/html">
 
-        <div class="row formCompetition">
+        <div class="row">
+            <div class="col-md-4">
 
-            <div class="title">
+            </div>
+
+            <div class="col-md-4 title">
                 <h2>Cadastro de Competição</h2></br>
             </div>
+            <div class="col-md-4">
+
+            </div>
+
+
+        </div>
+
+        <div class="row formCompetition">
 
             <div class="col-md-4">
 
@@ -29,7 +40,7 @@
                     </div>
                     <div class="col-md-6 ">
 
-                        <label for="dateBegin">Data Início</label>
+                        <label for="dateBegin">Data de Início</label>
                         <input name="dateBegin" type="date"
                                class="form-control">
                         <br/>
