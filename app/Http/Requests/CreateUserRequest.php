@@ -28,8 +28,8 @@ class CreateUserRequest extends Request
                 'password' => 'required',
                 'username' => 'required',
                 'email' => 'required',
-    //            'cpf' => 'required',
-    //            'rg' => 'required',
+//                'cpf' => 'required',
+//                'rg' => 'required',
 //                'birthDate' => 'required',
 
         ];

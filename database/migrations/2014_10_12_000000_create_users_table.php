@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('yearCourse');
             $table->date('birthDate');
             $table->boolean('graduated');
-//            $table->string('username');
+            $table->string('username');
             $table->rememberToken();
             $table->timestamps();
         });

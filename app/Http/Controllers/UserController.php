@@ -38,14 +38,7 @@ class UserController extends Controller
     {
         $id = $this->insert($request);
 
-//        return redirect()->route('list.users');
-
-//        return $request->all();
-//        return view('edit.user/id', compact('id'));
-
         return Redirect::route('edit.user', $id);
-
-//        return $user;
     }
 
     public function insert(CreateUserRequest $request)

@@ -78,7 +78,7 @@ Route::get(
     ]
 );
 
-//SUBMISSIOn
+//SUBMISSION
 Route::get('crawler', ['as' => 'submission', 'uses' => 'SubmissionController@crawler']);
 Route::get('submission', ['as' => 'submission', 'uses' => 'SubmissionController@index']);
 
@@ -141,10 +141,12 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard', function () {
 
-    $userrepository = new \App\UserRepository();
-    $userrepository->username = 'Menoto';
+//    $userrepository = new \App\UserRepository();
+//    $userrepository->username = 'Menoto';
 
-    $user = \App\User::find(32);
+    $user = \App\User::find(1);
+    dd($user->toJson());
+
 //    $repository = \App\Repository::find(1);
 
 //    $repository->userRepository();
@@ -156,12 +158,12 @@ Route::get('dashboard', function () {
 
 //    $casandra = array();
 
-    $ur = $user->userRepository;
-
-    foreach ($ur as $value) {
-        $value->repository;
-    }
-//    var_dump($casandra);
-
-    return $user;//array(1=>$user,2=>$user->userRepository);
+//    $ur = $user->userRepository;
+//
+//    foreach ($ur as $value) {
+//        $value->repository;
+//    }
+////    var_dump($casandra);
+//
+//    return $user;//array(1=>$user,2=>$user->userRepository);
 });

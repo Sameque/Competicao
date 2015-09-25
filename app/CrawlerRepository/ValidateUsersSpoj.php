@@ -11,6 +11,8 @@
 namespace App\CrawlerRepository;
 //namespace App;
 
+define("URL", 'http://br.spoj.com/users/');
+
 class ValidateUsersSpoj
 {
     private $url = 'http://br.spoj.com/users/';

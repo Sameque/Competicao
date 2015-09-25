@@ -85,15 +85,19 @@ class SubmissionController extends Controller
 ////            var_dump($domElement);
 //        }
 
-        $userRepository = UserRepository::find(12);
 
         $validateUser = App::make('ValidateRepository');
-        $user = App\UserRepository::find(5);
-        dd($validateUser->validate($user));
+        $user = App\User::findOrNew(1);
+
+        $userRepository = $user->userRepository->first();
+        $userRepository->repository_id = '7';
+
+//        dd($userRepository);
 
         $resp = $validateUser->validate($userRepository);
 
-        return $resp;
+        dd($resp);
+        return $resp.'';
     }
 
     /**

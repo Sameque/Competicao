@@ -2,17 +2,24 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CreateRepositoryRequest extends Request
 {
+//    function __construct()
+//    {
+//    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
+
+
     public function authorize()
     {
+
         return true;
     }
 
@@ -25,7 +32,9 @@ class CreateRepositoryRequest extends Request
     {
         return [
             'name' => 'required',
-            'url' => 'required'
+            'url' => 'required|urlvalid'
+//            'url' => 'required|active_url'
         ];
     }
+
 }

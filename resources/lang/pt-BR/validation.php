@@ -12,7 +12,7 @@ return [
     | such as the size rules. Feel free to tweak each of these messages.
     |
     */
-
+    'urlvalid'         => 'O campo :attribute não contém um URL válido',
     "accepted"         => "O campo :attribute deve ser aceito.",
     "active_url"       => "O campo :attribute não contém um URL válido.",
     "after"            => "O campo :attribute deverá conter uma data posterior a :date.",

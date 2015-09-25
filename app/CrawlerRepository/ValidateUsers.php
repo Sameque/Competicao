@@ -18,17 +18,18 @@ class ValidateUsers
         $validator = null;
         $validated = false;
 
-        if ($user->repository_id = 1) {
+        if ($user->repository_id == 1) {
             $validate = new ValidateUsersSpoj();
-        } elseif ($user->repository_id = 2) {
+        } elseif ($user->repository_id == 2) {
             $validate = new ValidateUsersUri();
-        } elseif ($user->repository_id = 3) {
+        } elseif ($user->repository_id == 3) {
             $validate = new ValidateUsersUva();
         } else $validate = null;
-//        dd($validate);
 
-        $validated = $validate->validateUser($user);
-
+        if ($validate) {
+            $validated = $validate->validateUser($user);
+        }else
+//            dd("merda");
         return $validated;
     }
 }
