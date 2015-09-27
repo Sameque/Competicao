@@ -28,6 +28,7 @@ Route::get('user/userrepository/{id}', ['as' => 'user.userrepository', 'uses' =>
 
 //Repositorys -> repository
 Route::get('repository/create', ['as' => 'create.repository', 'uses' => 'RepositoryController@create']);
+Route::get('repository/show/{id}', ['as' => 'show.repository', 'uses' => 'RepositoryController@show']);
 Route::post('repository/store', 'RepositoryController@store');
 Route::get('repository/index', 'RepositoryController@index');
 
@@ -141,11 +142,15 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard', function () {
 
+
+    $array = array('name' => 'sameque','idade' => 32);
+    return $array['idade'];
+
 //    $userrepository = new \App\UserRepository();
 //    $userrepository->username = 'Menoto';
 
-    $user = \App\User::find(1);
-    dd($user->toJson());
+//    $user = \App\User::find(1);
+//    dd($user->toJson());
 
 //    $repository = \App\Repository::find(1);
 

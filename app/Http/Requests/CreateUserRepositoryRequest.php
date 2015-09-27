@@ -23,14 +23,9 @@ class CreateUserRepositoryRequest extends Request
      */
     public function rules()
     {
-        return [
-//            'id' =>'required',
-//            'repository_id' =>'required',
-//            'username' =>'required',
-//            'user_id' =>'required',
-//            'created_at' =>'required',
-//            'updated_at' =>'required',
 
+        return [
+            ['username' =>'required|userrepository'],
         ];
     }
 }

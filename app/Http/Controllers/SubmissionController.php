@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 //use App\CrawleRepository\ValidateUsers;
 use App;
 use App\Http\Requests;
-use App\UserRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -25,19 +24,6 @@ class SubmissionController extends Controller
     {
 //        return view('register.submission');
 
-//        $html = '<html>
-//                    <body>
-//                        <h1>Samer</h1>
-//                        <h1>jose</h1>
-//                        <div>
-//                            <div>
-//                                <p class="message">Hello World!</p>
-//                            </div>
-//
-//                            <p>Hello Crawler!</p>
-//                        </div>
-//                    </body>
-//                </html>';
 
 //        $postdata = http_build_query(
 //            array(
@@ -62,42 +48,66 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://uniararas.br/');
 
-//        $html = file_get_contents('http://www.spoj.com/');
+        $html = file_get_contents('http://br.spoj.com/users/maria/');
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
 
-//        dd( file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1013'));
+//        dd($html);
 
 //        $html = Crawler::xpathLiteral($this->index());
 //        $html = 'http://br.spoj.com/';
 
 //        var_dump($result);
-//        $crawler = new Crawler($result);
+//        var_dump($crawler);
 //        $crawler = $crawler->filterXPath('descendant-or-self::body/p');
-//        $crawler = $crawler->filter('body > div > div > div > div > div');
+//        $html = '<html>
+//                    <body>
+//                    <article>
+//                        <h1>Samer</h1>
+//                        <h1>Jose</h1>
+//                    </article>
+//                    <article>
+//                        <h1>Prihh</h1>
+//                        <h1>Manuela</h1>
+//                    </article>
+//                        <div>
+//                            <div>
+//                                <p class="message">Hello World!</p>
+//                            </div>
+//
+//                            <p>Hello Crawler!</p>
+//                        </div>
+//                    </body>
+//                </html>';
+
+        $crawler = new Crawler($html);
+        $crawler = $crawler->filter('body > div > div')->eq(1)
+            ->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
+        //('body > div > div')->eq(1)
+//        $crawler = $crawler->filter('body > article')->eq(0)->filter('h1')->eq(0);
 //        $crawler->addHtmlContent('http://br.spoj.com/');
-//        foreach ($crawler as $domElement) {
-//            echo $domElement->nodeValue . '<br/>';
-//        }
+        foreach ($crawler as $domElement) {
+            echo $domElement->nodeValue;
+        }
 //
 //        foreach ($crawler as $domElement) {
 ////            var_dump($domElement);
 //        }
 
 
-        $validateUser = App::make('ValidateRepository');
-        $user = App\User::findOrNew(1);
-
-        $userRepository = $user->userRepository->first();
-        $userRepository->repository_id = '7';
-
-//        dd($userRepository);
-
-        $resp = $validateUser->validate($userRepository);
-
-        dd($resp);
-        return $resp.'';
+//        $validateUser = App::make('ValidateRepository');
+//        $user = App\User::findOrNew(1);
+//
+//        $userRepository = $user->userRepository->first();
+//        $userRepository->repository_id = '7';
+//
+////        dd($userRepository);
+//
+//        $resp = $validateUser->validate($userRepository);
+//
+//        dd($resp);
+//        return $resp.'';
     }
 
     /**

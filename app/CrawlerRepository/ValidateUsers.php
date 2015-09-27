@@ -13,23 +13,21 @@ namespace App\CrawlerRepository;
 
 class ValidateUsers
 {
-    public function validate($user)
+    public function validate($repository_id, $user)
     {
         $validator = null;
-        $validated = false;
 
-        if ($user->repository_id == 1) {
-            $validate = new ValidateUsersSpoj();
-        } elseif ($user->repository_id == 2) {
-            $validate = new ValidateUsersUri();
-        } elseif ($user->repository_id == 3) {
-            $validate = new ValidateUsersUva();
-        } else $validate = null;
+        if ($repository_id == 1) {
+            $validator = new ValidateUsersSpoj();
+        } elseif ($repository_id == 2) {
+            $validator = new ValidateUsersUri();
+        } elseif ($repository_id == 3) {
+            $validator = new ValidateUsersUva();
+        } else $validator = null;
 
-        if ($validate) {
-            $validated = $validate->validateUser($user);
-        }else
-//            dd("merda");
-        return $validated;
+        if (!empty($validator)) {
+            return $validator->validateUser($user);
+        } else
+            return false;
     }
 }

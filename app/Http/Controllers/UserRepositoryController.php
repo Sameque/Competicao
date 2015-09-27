@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRepositoryRequest;
+use App\Http\Requests;
 use App\Repository;
 use App\User;
 use App\UserRepository;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class UserRepositoryController extends Controller
 {
@@ -41,16 +39,38 @@ class UserRepositoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required',
+            'repository_id' => 'required',
+        ]);
 
-        $userrepository = new UserRepository($request->all());
 
-        $user = User::find($request->input('user_id'));
-        $repository = Repository::find($request->input('repository_id'));
+        $validator->sometimes('username', 'userspoj', function($input) {
+            return $input->repository_id == 1;
+        });
 
-        $repository->userRepository()->save($userrepository);
-        $user->userRepository()->save($userrepository);
+        if($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator->errors())
+                ->withInput($request->all());
+        }
 
-        $id = $user->id;
+
+//        dd("Gravandooooo");
+
+
+//        $userrepository = new UserRepository($request->all());
+
+        UserRepository::create($request->all());
+
+//        $user = User::find($request->input('user_id'));
+//        $repository = Repository::find($request->input('repository_id'));
+
+//        $repository->userRepository()->save($userrepository);
+//        $user->userRepository()->save($userrepository);
+
+//        $id = $user->id;
+        $id = $request->input('user_id');
 
         return view('register.userrepository', compact('id'));
 //        return redirect()->route('user.userrepository');

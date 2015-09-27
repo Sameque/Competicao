@@ -12,6 +12,7 @@ return [
     | such as the size rules. Feel free to tweak each of these messages.
     |
     */
+    'userspoj'   => 'O campo :attribute não contém um usuário válido no respectivo repositório',
     'urlvalid'         => 'O campo :attribute não contém um URL válido',
     "accepted"         => "O campo :attribute deve ser aceito.",
     "active_url"       => "O campo :attribute não contém um URL válido.",
@@ -103,6 +104,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'username'              =>  '<strong>Usuário</strong>',
+        'name'                  =>  '<strong>Nome</strong>',
+        'url'                   =>  '<strong>URL</strong>',
+        'repository_id'     =>  '<strong>Repositório</strong>',
+
+    ],
 
 ];

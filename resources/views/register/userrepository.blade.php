@@ -56,9 +56,7 @@
                             <td>{{i.repository.name}}</td>
                             <td>{{i.username}}</td>
                             <td>
-
                                 <a href="/listuserrepository/delete/{{i.id}}" class="btn btn-danger" method="DELETE">Apagar</a>
-
                             </td>
                         </tr>
                         </tbody>
@@ -74,28 +72,34 @@
 
                     <div class="formCompetition">
 
+                        @include('templates.message')
+
                         </br>
 
                         <br/>
                         <?php
-                        echo Form::model('', array('name' => 'cadForm1', 'url' => 'userrepository/store', 'method' => 'POST'));
+                        echo Form::open(array('name' => 'cadForm1',
+                                'url' => 'userrepository/store',
+                                'method' => 'POST'));
                         ?>
                         <br/>
                         <label for="username">Repositário</label>
-                        <!---->
-                        <select name="repository_id" id="repository_id" class="form-control" ng-model="user.repository">
+
+                        <select name="repository_id" id="repository_id" class="form-control">
                             <option value=""> Selecione um Repositório</option>
                             <option ng-required="true" ng-repeat="repository in repositorys" value={{repository.id}}>
                                 {{repository.name}}
                             </option>
                         </select>
-                        <!-- -->
+
                         </br >
-                        <label for="username">Usuário</label>
-                        <input name="username" id="username" type="text" class="form-control" ng-model="user.user"
-                               ng-required="true"
-                               placeholder='Digite seu usuário'
-                                />
+                        <?php
+                        echo Form::label('username', 'Usuário') . '<br/>';
+                        echo Form::text('username', null, array(
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Digite o nome do repositório',
+                                )) . '<br/>';
+                        ?>
                         <input value={{user_id}} name="user_id" id="user_id" type="hidden" class="form-control"
                                ng-model="user.id"/>
 

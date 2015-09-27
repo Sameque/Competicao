@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\CrawlerRepository\ValidateUsers;
+use App\User;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('urlvalid', function ($attribute, $value, $parameters) {
             $value = $this->formatUrl($value);
             return checkdnsrr($value);
+        });
+
+        Validator::extend('userspoj', function ($attribute, $value, $parameters) {
+            $validateUser = App::make('ValidateUsers');
+            return $validateUser->validate(1,$value);
         });
     }
 

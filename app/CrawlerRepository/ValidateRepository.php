@@ -11,7 +11,7 @@
 namespace App\CrawlerRepository;
 //namespace App;
 
-class ValidateUsers
+class ValidateRepository
 {
 //    private $url = '';
 //    private $validated = false;

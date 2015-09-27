@@ -60,6 +60,8 @@ class RepositoryController extends Controller
 //                ->withInput($request->all());
 //        }
 
+
+
         dd('Registro gravado no banco!!!');
 
         Repository::create($request->request->all());
