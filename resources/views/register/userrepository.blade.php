@@ -9,38 +9,12 @@
             };
             loadId();
         });
-
-        //angular.module("competicao").controller("userrepositoryCtrl", function ($scope, $http) {
-        //
-        //    var loadRepositorys = function () {
-        //        $http.get('http://localhost:8000/repository/index/').success(function (data) {
-        //            $scope.repositorys = data;
-        //        });
-        //    };
-        //
-        //    $scope.teste = function(){
-        //        setTeste("Morreu!!!");
-        //        teste1();
-        //    };
-        //
-        //    $scope.user_id = <?php echo $id; ?>;
-        //
-        //    var loadUserRepositorys = function () {
-        //        var url = 'http://localhost:8000/userrepository/show/' + $scope.user_id;
-        //        $http.get(url).success(function (data) {
-        //            $scope.userRepositorys = data;
-        //        })
-        //    };
-        //    loadRepositorys();
-        //    loadUserRepositorys();
-        //
-        //});
-
-
     </script>
+
 
     <div ng-controller="userrepositoryLoadCtrl"></div>
 
+    <% $id %>
     <div ng-controller="userrepositoryCtrl" xmlns="http://www.w3.org/1999/html">
         <div class="row">
             <div class="col-md-4">

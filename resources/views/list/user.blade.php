@@ -18,13 +18,13 @@
             </tr>
             @foreach ($users as $user)
                 <tr>
-                    <td><% $user->name %></td>
-                    <td><% $user->username %></td>
-                    <td><% $user->email %></td>
-                    <td><% $user->cpf %></td>
-                    <td><% $user->rg %></td>
-                    <td><% $user->yearCourse %></td>
-                    <td><% $user->accessLevel %></td>
+                    <td>{!! $user->name !!}</td>
+                    <td>{!! $user->username !!}</td>
+                    <td>{!! $user->email !!}</td>
+                    <td>{!! $user->cpf !!}</td>
+                    <td>{!! $user->rg !!}</td>
+                    <td>{!! $user->yearCourse !!}</td>
+                    <td>{!! $user->accessLevel !!}</td>
                     <td>
                         <?php
                             echo link_to_route('edit.user', $title = 'Editar', $parameters = array($user->id), $attributes = array('class' => 'btn  btn-primary '));

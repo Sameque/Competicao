@@ -10,7 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use \App;
+//use \App;
+use App\User;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', 'CompeticaoController@index');
 
@@ -142,9 +144,32 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard', function () {
 
+//    $artisan = Artisan::getFacadeApplication('route:list');
+    $user = \App\User::all('name');
+    return $user;
 
-    $array = array('name' => 'sameque','idade' => 32);
-    return $array['idade'];
+//
+//    User::create([
+//        'name'=>'userTeste',
+//        'accessLevel'=>1,
+//        'email'=>'teste@teste.com',
+//        'cpf'=>'111.111.111-11',
+//        'password'=>'123456',
+//        'rg'=>'123456789',
+//        'yearCourse'=>2001,
+//        'birthDate'=>'2001-01-01',
+//        'graduated'=>2001,
+//        'username'=>'userTeste',
+//        'created_at'=>'2001-01-01 00:00:00',
+//        'updated_at'=>'2015-01-01 00:00:00'
+//    ]);
+
+
+//
+//    dd($user);
+//
+//    $array = array('name' => 'sameque','idade' => 32);
+//    return $array['idade'];
 
 //    $userrepository = new \App\UserRepository();
 //    $userrepository->username = 'Menoto';
