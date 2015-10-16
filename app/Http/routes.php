@@ -14,7 +14,7 @@
 use App\User;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/', 'CompeticaoController@index');
+Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 
 //Users
 Route::get('user/create', ['as' => 'create.user', 'uses' => 'UserController@create']);
@@ -141,6 +141,11 @@ Route::group(['before' => 'oauth'], function () {
 //Route::get('teste', function () {
 //    return 'Hello World';
 //});
+
+
+Route::get('dashboard2', function () {
+    return "Teste";
+});
 
 Route::get('dashboard', function () {
 

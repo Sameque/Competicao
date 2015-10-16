@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://localhost/competiton/',
 //    'url' => 'http://172.22.25.3:8082/',
 
     /*
