@@ -127,6 +127,7 @@ class UserRepositoryController extends Controller
     public function destroy($userRep_id)
     {
         $userrepository = UserRepository::find($userRep_id);
+
         $id = $userrepository->user->id;
         $userrepository->delete();
 

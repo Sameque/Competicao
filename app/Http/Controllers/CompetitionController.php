@@ -34,9 +34,14 @@ class CompetitionController extends Controller
 
     public function competitionUserStore(Request $request)
     {
+//        dd($request->all());
+
         $competition = Competition::find($request->input('competition_id'));
+
         $competition->users()->attach($request->input('user_id'));
+
         return $this->competitionUser($competition->id);
+
     }
 
 

@@ -1,6 +1,8 @@
 @extends('templates.default')
 @section('content')
 
+
+
     <script>
         angular.module("competicao").controller("userrepositoryLoadCtrl", function ($scope) {
 

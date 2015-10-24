@@ -39,8 +39,6 @@
 
             <div class=" col-md-7">
                 <div class="formCad">
-
-
                     <div class="formProblem">
                         </br>
                         <br/>
@@ -64,7 +62,14 @@
                         echo Form::submit('Adicionar', array('class' => 'btn btn-primary btn-block'));
                         echo Form::close();
                         echo '<br/>';
+
+                        echo link_to_route('competition.edit',
+                                $title = ' Voltar para competição',
+                                $parameters = array($competition_id),
+                                $attributes = array('class' => 'btn glyphicon glyphicon-fast-backward  btn-warning  btn-block'));
                         ?>
+                        <br/>
+
                     </div>
                 </div>
             </div>

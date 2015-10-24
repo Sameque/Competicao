@@ -6,6 +6,7 @@
     <div class="formLog">
         <form method="POST" action="/auth/login">
             {!! csrf_field() !!}
+            @include('templates.message')
 
             <div>
                 Email

@@ -144,14 +144,17 @@ Route::group(['before' => 'oauth'], function () {
 
 
 Route::get('dashboard2', function () {
-    return "Teste";
+
+    $user = User::all();
+    $user->userRepository;
+    return $user;
 });
 
 Route::get('dashboard', function () {
 
 //    $artisan = Artisan::getFacadeApplication('route:list');
-    $user = \App\User::all('name');
-    return $user;
+//    $user = \App\User::all('name');
+    return "Teste";
 
 //
 //    User::create([

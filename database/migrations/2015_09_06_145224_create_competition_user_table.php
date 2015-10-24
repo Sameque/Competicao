@@ -14,9 +14,13 @@ class CreateCompetitionUserTable extends Migration
     {
         Schema::create('competition_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('competition_id');
-            $table->integer('user_id');
+            $table->integer('competition_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+
+//            $table->foreign('competition_id')->references('id')->on('competitions');
+//            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
