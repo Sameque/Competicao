@@ -119,8 +119,7 @@ Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
       <li><a href="#">Dropdown link</a></li>
     </ul>
   </div>
-  </div>
-';
+  </div>';
 }]);
 
 
@@ -145,9 +144,14 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard2', function () {
 
-    $user = User::all();
-    $user->userRepository;
-    return $user;
+
+    $validator = new \App\CrawlerRepository\ValidateProblemsSpoj();
+
+    $valid = $validator->validationProblem('POPULAR1');
+
+    dd($valid);
+
+    return $valid;
 });
 
 Route::get('dashboard', function () {

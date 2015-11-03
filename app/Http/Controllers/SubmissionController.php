@@ -48,7 +48,7 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://uniararas.br/');
 
-        $html = file_get_contents('http://br.spoj.com/users/maria/');
+        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
@@ -65,30 +65,40 @@ class SubmissionController extends Controller
 //                    <body>
 //                    <article>
 //                        <h1>Samer</h1>
-//                        <h1>Jose</h1>
+//                        <h1>Maria</h1>
 //                    </article>
 //                    <article>
 //                        <h1>Prihh</h1>
-//                        <h1>Manuela</h1>
+//                        <h1>Mek</h1>
 //                    </article>
 //                        <div>
 //                            <div>
-//                                <p class="message">Hello World!</p>
+//                                <strong><p class="message">Hello World!</p></strong>
 //                            </div>
-//
-//                            <p>Hello Crawler!</p>
+//                            </i><p>Hello Crawler!</p>
 //                        </div>
 //                    </body>
 //                </html>';
 
         $crawler = new Crawler($html);
-        $crawler = $crawler->filter('body > div > div')->eq(1)
-            ->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
-        //('body > div > div')->eq(1)
+
+        //$crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h1');//GET NAME PROBLEM
+        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);//GET CODE PROBLEM
+//        $crawler = $crawler->filter('div');
+//            ->eq(1)->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
+//        ('body > div > div')->eq(1)
 //        $crawler = $crawler->filter('body > article')->eq(0)->filter('h1')->eq(0);
 //        $crawler->addHtmlContent('http://br.spoj.com/');
+//        $crawler = $crawler->filter('body > article')->eq(1)->filter('h1')->eq(0);
+
+
+        $i=0;
         foreach ($crawler as $domElement) {
+            echo '</br>'.$i.'</br></br>';
+//            echo $domElement->nodeName;
             echo $domElement->nodeValue;
+
+            $i++;
         }
 //
 //        foreach ($crawler as $domElement) {

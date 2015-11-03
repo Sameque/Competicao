@@ -42,7 +42,7 @@
 
 
                     <div class="formProblem">
-
+                        @include('templates.message');
                         </br>
 
                         <br/>
@@ -61,17 +61,18 @@
                         </br >
                         <label for="code">Código</label>
                         <input name="code" id="code" type="text" class="form-control" ng-model="problem.code"
-                               ng-required="true"
+
                                placeholder='Digite o código do problema'/><br/>
+                    <!--
                         <label for="name">Nome</label>
                         <input name="name" id="name" type="text" class="form-control" ng-model="problem.name"
-                               ng-required="true"
-                               placeholder='Digite o nome de apresentação'/><br/>
 
+                               placeholder='Digite o nome de apresentação'/><br/>
+                    -->
                         <label for="dificult">Dificuldade</label>
                         <input name="dificult" id="dificult" type="number" class="form-control"
                                ng-model="problem.dificult"
-                               ng-required="true"
+
                                placeholder='Dificuldade do problema'/>
 
                         <input value="<% $competition_id %>" name="competition_id" id="competition_id" type="hidden"

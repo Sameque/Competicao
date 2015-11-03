@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Competition;
+
 class CompetitionSeeder extends Seeder
 {
     /**
@@ -11,9 +13,9 @@ class CompetitionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('repositorys')->truncate();
+        DB::table('competitions')->truncate();
 
-        Repository::create([
+        Competition::create([
             'name'=>'Competição_Teste-01',
             'dateBegin'=>'2001-01-01 11:11:11',
             'hoursBegin'=>'2001-01-01 11:11:11',
@@ -21,7 +23,7 @@ class CompetitionSeeder extends Seeder
             'hoursEnd'=>'2001-01-01 11:11:11'
         ]);
 
-        Repository::create([
+        Competition::create([
             'name'=>'Competição_Teste-02',
             'dateBegin'=>'2001-01-01 12:12:12',
             'hoursBegin'=>'2001-01-01 12:12:12',

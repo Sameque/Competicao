@@ -14,7 +14,6 @@
 
     <div ng-controller="userrepositoryLoadCtrl"></div>
 
-    <% $id %>
     <div ng-controller="userrepositoryCtrl" xmlns="http://www.w3.org/1999/html">
         <div class="row">
             <div class="col-md-4">

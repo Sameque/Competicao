@@ -5,6 +5,7 @@ namespace App\Providers;
 
 use App\CrawlerRepository\ValidateRepository;
 use App\CrawlerRepository\ValidateUsers;
+use App\CrawlerRepository\ValidateProblem;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -32,6 +33,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
         $this->app->singleton('ValidateUsers', function(){
             return new ValidateUsers();
+        });
+
+        $this->app->singleton('ValidateProblem', function(){
+            return new ValidateProblem();
         });
 
     }

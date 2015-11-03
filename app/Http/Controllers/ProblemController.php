@@ -6,6 +6,8 @@ use App\Competition;
 use App\Http\Requests;
 use App\Problem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class ProblemController extends Controller
 {
@@ -37,6 +39,27 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
+
+//        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'code' => 'required',
+//            'dificult' => 'required',
+            'repository_id' => 'required',
+        ]);
+
+
+        $validator->sometimes('code', 'problem', function($input) {
+            return $input->repository_id > 0;
+        });
+
+        if($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator->errors())
+                ->withInput($request->all());
+        }
+
+        dd('Gravando!!!!');
+
         $problem = new Problem($request->all());
 //        $competition = Competition::find($request->input('competition_id'));
         $problem->save();

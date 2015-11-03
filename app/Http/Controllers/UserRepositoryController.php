@@ -46,7 +46,8 @@ class UserRepositoryController extends Controller
 
 
         $validator->sometimes('username', 'userspoj', function($input) {
-            return $input->repository_id == 1;
+//            dd($input);
+            return $input->repository_id > 0;
         });
 
         if($validator->fails()){
@@ -55,6 +56,7 @@ class UserRepositoryController extends Controller
                 ->withInput($request->all());
         }
 
+//        dd($request);
 
 //        dd("Gravandooooo");
 
