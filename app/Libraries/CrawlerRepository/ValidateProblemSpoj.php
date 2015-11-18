@@ -8,7 +8,7 @@
  */
 
 //namespace App\CrawleRepository;
-namespace App\CrawlerRepository;
+namespace App\Libraries\CrawlerRepository;
 //namespace App;
 
 use Symfony\Component\DomCrawler\Crawler;

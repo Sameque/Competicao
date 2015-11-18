@@ -12,8 +12,10 @@
 */
 //use \App;
 use App\User;
+use App\Libraries\CrawlerRepository\ValidateProblemSpoj;
 use Illuminate\Support\Facades\Artisan;
 
+//App\Libraries\DateTimeCompetition
 Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 
 //Users
@@ -145,13 +147,16 @@ Route::group(['before' => 'oauth'], function () {
 Route::get('dashboard2', function () {
 
 
-    $validator = new \App\CrawlerRepository\ValidateProblemsSpoj();
+    $competition = new \App\Libraries\DateTime\DateTimeCompetition(3);
 
-    $valid = $validator->validationProblem('POPULAR1');
 
-    dd($valid);
+//    $validator = new ValidateProblemSpoj();
+//
+//    $valid = $validator->validationProblem('POPULAR1');
+//
+//    dd($valid);
 
-    return $valid;
+    return $competition->start();
 });
 
 Route::get('dashboard', function () {

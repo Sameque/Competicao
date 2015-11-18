@@ -6,6 +6,7 @@
         <table class="table table-striped">
             <tbody>
             <tr>
+            samer@sula@13509
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Data Inicio</th>
@@ -17,7 +18,6 @@
                 <th>Editar</th>
 
             </tr>
-
             <tr ng-repeat="i in competition">
                 <td>{{i.id}}</td>
                 <td>{{i.name}}</td>

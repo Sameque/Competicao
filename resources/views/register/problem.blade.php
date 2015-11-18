@@ -25,7 +25,7 @@
 
                         <tbody>
                         <tr ng-repeat="i in problems">
-                            <td>{{i.name}}</td>
+                            <td>{{i.code}}</td>
                             <td>
                                 <a href="/problem/destroy/{{i.id}}" class="btn btn-danger"
                                    method="DELETE">Apagar</a>

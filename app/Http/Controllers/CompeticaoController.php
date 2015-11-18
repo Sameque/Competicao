@@ -101,5 +101,3 @@ class CompeticaoController extends Controller
         return redirect()->guest('auth/login');
     }
 }
-
-

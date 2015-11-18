@@ -48,7 +48,7 @@ class ProblemController extends Controller
         ]);
 
 
-        $validator->sometimes('code', 'problem', function($input) {
+        $validator->sometimes('code', 'problemspoj', function($input) {
             return $input->repository_id > 0;
         });
 
@@ -58,13 +58,14 @@ class ProblemController extends Controller
                 ->withInput($request->all());
         }
 
-        dd('Gravando!!!!');
 
         $problem = new Problem($request->all());
+
 //        $competition = Competition::find($request->input('competition_id'));
         $problem->save();
 
         $competition_id = $problem->competition_id;
+//        dd('Gravando!!!!');
 
         return view('register.problem', compact('competition_id'));
     }

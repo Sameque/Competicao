@@ -28,9 +28,7 @@ class AppServiceProvider extends ServiceProvider
             return $validateUser->validate(1,$value);
         });
 
-        Validator::extend('problem', function ($attribute, $value, $parameters) {
-
-            dd($value);
+        Validator::extend('problemspoj', function ($attribute, $value, $parameters) {
 
             $validateProblem = App::make('ValidateProblem');
             return $validateProblem->validate(1,$value);

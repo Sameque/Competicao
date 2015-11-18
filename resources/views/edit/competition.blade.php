@@ -25,7 +25,21 @@
             <div class="col-md-4">
                 <br/>
                 <?php
-                echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
+                //$inicio = DateTime::createFromFormat('Y-m-d H:i:s', $competition->dateBegin.$competition->hoursBegin);
+                $inicio = DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
+                $hrs =  DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
+                //dd($inicio);
+                $intervalo = $inicio->diff($hrs);
+
+                if($inicio > $hrs){echo 'Falta: '.$intervalo->format('%Y-%m-%d %H:%I:%S');}
+                else { echo 'Inicio '.$inicio->format('d/m/y h:i:s');}
+
+//                echo $intervalo->format('%Y-%m-%d %H:%I:%S');//.'-'.$competition->dateBegin.$competition->hoursBegin;
+
+
+                //dd($intervalo);
+                //echo $intervalo;
+                    echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
                     echo '<div class="row">'
                                 .'<div class="inputNameCompetiton">';
 
@@ -93,8 +107,8 @@
                         <th colspan="2">Problemas</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="i in problems    ">
-                            <td>{{i.name}}</td>
+                        <tr ng-repeat="i in problems">
+                            <td>{{i.code}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -111,8 +125,8 @@
                         </tr>
 
                         <tbody>
-                        <tr ng-repeat="i in users">
-                            <td>{{i.name}}</td>
+                        <tr ng-repeat="y in users">
+                            <td>{{y.name}}</td>
                         </tr>
                         </tbody>
                     </table>

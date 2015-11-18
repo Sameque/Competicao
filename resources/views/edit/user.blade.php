@@ -44,14 +44,16 @@
             <?php
 
             echo '</br>';
-            echo Form::open(['route' => ['update.user', $user->id], 'method' => 'PUT']);
+            echo Form::model($user,['route' => ['update.user', $user->id], 'method' => 'PUT']);
 
             echo Form::label('username', 'Usuário') . '<br/>';
-            echo Form::text('username', null, array('ng-required' => 'true',
+            echo Form::text('username', null, array(
+                            'ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite um nome de usuário',
-                            'ng-model' => 'user.username',
-                            'ng-show' => 'true'
+                            'ng-show' => 'true',
+                            /*'ng-model' => 'user.username',*/
+
                     )) . '<br/>';
 
 
@@ -60,28 +62,28 @@
                             'ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite seu nome',
-                            'ng-model' => 'user.name'
+                            /*'ng-model' => 'user.name'*/
                     )) . '<br/>';
 
             echo Form::label('email', 'Email') . '<br/>';
             echo Form::email('email', null, array('ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite seu email',
-                            'ng-model' => 'user.email'
+                            /*'ng-model' => 'user.email'*/
                     )) . '<br/>';
 
             echo Form::label('cpf', 'CPF') . '<br/>';
             echo Form::text('cpf', null, array(
                             'class' => 'form-control',
                             'placeholder' => 'Digite seu CPF',
-                            'ng-model' => 'user.cpf',
+                           /* 'ng-model' => 'user.cpf',*/
                             'mask' => '999.999.999-99',
                     )) . '<br/>';
 
             echo Form::label('rg', 'RG') . '<br/>';
             echo Form::text('rg', null, array('class' => 'form-control',
                             'placeholder' => 'Digite seu RG',
-                            'ng-model' => 'user.rg'
+                            /*'ng-model' => 'user.rg'*/
                     )) . '<br/>';
 
             //  echo Form::label('birthDate', 'Data de Nascimento (dd/mm/aaaa)') . '<br/>';
@@ -94,7 +96,9 @@
             //           )) . '<br/>';
 
             echo '<div class="form-control">';
-            echo Form::checkbox('graduated', 'value', false, array('ng-model' => 'user.graduated',)) . ' ';
+            echo Form::checkbox('graduated', 'value', false, array(
+                                    /*'ng-model' => 'user.graduated',*/
+            )) . ' ';
             echo Form::label('graduated', 'É formado na área?') . '<br/>' . '<br/>';
             echo '</div>' . '</br>';
 
@@ -102,7 +106,7 @@
             echo Form::number('yearCourse', '', array(
                             'class' => 'form-control',
                             'placeholder' => 'Diite o ano da ultima formação',
-                            'ng-model' => 'user.yearCourse',
+                            /*'ng-model' => 'user.yearCourse',*/
                             'ng-disabled' => '!user.graduated',
                     )) . '<br/>';
 
