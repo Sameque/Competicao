@@ -26,7 +26,8 @@ return [
     |
     */
 
-    'url' => 'http://localhost/competiton/',
+    'url' => 'http://localhost/',
+//    'url' => 'http://localhost/competiton/',
 //    'url' => 'http://172.22.25.3:8082/',
 
     /*
@@ -80,7 +81,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', '123456789hytrewqas58796542158uyt'),
 
     'cipher' => 'AES-256-CBC',
 
