@@ -51,6 +51,7 @@
         </ul>
     </div>
 </nav>
+<!--
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -85,6 +86,7 @@
                 <li><a href="../navbar-static-top/">Static top</a></li>
                 <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+        </div>
+    </div>
 </nav>
+-->
