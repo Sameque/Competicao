@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d3a12fd-c05a-4ba5-97de-5f23e49763f2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Competicao.iml" afterPath="$PROJECT_DIR$/.idea/Competicao.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/blade.xml" afterPath="$PROJECT_DIR$/.idea/blade.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/templates/menuDefault.blade.php" afterPath="$PROJECT_DIR$/resources/views/templates/menuDefault.blade.php" />
-    </list>
+    <list default="true" id="9d3a12fd-c05a-4ba5-97de-5f23e49763f2" name="Default" comment="" />
     <ignored path="Competicao.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -45,8 +35,8 @@
       <file leaf-file-name="menuDefault.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/templates/menuDefault.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0904255">
-              <caret line="79" column="61" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.6028369">
+              <caret line="37" column="40" selection-start-line="36" selection-start-column="21" selection-end-line="37" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -254,8 +244,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/templates/menuDefault.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0904255">
-          <caret line="79" column="61" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.6028369">
+          <caret line="37" column="40" selection-start-line="36" selection-start-column="21" selection-end-line="37" selection-end-column="40" />
           <folding />
         </state>
       </provider>
