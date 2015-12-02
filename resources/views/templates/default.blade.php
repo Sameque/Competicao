@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
-    echo Html::style('competicao/bootstrap/css/bootstrap.css');
+    echo Html::style('bootstrap/css/bootstrap.css');
     echo Html::style('css/default.css');
     echo Html::script('node_modules\angular\angular.min.js');
     echo Html::script('node_modules\angular\ngMask.min.js');
