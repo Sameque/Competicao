@@ -5,7 +5,7 @@ namespace App\Providers;
 
 use App\CrawlerRepository\ValidateRepository;
 use App\CrawlerRepository\ValidateUsers;
-use App\CrawlerRepository\ValidateProblem;
+use App\Libraries\CrawlerRepository\ValidateProblem;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

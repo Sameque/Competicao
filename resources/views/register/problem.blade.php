@@ -42,7 +42,7 @@
 
 
                     <div class="formProblem">
-                        @include('templates.message');
+                        @include('templates.message')
                         </br>
 
                         <br/>

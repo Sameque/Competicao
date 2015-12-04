@@ -40,7 +40,7 @@ class ProblemController extends Controller
     public function store(Request $request)
     {
 
-//        dd($request->all());
+
         $validator = Validator::make($request->all(), [
             'code' => 'required',
 //            'dificult' => 'required',
@@ -48,15 +48,16 @@ class ProblemController extends Controller
         ]);
 
 
+
         $validator->sometimes('code', 'problemspoj', function($input) {
             return $input->repository_id > 0;
         });
-
         if($validator->fails()){
             return redirect()->back()
                 ->withErrors($validator->errors())
                 ->withInput($request->all());
         }
+
 
 
         $problem = new Problem($request->all());
