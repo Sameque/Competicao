@@ -35,10 +35,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if ($this->auth->check()) {
-//            dd($request);
-            return redirect('/home');
+            return redirect('/');//QUANDO ACESSA A TELA DE LOGIN ELE VERIFICA SE JÁ FOI LOGADO E REDIRECIONA PARA ESSA ROTA
         }
-
         return $next($request);
     }
 }

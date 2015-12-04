@@ -22,7 +22,7 @@
         <?php
         if (Auth::check()) {
             echo 'Usuário: ' . Auth::user()->name;
-        }
+        }else echo 'Efetue login!!!'
         ?>
     </div>
     <br/>

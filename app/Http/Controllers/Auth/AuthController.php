@@ -22,16 +22,14 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-    protected $redirectPath = '/';//NÃO ESTA REDIRECIONANDO
-    protected $loginPath = '/';
+    protected $redirectPath = '/';
+//    protected $redirectTo = '/';
+    protected $loginPath = 'auth/login';
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-
-
-
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
@@ -45,7 +43,6 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-//        dd($data);
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -61,13 +58,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'cpf' => $data['cpf'],
-            'password' =>$data['password'] //bcrypt($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
     }
 }

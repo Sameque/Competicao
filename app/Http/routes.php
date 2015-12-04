@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 
 //App\Libraries\DateTimeCompetition
 Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
+//Route::get('/home', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 
 //Users
 Route::get('user/create', ['as' => 'create.user', 'uses' => 'UserController@create']);
@@ -99,7 +100,7 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 //LOGIN
-Route::get('logout', 'CompeticaoController@logout');
+//Route::get('logout', 'CompeticaoController@logout');
 
 
 

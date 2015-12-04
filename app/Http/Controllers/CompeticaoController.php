@@ -92,12 +92,12 @@ class CompeticaoController extends Controller
 
     //TESTE
 
-    public function logout()
-    {
-        if (Auth::check()) {
-            Auth::logout();
-            return redirect()->guest('auth/login');
-        }
-        return redirect()->guest('auth/login');
-    }
+//    public function logout()
+//    {
+//        if (Auth::check()) {
+//            Auth::logout();
+//            return redirect()->guest('auth/login');
+//        }
+//        return redirect()->guest('auth/login');
+//    }
 }

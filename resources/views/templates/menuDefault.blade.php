@@ -10,7 +10,7 @@
             </li>
             <li>
                 <?php
-                echo link_to('logout', $title = 'Efetuar Login', $attributes = array('method'=>'GET'), $secure = null);
+                echo link_to('auth/login', $title = 'Efetuar Login', $attributes = array('method'=>'GET'), $secure = null);
                 ?>
             </li>
             <li>
@@ -48,6 +48,12 @@
                 echo link_to('competition/index', $title = 'Competições', $attributes = array(), $secure = null);
                 ?>
             </li>
+            <li>
+                <?php
+                echo link_to('auth/logout', $title = 'Sair', $attributes = array('method'=>'GET'), $secure = null);
+                ?>
+            </li>
+
         </ul>
     </div>
 </nav>

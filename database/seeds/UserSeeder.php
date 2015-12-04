@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'accessLevel'=>1,
             'email'=>'teste@teste.com',
             'cpf'=>'111.111.111-11',
+            'password'=>bcrypt('123456'),
             'rg'=>'987654321',
             'yearCourse'=>2002,
             'birthDate'=>'2001-01-01',
