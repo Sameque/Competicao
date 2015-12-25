@@ -47,7 +47,6 @@ class UserRepositoryController extends Controller
 
 
         $validator->sometimes('username', 'userspoj', function($input) {
-//            dd($input);
             return $input->repository_id > 0;
         });
 
@@ -59,8 +58,8 @@ class UserRepositoryController extends Controller
 
         $userRepository = UserRepository::create($request->all());
 
-        $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
 
+        RepositoryUser::getRepositoryUser($userRepository);
         $id = $request->input('user_id');
 
         return view('register.userrepository', compact('id'));
@@ -122,17 +121,15 @@ class UserRepositoryController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($userRepositpry_id)
+    public function destroy($userRep_id)
     {
-        dd('Userrepositorycontroll');
-
-        $userRepository = UserRepository::find($userRepositpry_id);
+        $userRepository = UserRepository::find($userRep_id);
 
         $id = $userRepository->user->id;
+        $userRepository->problemUnsolvedUser()->delete();
+        $userRepository->problemSolvedUser()->delete();
+        $userRepository->delete();
 
-//        $userRepository->problemUnsolvedUser()->delete();
-//        $userRepository->problemSolvedUser()->delete();
-//        $userRepository->delete();
 
 
         return view('register.userrepository', compact('id'));

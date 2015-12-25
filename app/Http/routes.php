@@ -46,7 +46,13 @@ Route::post('userrepository/store', ['as' => 'store.userrepository', 'uses' => '
 Route::get('userrepository/show/{user_id}', ['as' => 'user.userrepositoryshow', 'uses' => 'UserRepositoryController@show']);
 Route::get('listuserrepository', ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
 
-Route::get('listuserrepository/delete/{id}', ['as' => 'delete.userrepositorys', 'uses' => 'UserRepositoryController@destroy']);
+Route::get('listuserrepository/delete/{userRep_id}',
+            ['as' => 'delete.userrepositorys',
+                'uses' => 'UserRepositoryController@destroy'
+            ]);
+    //Route::get('listuserrepository/delete/{id}', ['as' => 'delete.userrepositorys', 'uses' => function(){
+//    echo 'Teste';
+//}]);
 
 //COMPETICAO
 Route::get('competition/show/{id}', ['as' => 'competition.show', 'uses' => 'CompetitionController@show']);
@@ -165,9 +171,14 @@ Route::get('dashboard2', function () {
 
 Route::get('dashboard1', function () {
 
+    $user = User::findOrNew(1);
 
-    echo 'Casinha: '.ADMIN;
 
+    foreach($user->userRepository as $userRepository){
+        $userRepository->problemUnsolvedUser;
+        $userRepository->problemSolvedUser;
+    }
+    return $user;
 
 //    $userRepository = UserRepository::find(14);
 //
