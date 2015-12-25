@@ -45,6 +45,7 @@ Route::get('userrepository/{user_id}', ['as' => 'userrepository.user', 'uses' =>
 Route::post('userrepository/store', ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
 Route::get('userrepository/show/{user_id}', ['as' => 'user.userrepositoryshow', 'uses' => 'UserRepositoryController@show']);
 Route::get('listuserrepository', ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
+
 Route::get('listuserrepository/delete/{id}', ['as' => 'delete.userrepositorys', 'uses' => 'UserRepositoryController@destroy']);
 
 //COMPETICAO

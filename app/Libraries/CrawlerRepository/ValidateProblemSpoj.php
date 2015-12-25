@@ -11,7 +11,6 @@ namespace App\Libraries\CrawlerRepository;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-define("URL_PROBLEMS_SPOJ", 'http://br.spoj.com/problems/');
 
 class ValidateProblemSpoj
 {

@@ -124,6 +124,8 @@ class UserRepositoryController extends Controller
      */
     public function destroy($userRepositpry_id)
     {
+        dd('Userrepositorycontroll');
+
         $userRepository = UserRepository::find($userRepositpry_id);
 
         $id = $userRepository->user->id;
@@ -132,7 +134,6 @@ class UserRepositoryController extends Controller
 //        $userRepository->problemSolvedUser()->delete();
 //        $userRepository->delete();
 
-        dd('Userrepositorycontroll');
 
         return view('register.userrepository', compact('id'));
     }

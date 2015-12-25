@@ -15,7 +15,6 @@ use App\ProblemSolvedUser;
 use App\ProblemUnsolvedUser;
 use Symfony\Component\DomCrawler\Crawler;
 
-define("URL_USER_SPOJ", 'http://br.spoj.com/users/');
 
 class RepositoryUserSpoj
 {   

@@ -13,7 +13,6 @@ namespace App\Libraries\CrawlerRepository;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-define("URL_USER_SPOJ_VALIDATE", 'http://br.spoj.com/users/');
 
 class ValidateUsersSpoj
 {
