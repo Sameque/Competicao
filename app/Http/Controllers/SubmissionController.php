@@ -48,7 +48,9 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://uniararas.br/');
 
-        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
+//        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
+        $html = file_get_contents('http://br.spoj.com/users/sameque/');//GET USERNAME, USER
+
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
@@ -82,8 +84,12 @@ class SubmissionController extends Controller
 
         $crawler = new Crawler($html);
 
-        //$crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h1');//GET NAME PROBLEM
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);//GET CODE PROBLEM
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h1');//GET NAME PROBLEM
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);//GET CODE PROBLEM
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);//GET USERNAME, USER
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > h3');//GET NAME, USER
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(1)->filter('td');//PROBLEM SOLVED
+        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(2)->filter('td');//PROBLEM UNSOLVED
 //        $crawler = $crawler->filter('div');
 //            ->eq(1)->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
 //        ('body > div > div')->eq(1)
@@ -91,15 +97,20 @@ class SubmissionController extends Controller
 //        $crawler->addHtmlContent('http://br.spoj.com/');
 //        $crawler = $crawler->filter('body > article')->eq(1)->filter('h1')->eq(0);
 
-
-        $i=0;
-        foreach ($crawler as $domElement) {
-            echo '</br>'.$i.'</br></br>';
-//            echo $domElement->nodeName;
-            echo $domElement->nodeValue;
-
-            $i++;
+        $userAuxi='';
+        foreach ($crawler as $key => $domElement) {
+            if($domElement->nodeValue != "") {
+                $userAuxi[] = $domElement->nodeValue;
+//                echo $key.'-'.$domElement->nodeValue.'</br>';
+            }
         }
+//        dd($userAuxi);
+        foreach($userAuxi as $key=>$value){
+            echo ($key+1).'->'.$value.'</br>';
+        }
+
+//        dd($userAuxi);
+
 //
 //        foreach ($crawler as $domElement) {
 ////            var_dump($domElement);

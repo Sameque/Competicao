@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Competition;
 use App\Http\Requests;
 use App\Problem;
+use App\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

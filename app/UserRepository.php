@@ -14,6 +14,19 @@ class UserRepository extends Model
         return $this->belongsTo('App\Repository');
     }
 
+
+    public function problemSolvedUser()
+    {
+        return $this->hasMany('App\ProblemSolvedUser');
+    }
+
+
+    public function problemUnsolvedUser()
+    {
+        return $this->hasMany('App\ProblemUnsolvedUser');
+    }
+
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -24,12 +37,14 @@ class UserRepository extends Model
         'repository_id',
         'username',
         'user_id',
+        'name',
         'created_at',
         'updated_at',
 
     ];
 
     protected $hidden = [
+        'id',
         'created_at',
         'updated_at',
     ];

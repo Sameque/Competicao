@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 
-use App\CrawlerRepository\ValidateRepository;
-use App\CrawlerRepository\ValidateUsers;
+use App\Libraries\CrawlerRepository\ValidateRepository;
+use App\Libraries\CrawlerRepository\ValidateUsers;
 use App\Libraries\CrawlerRepository\ValidateProblem;
 use Illuminate\Support\ServiceProvider;
-
+// Error in add problems (RepositoryServiceProvider)
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**

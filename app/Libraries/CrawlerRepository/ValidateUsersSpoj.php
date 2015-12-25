@@ -8,24 +8,23 @@
  */
 
 //namespace App\CrawleRepository;
-namespace App\CrawlerRepository;
+namespace App\Libraries\CrawlerRepository;
 //namespace App;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-define("URL_USER_SPOJ", 'http://br.spoj.com/users/');
+define("URL_USER_SPOJ_VALIDATE", 'http://br.spoj.com/users/');
 
 class ValidateUsersSpoj
 {
-
     public function validateUser($userRepository)
     {
-        $urlValidate = URL_USER_SPOJ.$userRepository.'/';
+        $urlValidate = URL_USER_SPOJ_VALIDATE.$userRepository.'/';
         if($this->getHTML($urlValidate) != '200' ){
             return false;
         } else {
 
-            return $this->validateUserName(URL_USER_SPOJ.$userRepository,$userRepository);
+            return $this->validateUserName(URL_USER_SPOJ_VALIDATE.$userRepository,$userRepository);
         }
     }
 

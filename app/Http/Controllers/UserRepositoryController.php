@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Libraries\CrawlerRepository\RepositoryUser;
 use App\Repository;
 use App\User;
 use App\UserRepository;
@@ -56,27 +57,13 @@ class UserRepositoryController extends Controller
                 ->withInput($request->all());
         }
 
-//        dd($request);
+        $userRepository = UserRepository::create($request->all());
 
-//        dd("Gravandooooo");
+        $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
 
-
-//        $userrepository = new UserRepository($request->all());
-
-        UserRepository::create($request->all());
-
-//        $user = User::find($request->input('user_id'));
-//        $repository = Repository::find($request->input('repository_id'));
-
-//        $repository->userRepository()->save($userrepository);
-//        $user->userRepository()->save($userrepository);
-
-//        $id = $user->id;
         $id = $request->input('user_id');
 
         return view('register.userrepository', compact('id'));
-//        return redirect()->route('user.userrepository');
-//        return $repository;
     }
 
     /**
@@ -115,9 +102,18 @@ class UserRepositoryController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+//    public function update(Request $request, $id)
+//    {
+//
+//    }
+
+    public function update($userRepository)
     {
-        //
+        $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
+        $id = $userRepository->user_id;
+
+        return view('register.userrepository', compact('id'));
+
     }
 
     /**
@@ -126,12 +122,17 @@ class UserRepositoryController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($userRep_id)
+    public function destroy($userRepositpry_id)
     {
-        $userrepository = UserRepository::find($userRep_id);
+        $userRepository = UserRepository::find($userRepositpry_id);
 
-        $id = $userrepository->user->id;
-        $userrepository->delete();
+        $id = $userRepository->user->id;
+
+//        $userRepository->problemUnsolvedUser()->delete();
+//        $userRepository->problemSolvedUser()->delete();
+//        $userRepository->delete();
+
+        dd('Userrepositorycontroll');
 
         return view('register.userrepository', compact('id'));
     }

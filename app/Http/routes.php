@@ -12,8 +12,11 @@
 */
 //use \App;
 use App\User;
+use App\UserRepository;
+use App\ProblemSolvedUser;
 use App\Libraries\CrawlerRepository\ValidateProblemSpoj;
 use Illuminate\Support\Facades\Artisan;
+use App\Libraries\CrawlerRepository\RepositoryUser;
 
 //App\Libraries\DateTimeCompetition
 Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
@@ -147,24 +150,51 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard2', function () {
 
+    $userRepository = UserRepository::find(14);
+    $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
 
-    $competition = new \App\Libraries\DateTime\DateTimeCompetition(3);
 
+    $userRepository->problemSolvedUser;
+    $userRepository->problemUnsolvedUser;
+    $userRepository->repository;
+//    $userRepository->save();
 
-//    $validator = new ValidateProblemSpoj();
-//
-//    $valid = $validator->validationProblem('POPULAR1');
-//
-//    dd($valid);
-
-    return $competition->start();
+    return $userRepository;
 });
 
-Route::get('dashboard', function () {
+Route::get('dashboard1', function () {
 
-//    $artisan = Artisan::getFacadeApplication('route:list');
-//    $user = \App\User::all('name');
-    return "Teste";
+
+    echo 'Casinha: '.ADMIN;
+
+
+//    $userRepository = UserRepository::find(14);
+//
+//    $userRepository->problemUnsolvedUser()->delete();
+//    $userRepository->problemSolvedUser()->delete();
+//    $userRepository->delete();
+//
+//    $userRepository->problemUnsolvedUser;
+//    $userRepository->problemSolvedUser;
+//    return $userRepository;
+//
+
+
+//    $userRepository->repository;
+//    $userRepository->user;
+
+//    $userRepository->problemSolvedUser()->detach(1);
+
+
+//    dd($problemSolvedUser);
+//
+//    $userRepository = UserRepository::find(1);
+//    $teste = RepositoryUser();
+//    $resp = $teste->getRepositoryUser($userRepository);
+////    $resp->getUserRepository($userRepository);
+//
+//    dd($resp->problemSolved);
+
 
 //
 //    User::create([

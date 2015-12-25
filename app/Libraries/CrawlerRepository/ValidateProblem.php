@@ -7,9 +7,12 @@
  * Time: 17:06
  */
 
-//namespace App\CrawleRepository;
 namespace App\Libraries\CrawlerRepository;
-//namespace App;
+
+use App\Libraries\CrawlerRepository\ValidateProblemUri;
+use App\Libraries\CrawlerRepository\ValidateProblemUva;
+use App\Libraries\CrawlerRepository\ValidateProblemSpoj;
+
 
 class ValidateProblem
 {
