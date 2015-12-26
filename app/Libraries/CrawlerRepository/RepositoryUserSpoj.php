@@ -18,19 +18,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class RepositoryUserSpoj
 {   
-    private $name;
-    private $userName;
-    private $problemSolved;
-    private $problemUnsolved;
-    private $url;
+//    private $name;
     private $html;
 
 
 
     public function getUserRepository($userRepository)
     {
-        $this->url = URL_USER_SPOJ.$userRepository->username.'/';
-//        $this->html = file_get_contents($this->url);
+        $this->html = file_get_contents(URL_USER_SPOJ.$userRepository->username.'/');
         $problemSolvedController = new ProblemSolvedUserController();
         $problemUnsolvedController = new ProblemUnsolvedUserController();
 
@@ -51,8 +46,8 @@ class RepositoryUserSpoj
 
     private function getName(){
 
-        $html = file_get_contents($this->url);
-        $crawler = new Crawler($html);
+        $crawler = new Crawler($this->html);
+
         $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > h3');
 
         $userAuxi ='';
@@ -64,8 +59,8 @@ class RepositoryUserSpoj
 
     private function getUserName(){
 
-        $html = file_get_contents($this->url);
-        $crawler = new Crawler($html);
+        $crawler = new Crawler($this->html);
+
         $crawler = $crawler->filter('body > div > div')->eq(1)
             ->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
 
@@ -78,8 +73,7 @@ class RepositoryUserSpoj
 
     private function getProblemSolved(){
 
-        $html = file_get_contents($this->url);
-        $crawler = new Crawler($html);
+        $crawler = new Crawler($this->html);
 
         $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(1)->filter('td');
 
@@ -95,8 +89,7 @@ class RepositoryUserSpoj
 
     private function getProblemUnsolved(){
 
-        $html = file_get_contents($this->url);
-        $crawler = new Crawler($html);
+        $crawler = new Crawler($this->html);
 
         $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(2)->filter('td');
 
@@ -109,21 +102,4 @@ class RepositoryUserSpoj
         }
         return $userAuxi;
     }
-
-    private function deleteProblemSolved(){
-
-        $html = file_get_contents($this->url);
-        $crawler = new Crawler($html);
-
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(1)->filter('td');
-
-        $userAuxi ='';
-        foreach ($crawler as $key => $domElement) {
-            if($domElement->nodeValue != "") {
-                $userAuxi[] = new ProblemSolvedUser(array('problem'=> $domElement->nodeValue));
-            }
-        }
-        return $userAuxi;
-    }
-
 }
