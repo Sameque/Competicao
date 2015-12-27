@@ -16,14 +16,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class ValidateUsersSpoj
 {
-    public function validateUser($userRepository)
+    public function validateUser($username)
     {
-        $urlValidate = URL_USER_SPOJ_VALIDATE.$userRepository.'/';
+        $urlValidate = URL_USER_SPOJ_VALIDATE.$$username.'/';
         if($this->getHTML($urlValidate) != '200' ){
             return false;
         } else {
 
-            return $this->validateUserName(URL_USER_SPOJ_VALIDATE.$userRepository,$userRepository);
+            return $this->validateUserName($urlValidate,$$username);
         }
     }
 
@@ -34,7 +34,6 @@ class ValidateUsersSpoj
         $crawler = $crawler->filter('body > div > div')->eq(1)
             ->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
 
-//        dd($html);
         $userAuxi = '';
 
         foreach ($crawler as $domElement) {

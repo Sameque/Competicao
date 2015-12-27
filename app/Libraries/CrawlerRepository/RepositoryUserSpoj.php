@@ -25,24 +25,7 @@ class RepositoryUserSpoj
 
     public function getUserRepository($username)
     {
-
         $this->html = file_get_contents(URL_USER_SPOJ.$username.'/');
-
-//        $problemSolvedController = new ProblemSolvedUserController();
-//        $problemUnsolvedController = new ProblemUnsolvedUserController();
-
-        //Delete registers problem solved
-//        $problemSolvedController->destroy($userRepository->id);
-        //get and save register problem solved
-//        $problemSolvedController->store($userRepository->id,$this->getProblemSolved());
-
-
-        //Delete registers problem unsolved
-//        $problemUnsolvedController->destroy($userRepository->id);
-        //get and save register problem unsolved
-//        $problemUnsolvedController->store($userRepository->id,$this->getProblemUnsolved());
-
-//        $userRepository->name = $this->getName();
 
         $attributes = array(
             'name' => $this->getName(),
@@ -52,7 +35,6 @@ class RepositoryUserSpoj
             );
 
         return $attributes;
-//        return $userRepository;
     }
 
     private function getName(){
