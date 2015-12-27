@@ -13,10 +13,10 @@ namespace App\Libraries\CrawlerRepository;
 //use App\Libraries\CrawlerRepository\RepositoryUserUri;
 //use App\Libraries\CrawlerRepository\RepositoryUserUva;
 
-class RepositoryUser
+class RepositoryProblem
 {
 
-    public static function getRepositoryUser($repository_id,$username)
+    public static function getRepositoryProblem($repository_id,$username)
     {
         if ($repository_id == 1) {
             $validator = new RepositoryUserSpoj();

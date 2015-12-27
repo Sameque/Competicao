@@ -23,25 +23,36 @@ class RepositoryUserSpoj
 
 
 
-    public function getUserRepository($userRepository)
+    public function getUserRepository($username)
     {
-        $this->html = file_get_contents(URL_USER_SPOJ.$userRepository->username.'/');
-        $problemSolvedController = new ProblemSolvedUserController();
-        $problemUnsolvedController = new ProblemUnsolvedUserController();
+
+        $this->html = file_get_contents(URL_USER_SPOJ.$username.'/');
+
+//        $problemSolvedController = new ProblemSolvedUserController();
+//        $problemUnsolvedController = new ProblemUnsolvedUserController();
 
         //Delete registers problem solved
-        $problemSolvedController->destroy($userRepository->id);
+//        $problemSolvedController->destroy($userRepository->id);
         //get and save register problem solved
-        $problemSolvedController->store($userRepository->id,$this->getProblemSolved());
+//        $problemSolvedController->store($userRepository->id,$this->getProblemSolved());
+
 
         //Delete registers problem unsolved
-        $problemUnsolvedController->destroy($userRepository->id);
+//        $problemUnsolvedController->destroy($userRepository->id);
         //get and save register problem unsolved
-        $problemUnsolvedController->store($userRepository->id,$this->getProblemUnsolved());
+//        $problemUnsolvedController->store($userRepository->id,$this->getProblemUnsolved());
 
-        $userRepository->name = $this->getName();
+//        $userRepository->name = $this->getName();
 
-        return $userRepository;
+        $attributes = array(
+            'name' => $this->getName(),
+            'username' => $this->getUserName(),
+            'problemSolved' => $this->getProblemSolved(),
+            'problemUnsolved' => $this->getProblemUnsolved(),
+            );
+
+        return $attributes;
+//        return $userRepository;
     }
 
     private function getName(){

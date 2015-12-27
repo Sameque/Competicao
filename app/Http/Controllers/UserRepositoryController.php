@@ -58,11 +58,24 @@ class UserRepositoryController extends Controller
 
         $userRepository = UserRepository::create($request->all());
 
+        $this->updateUserRepository($userRepository);
 
-        RepositoryUser::getRepositoryUser($userRepository);
         $id = $request->input('user_id');
 
         return view('register.userrepository', compact('id'));
+    }
+
+    public function updateUserRepository(UserRepository $userRepository){
+
+        $problemSolvedController = new ProblemSolvedUserController();
+        $problemUnsolvedController = new ProblemUnsolvedUserController();
+        //Limpando registro de problemas do repositório
+        $problemSolvedController->destroy($userRepository->id);
+        $problemUnsolvedController->destroy($userRepository->id);
+
+
+        $atributes = RepositoryUser::getRepositoryUser($userRepository);
+
     }
 
     /**

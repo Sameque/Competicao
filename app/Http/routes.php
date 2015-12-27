@@ -120,19 +120,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 //TESTES
 //Route::get('user/teste', ['as' => 'teste', 'uses' => 'UserController@teste']);
 Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
-    return '
-<div class="btn-group" role="group" aria-label="...">
-<div class="btn-group" role="group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Dropdown link</a></li>
-      <li><a href="#">Dropdown link</a></li>
-    </ul>
-  </div>
-  </div>';
+   return RepositoryUser::getRepositoryUser(1,'sameque');
 }]);
 
 
@@ -157,16 +145,28 @@ Route::group(['before' => 'oauth'], function () {
 
 Route::get('dashboard2', function () {
 
-    $userRepository = UserRepository::find(14);
-    $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
+    $user = User::findOrNew(1);
 
+        foreach($user->userRepository as $userRepository){
 
-    $userRepository->problemSolvedUser;
-    $userRepository->problemUnsolvedUser;
-    $userRepository->repository;
-//    $userRepository->save();
+            $attributes =  RepositoryUser::getRepositoryUser(
+                $userRepository->repository_id,
+                $userRepository->username
+            );
 
-    return $userRepository;
+            $problemSolvedController = new ProblemSolvedUserController();
+            $problemUnsolvedController = new ProblemUnsolvedUserController();
+
+            $problemSolvedController->store($userRepository->id,$attributes->problemSolved);
+            $problemUnsolvedController->store($userRepository->id,$attributes->problemUnsolved);
+
+            $userRepository->problemSolvedUser;
+            $userRepository->problemUnsolvedUser;
+            $userRepository->repository;
+        }
+
+    return $user;
+//    return $userRepository;
 });
 
 Route::get('dashboard1', function () {
