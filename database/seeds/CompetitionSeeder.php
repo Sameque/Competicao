@@ -13,7 +13,7 @@ class CompetitionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('competitions')->truncate();
+        DB::table('competitions')->delete();
 
         Competition::create([
             'name'=>'Competição_Teste-01',
