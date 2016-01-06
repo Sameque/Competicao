@@ -18,12 +18,12 @@ class ValidateUsersSpoj
 {
     public function validateUser($username)
     {
-        $urlValidate = URL_USER_SPOJ_VALIDATE.$$username.'/';
+        $urlValidate = URL_USER_SPOJ_VALIDATE.$username.'/';
         if($this->getHTML($urlValidate) != '200' ){
             return false;
         } else {
 
-            return $this->validateUserName($urlValidate,$$username);
+            return $this->validateUserName($urlValidate,$username);
         }
     }
 

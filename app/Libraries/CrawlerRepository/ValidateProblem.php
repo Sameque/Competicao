@@ -9,10 +9,6 @@
 
 namespace App\Libraries\CrawlerRepository;
 
-use App\Libraries\CrawlerRepository\ValidateProblemUri;
-use App\Libraries\CrawlerRepository\ValidateProblemUva;
-use App\Libraries\CrawlerRepository\ValidateProblemSpoj;
-
 
 class ValidateProblem
 {
@@ -21,15 +17,15 @@ class ValidateProblem
         $validator = null;
 
         if ($repository_id == 1) {
-            $validator = new ValidateProblemSpoj();
+            $repository = new ValidateProblemSpoj();
         } elseif ($repository_id == 2) {
-            $validator = new ValidateProblemUri();
+            $repository = new ValidateProblemUri();
         } elseif ($repository_id == 3) {
-            $validator = new ValidateProblemUva();
-        } else $validator = null;
+            $repository = new ValidateProblemUva();
+        } else $repository = null;
 
-        if (!empty($validator)) {
-            return $validator->validationProblem($problem);
+        if (!empty($repository)) {
+            return $repository->validationProblem($problem);
         } else
             return false;
     }

@@ -9,25 +9,21 @@
 
 namespace App\Libraries\CrawlerRepository;
 
-//use App\Libraries\CrawlerRepository\RepositoryUserSpoj;
-//use App\Libraries\CrawlerRepository\RepositoryUserUri;
-//use App\Libraries\CrawlerRepository\RepositoryUserUva;
-
 class RepositoryProblem
 {
 
-    public static function getRepositoryProblem($repository_id,$username)
+    public static function getRepositoryProblem($repository_id,$problem,$username=null)
     {
         if ($repository_id == 1) {
-            $validator = new RepositoryUserSpoj();
+            $repository = new RepositoryProblemSpoj();
         } elseif ($repository_id == 2) {
-            $validator = new RepositoryUserUri();
+            $repository = new RepositoryProblemUri();
         } elseif ($repository_id == 3) {
-            $validator = new RepositoryUserUva();
-        } else $validator = null;
+            $repository = new RepositoryProblemUva();
+        } else $repository = null;
 
-        if (!empty($validator)) {
-            return $validator->getUserRepository($username);
+        if (!empty($repository)) {
+            return $repository->getProblem($problem,$username);
         } else
             return false;
     }

@@ -73,8 +73,7 @@ class UserRepositoryController extends Controller
         $problemSolvedController->destroy($userRepository->id);
         $problemUnsolvedController->destroy($userRepository->id);
 
-
-        $atributes = RepositoryUser::getRepositoryUser($userRepository);
+        $atributes = RepositoryUser::getRepositoryUser($userRepository->repository_id, $userRepository->username);
 
     }
 

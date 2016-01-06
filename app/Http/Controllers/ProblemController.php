@@ -41,7 +41,6 @@ class ProblemController extends Controller
     public function store(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), [
             'code' => 'required',
 //            'dificult' => 'required',
@@ -50,9 +49,11 @@ class ProblemController extends Controller
 
 
 
+
         $validator->sometimes('code', 'problemspoj', function($input) {
             return $input->repository_id > 0;
         });
+
         if($validator->fails()){
             return redirect()->back()
                 ->withErrors($validator->errors())
@@ -60,14 +61,11 @@ class ProblemController extends Controller
         }
 
 
-
         $problem = new Problem($request->all());
 
-//        $competition = Competition::find($request->input('competition_id'));
         $problem->save();
 
         $competition_id = $problem->competition_id;
-//        dd('Gravando!!!!');
 
         return view('register.problem', compact('competition_id'));
     }
