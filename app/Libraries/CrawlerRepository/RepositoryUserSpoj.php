@@ -9,8 +9,6 @@
 
 namespace App\Libraries\CrawlerRepository;
 
-use App\Http\Controllers\ProblemSolvedUserController;
-use App\Http\Controllers\ProblemUnsolvedUserController;
 use App\ProblemSolvedUser;
 use App\ProblemUnsolvedUser;
 use Symfony\Component\DomCrawler\Crawler;
@@ -18,10 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class RepositoryUserSpoj
 {   
-//    private $name;
     private $html;
-
-
 
     public function getUserRepository($username)
     {
