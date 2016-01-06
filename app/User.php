@@ -46,7 +46,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = [
 //        'id',
         'accessLevel',
-//        'password',
+        'password',
 //        'cpf',
 //        'rg',
 //        'passwordConf',

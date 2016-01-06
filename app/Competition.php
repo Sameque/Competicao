@@ -8,7 +8,7 @@ class Competition extends Model
 {
     protected $table = 'competitions';
 
-    public function problems()
+        public function problems()
     {
         return $this->hasMany('App\Problem');
     }
@@ -33,7 +33,7 @@ class Competition extends Model
 //        'hoursBegin',
 //        'dateEnd',
 //        'hourEnd',
-//        'created_at',
-//        'updated_at'
+        'created_at',
+        'updated_at'
     ];
 }

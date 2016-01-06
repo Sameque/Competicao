@@ -26,6 +26,9 @@ class Problem extends Model
 //        'competition_id',
 //        'url',
 //        'dificult',
+        'created_at',
+        'updated_at'
+
     ];
 
     public function repository()

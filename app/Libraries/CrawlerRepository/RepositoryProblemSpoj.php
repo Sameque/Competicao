@@ -36,7 +36,7 @@ class RepositoryProblemSpoj
             $attributes = $this->getProblemsUser();
         }
 
-        dd($attributes);
+//        dd($attributes);
 
         return $attributes;
     }
@@ -114,7 +114,6 @@ class RepositoryProblemSpoj
 
 
             if( $key == $k and $domElement->nodeValue <> '') {
-//                dd($domElement->textContent);
                 $register['result'] = $domElement->nodeValue;
                 $k = $k +7;
             }
