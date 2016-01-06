@@ -12,7 +12,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();
+
+        DB::table('users')->delete();
 
 //        dd(User::all());
 
