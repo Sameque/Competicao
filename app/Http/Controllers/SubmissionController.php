@@ -62,7 +62,8 @@ class SubmissionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualizar a competição.
+     * Verifica as submições dos usuários para atualizar o ranking
      *
      * @param  Request $request
      * @param  int $id
@@ -72,53 +73,121 @@ class SubmissionController extends Controller
     {
         $competition = App\Competition::findOrNew($competition_id);
 
-        //PEGAR TODOS OS PROBLEMAS DA COMPETICAO
+        /**
+         * PEGAR TODOS OS PROBLEMAS DA COMPETICAO
+         */
         $problemCompetition = '';
         foreach($competition->problems as $i){
             $register['code'] = $i->code;
             $register['repository_id'] = $i->repository_id;
             $problemCompetition[] = $register;
         }
-
-        //PEGAR TODOS OS USUÁRO DA COMPETICAO
+        /**
+         * PEGAR TODOS OS USUÁRO DA COMPETICAO
+         *
+         */
         $usersCompetiton = '';
         foreach($competition->users as $i){
             $i->userRepository;
             $usersCompetiton[] = $i;
         }
 
-        //VERIFICAR EM TODOS OS PROBLEMAS QUAIS JÁ FORAM RESOLVIDO PELO USUÁRIO
-        // NA DATA HORA QUE OCORRE A COMPETICAO
-        foreach($problemCompetition as $problem){
-            foreach($usersCompetiton as $user){
-                foreach($user->userRepository as $userRepository){
+        /**
+         * Anda no array de usuários da competição
+         *
+         */
+        foreach($usersCompetiton as $user){
+            /**
+             * Anda no array de repositórios do usuário
+             */
+            foreach($user->userRepository as $userRepository){
+                //          ==>>
+
+                /**
+                 * Filtrar os problemas referente ao repositório do usuário repositório "vigente/selecionado"
+                 */
+
+                $problems = '';
+                foreach($problemCompetition as $problem){
                     if($userRepository->reposytory_id = $problem['repository_id']){
-                        $this->verifyProblemSolvedUser($competition->dateBegin,$competition->dateEnd,
-                            $userRepository->reposytory_id,$userRepository->username,$problem['code']);
+                        $problems[] = $problem['code'];
                     }
+                }
+
+                $submission = $this->getProblemUser(
+                    $competition->dateBegin,
+                    $competition->dateEnd,
+                    $userRepository->reposytory_id,
+                    $userRepository->username,
+                    $problems
+                );
+
+//                $submissionModel2 = App\Submission::create($submission);
+
+                foreach ($submission as $item){
+                    $submissionModel = new App\Submission();
+
+                    $submissionModel->date = $item['date'];
+                    $submissionModel->hours = $item['hours'];
+                    $submissionModel->problem = $item['problem'];
+                    $submissionModel->result = $item['result'];
+                    $submissionModel->language = $item['language'];
+                    $submissionModel->user_id = $user->id;
+                    $submissionModel->competition_id = $competition->id;
+
+                    $submissionModel->save();
+                }
+            }
+        }
+
+        return $competition;
+    }
+
+    /**
+     * @param Date $competitionBegin_dt
+     * @param Date $competitionEnd_dt
+     * @param int $repository_id
+     * @param User $username
+     * @param string $problem
+     * @return array
+     */
+    private function getProblemUser($competitionBegin_dt,$competitionEnd_dt,$repository_id,$username,$problems){
+
+        /**
+         * Pegaos registros de submissão do problema($problem) no usuário de repositório ($username)
+         */
+        $submisions = RepositoryProblem::getRepositoryProblem($repository_id,$problems,$username);
+
+
+        /**
+         * anda no array de registros de submissões
+         */
+        $auxSubmission = '';
+        foreach($submisions as $key => $submision) {
+
+
+            foreach ($problems as $problem) {
+                /**
+                 * verifica se o respectivo problema pertence a essa competição e se
+                 * os registros estão dentro do periodo da competição.
+                 */
+
+                if ($submision['problem'] == $problem and
+
+                    (
+                        $submision['date'] >= $competitionBegin_dt and
+                        $submision['date'] <= $competitionEnd_dt
+                    )
+                    )
+                 {
+                     $auxSubmission[] = $submision;
+//                    unset($submisions[$key]);
                 }
             }
 
         }
 
-        return $competition;
-
-    }
-
-    private function verifyProblemSolvedUser($competitionBegin_dt,$competitionEnd_dt,$repository_id,$username,$problem){
-
-        $submisions = RepositoryProblem::getRepositoryProblem($repository_id,$problem,$username);
-
-        foreach($submisions as $key => $submision){
-            if($submision['problem'] != $problem){
-                unset($submisions[$key]);
-            }
-        }
-
-
-
-        dd($submisions);
-
+        return $auxSubmission;
     }
 
 
