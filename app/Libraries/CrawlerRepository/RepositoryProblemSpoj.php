@@ -23,17 +23,20 @@ class RepositoryProblemSpoj
 
     public function getProblem($problem,$username)
     {
+
         $this->htmlProblemUser = file_get_contents(URL_PROBLEMS__USER_SPOJ.$username.'/');
-        $this->htmlProblem = file_get_contents(URL_PROBLEMS_SPOJ.$problem.'/');
+
+//        $this->htmlProblem = file_get_contents(URL_PROBLEMS_SPOJ.$problem.'/');
 
         if($username == null) {
-            $attributes = array(
-                'name' => $this->getName(),
-                'code' => $problem,
-                'content' => $this->getProblemContent(),
-            );
+            dd('[RepositoryProblemSpoj] => '.' {não implementado}');
+//            $attributes = array(
+//                'name' => $this->getName(),
+//                'code' => $problem,
+//                'content' => $this->getProblemContent(),
+//            );
         } else{
-            $attributes = $this->getProblemsUser();
+            $attributes = $this->getProblemUsers();
         }
 
 //        dd($attributes);
@@ -72,7 +75,7 @@ class RepositoryProblemSpoj
 
 
 
-    private function getProblemsUser(){
+    private function getProblemUsers(){
 
         $crawler = new Crawler($this->htmlProblemUser);
 
@@ -114,12 +117,13 @@ class RepositoryProblemSpoj
 
 
             if( $key == $k and $domElement->nodeValue <> '') {
-                $register['result'] = $domElement->nodeValue;
+//                $register['result'] = $domElement->nodeValue;
+                $register['result'] = $this->formatField($domElement->nodeValue);
                 $k = $k +7;
             }
 
             if( $key == $j and $domElement->nodeValue <> '') {
-                $register['language'] = $domElement->nodeValue;
+                $register['language'] = $this->formatField($domElement->nodeValue);
             }
 
             if($key == $j){
@@ -167,6 +171,25 @@ class RepositoryProblemSpoj
         return $userAuxi;
     }
 
+    /**
+     * Formatar a o campo resultado retirando os '\n' e '\t')
+     *
+     * @param $result string
+     * @return string
+     */
+    private function formatField($result){
+
+        $retorno='';
+
+        for($i=0; $i<strlen($result); $i++ ){
+            if ( (substr($result,$i-1,1) != "\n") and (substr($result,$i-1,1) != "\t") ){
+                $retorno = $retorno.substr($result,$i-1,1);
+            }
+        }
+
+        return $retorno;
+
+    }
     private function getProblemUnsolved(){
 
         $crawler = new Crawler($this->html);

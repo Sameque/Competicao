@@ -17,6 +17,7 @@ use App\ProblemSolvedUser;
 use App\Libraries\CrawlerRepository\ValidateProblemSpoj;
 use Illuminate\Support\Facades\Artisan;
 use App\Libraries\CrawlerRepository\RepositoryUser;
+use App\Libraries\CrawlerRepository\RepositoryProblem;
 
 //App\Libraries\DateTimeCompetition
 Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
@@ -117,11 +118,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 
-//TESTES
-//Route::get('user/teste', ['as' => 'teste', 'uses' => 'UserController@teste']);
-Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
-   return RepositoryUser::getRepositoryUser(1,'sameque');
-}]);
 
 
 
@@ -143,42 +139,71 @@ Route::group(['before' => 'oauth'], function () {
 //});
 
 
-Route::get('dashboard2', function () {
+//TESTES
+//Route::get('user/teste', ['as' => 'teste', 'uses' => 'UserController@teste']);
 
-    $user = User::findOrNew(1);
 
-        foreach($user->userRepository as $userRepository){
+Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
 
-            $attributes =  RepositoryUser::getRepositoryUser(
-                $userRepository->repository_id,
-                $userRepository->username
-            );
+    $arrayTeste = RepositoryProblem::getRepositoryProblem(1,'BAFO','sameque');
 
-            $problemSolvedController = new ProblemSolvedUserController();
-            $problemUnsolvedController = new ProblemUnsolvedUserController();
+    foreach($arrayTeste as $i){
 
-            $problemSolvedController->store($userRepository->id,$attributes->problemSolved);
-            $problemUnsolvedController->store($userRepository->id,$attributes->problemUnsolved);
+        echo $i['result'].'</br>';
+    }
+//    return $arrayTeste;
+}]);
 
-            $userRepository->problemSolvedUser;
-            $userRepository->problemUnsolvedUser;
-            $userRepository->repository;
-        }
+Route::get('dashboard2/{competition_id}',['as' => 'submissionUpdate', 'uses' => 'SubmissionController@update']
 
-    return $user;
+//    $user = User::findOrNew(1);
+//
+//        foreach($user->userRepository as $userRepository){
+//
+//            $attributes =  RepositoryUser::getRepositoryUser(
+//                $userRepository->repository_id,
+//                $userRepository->username
+//            );
+//
+//            $problemSolvedController = new ProblemSolvedUserController();
+//            $problemUnsolvedController = new ProblemUnsolvedUserController();
+//
+//            $problemSolvedController->store($userRepository->id,$attributes->problemSolved);
+//            $problemUnsolvedController->store($userRepository->id,$attributes->problemUnsolved);
+//
+//            $userRepository->problemSolvedUser;
+//            $userRepository->problemUnsolvedUser;
+//            $userRepository->repository;
+//        }
+//
+//    return 'dashboard2';
 //    return $userRepository;
-});
+);
 
 Route::get('dashboard1', function () {
 
-    $user = User::findOrNew(1);
 
 
-    foreach($user->userRepository as $userRepository){
-        $userRepository->problemUnsolvedUser;
-        $userRepository->problemSolvedUser;
+//    $user = User::all();
+//
+//    foreach($user as $i){
+//        $i->userRepository;
+//    }
+//
+//    return $user;
+//
+
+    $submission  = App\Submission::all();
+
+    foreach ($submission as $i){
+
+        $i->competition;
+        foreach($i->user->userRepository as $j){$j->repository;}
+
     }
-    return $user;
+
+    return $submission;
+
 
 //    $userRepository = UserRepository::find(14);
 //
