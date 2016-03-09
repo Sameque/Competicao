@@ -25,6 +25,8 @@ class Submission extends Model
         'problem',
         'result',
         'language',
+        'user_id',
+        'competition_id',
         'updated_at',
         'created_at'
     ];

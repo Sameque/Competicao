@@ -7,6 +7,7 @@ use App;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Libraries\CrawlerRepository\RepositoryProblem;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\DomCrawler\Crawler;
 
 class SubmissionController extends Controller
@@ -18,7 +19,7 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        return view('register.submission');
+        return view('list.submission');
     }
 
 
@@ -91,7 +92,6 @@ class SubmissionController extends Controller
             $i->userRepository;
             $usersCompetiton[] = $i;
         }
-
         /**
          * Anda no array de usuários da competição
          *
@@ -124,6 +124,11 @@ class SubmissionController extends Controller
 
 //                $submissionModel2 = App\Submission::create($submission);
 
+                DB::table('submission')
+                    ->where('competition_id', '=', $competition->id)
+                    ->where('user_id', '=', $user->id)
+                    ->delete();
+
                 foreach ($submission as $item){
                     $submissionModel = new App\Submission();
 
@@ -139,6 +144,8 @@ class SubmissionController extends Controller
                 }
             }
         }
+
+        dd('SubmissionController');
 
         return $competition;
     }
@@ -160,7 +167,7 @@ class SubmissionController extends Controller
 
 
         /**
-         * anda no array de registros de submissões
+         * Anda no array de registros de submissões
          */
         $auxSubmission = '';
         foreach($submisions as $key => $submision) {
@@ -171,7 +178,6 @@ class SubmissionController extends Controller
                  * verifica se o respectivo problema pertence a essa competição e se
                  * os registros estão dentro do periodo da competição.
                  */
-
                 if ($submision['problem'] == $problem and
 
                     (
@@ -179,10 +185,9 @@ class SubmissionController extends Controller
                         $submision['date'] <= $competitionEnd_dt
                     )
                     )
-                 {
-                     $auxSubmission[] = $submision;
-//                    unset($submisions[$key]);
-                }
+                         {
+                             $auxSubmission[] = $submision;
+                         }
             }
 
         }

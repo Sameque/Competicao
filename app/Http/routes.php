@@ -154,7 +154,8 @@ Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
 //    return $arrayTeste;
 }]);
 
-Route::get('dashboard2/{competition_id}',['as' => 'submissionUpdate', 'uses' => 'SubmissionController@update']
+Route::get('dashboard2/{competition_id}',['as' => 'submissionUpdate', 'uses' => 'SubmissionController@update']);
+Route::get('dashboard3/{competition_id}',['as' => 'rankingShow', 'uses' => 'RankingController@show']);
 
 //    $user = User::findOrNew(1);
 //
@@ -178,7 +179,7 @@ Route::get('dashboard2/{competition_id}',['as' => 'submissionUpdate', 'uses' => 
 //
 //    return 'dashboard2';
 //    return $userRepository;
-);
+//);
 
 Route::get('dashboard1', function () {
 
