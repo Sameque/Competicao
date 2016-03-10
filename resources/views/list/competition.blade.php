@@ -6,7 +6,7 @@
         <table class="table table-striped">
             <tbody>
             <tr>
-            samer@sula@13509
+
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Data Inicio</th>
