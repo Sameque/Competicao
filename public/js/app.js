@@ -12,6 +12,7 @@ var global_id = 0;
 var setGlobal_id = function (data) {
     global_id = data;
 };
+
 var admin = function () {
     return true;
 }
@@ -38,7 +39,7 @@ angular.module("competicao").controller("listCompetitionCtrl", function ($scope,
     };
     $scope.delete = function (id) {
         var url = 'http://localhost/competition/destroy/' + id;
-        //alert(url);
+        alert(url);
 
         $http.delete(url).success(function (data) {
             alert(data);

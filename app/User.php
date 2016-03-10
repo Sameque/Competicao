@@ -29,6 +29,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('App\Competition');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany('App\Subimission');
+    }
+
     protected $fillable = [
 //        'id',
         'name',

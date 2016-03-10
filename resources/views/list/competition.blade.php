@@ -2,6 +2,7 @@
 @section('content')
 
     <h2 class="title">Lista de Competições</h2></br>
+
     <div class="listUser" ng-controller="listCompetitionCtrl">
         <table class="table table-striped">
             <tbody>
@@ -42,8 +43,6 @@
                         <i class="glyphicon glyphicon-pencil"></i>
                     </a>
                 </td>
-
-
 
 
             </tr>

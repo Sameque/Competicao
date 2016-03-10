@@ -8,13 +8,11 @@ class Competition extends Model
 {
     protected $table = 'competitions';
 
-        public function problems()
-    {
+    public function problems(){
         return $this->hasMany('App\Problem');
     }
 
-    public function users()
-    {
+    public function users(){
         return $this->belongsToMany('App\User');
     }
 
