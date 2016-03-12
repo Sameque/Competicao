@@ -29,20 +29,19 @@ class ValidateProblemSpoj
     private function validateProblem($url,$problem){
          
         $html = file_get_contents($url);
-            
+        
         $crawler = new Crawler($html);
-
-//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);
+        
         $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);
-
+        
+        if($crawler->count() <= 0){return false;}
+            
         $urlAuxi = $crawler->attr('href');
-
+        
         $urlAuxi = substr($urlAuxi,8,100);
 
         $urlAuxi = substr($urlAuxi,0,strlen($urlAuxi)-1);
-
-//        $userAuxi = substr($userAuxi, 10, strlen($problem));
-
+        
         if($urlAuxi == $problem)
             return true;
         else
