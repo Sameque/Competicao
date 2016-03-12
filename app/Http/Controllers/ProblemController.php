@@ -114,7 +114,10 @@ class ProblemController extends Controller {
      * @return Response
      */
     public function destroy($id) {
+        
+
         $problem = Problem::find($id);
+//                dd($problem);
 
 
         if ($problem == null) {

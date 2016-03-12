@@ -124,16 +124,14 @@ class CompetitionController extends Controller {
      * @param  int $id
      * @return Response
      */
+    
+    
     public function update(Request $request, $id) {
         $competition = Competition::find($id);
         $competition->fill($request->all());
 
-//        $competition->dateBegin = date('Y-d-m', strtotime($request->input('dateBegin')));
-//        $competition->dateEnd = date('Y-d-m', strtotime($request->input('dateEnd')));
-
         $competition->save();
-//        dd($competition);
-        return view('edit.competition', compact('competition'));
+        return $this->edit($competition->id);
     }
 
     /**
@@ -160,7 +158,6 @@ class CompetitionController extends Controller {
     }
 
     public function userDestroy($competition_id, $user_id) {
-
         $this->toUserDestroy($competition_id, $user_id);
         return $this->competitionUser($competition_id);
 //        return view('register.competitionUser', compact('competition_id'));
