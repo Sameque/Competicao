@@ -1,17 +1,7 @@
 @extends('templates.default')
 @section('content')
-    <script>
-        angular.module("competicao").controller("loadIdCtrl", function ($scope) {
-            var loadId = function () {
-                setGlobal_id(<?php echo $competition_id; ?>);
-//            alert(global_id);
-            };
-            loadId();
-        });
-    </script>
-    <div ng-controller="loadIdCtrl"></div>
-
-    <div ng-controller="competitionUserCtrl">
+    
+    <div>
 
         <h2 class="title">Cadastrar Usuário/Competição</h2></br>
         <div class="row">
@@ -24,13 +14,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="i in users">
-                            <td>{{i.name}}</td>
+                      @foreach ($users as $user)
+                        <tr>
+                            <td>{!!$user->name!!}</td>
                             <td>
-                                <a href="/competition/user/destroy/{{competition_id}}/{{i.id}}" class="btn btn-danger"
+                                <a href="/competition/user/destroy/{!!$competition->id!!}/{!!$user->id!!}" class="btn btn-danger"
                                    method="DELETE">Apagar</a>
                             </td>
                         </tr>
+                      @endforeach  
                         </tbody>
                     </table>
                 </div>
@@ -47,15 +39,25 @@
                         ?>
                         <br/>
                         <label for="repository_id">Usuário</label>
-                        <select name="user_id" id="user_id" class="form-control"
-                                ng-model="competition.users">
+                        
+                        
+                        
+                        <select name="user_id" id="user_id" class="form-control">
                             <option value=""> Selecione o Usuário</option>
-                            <option ng-required="true" ng-repeat="i in allUsers" value={{i.id}}>
-                                {{i.name}}
+                            
+                          @foreach ($allUsers as $user)  
+                          <option value={!!$user->id!!}>
+                                {!!$user->name!!}
                             </option>
+                          @endforeach
+                        
+                        
                         </select>
+                        
+                        
+                        
                         </br >
-                        <input value="<% $competition_id %>" name="competition_id" id="competition_id" type="hidden"
+                        <input value="<% $competition->id %>" name="competition_id" id="competition_id" type="hidden"
                                class="form-control"/></br >
 
                         <?php
@@ -65,7 +67,7 @@
 
                         echo link_to_route('competition.edit',
                                 $title = ' Voltar para competição',
-                                $parameters = array($competition_id),
+                                $parameters = array($competition->id),
                                 $attributes = array('class' => 'btn glyphicon glyphicon-fast-backward  btn-warning  btn-block'));
                         ?>
                         <br/>
@@ -76,5 +78,4 @@
         </div>
         </br>
     </div>
-
 @stop

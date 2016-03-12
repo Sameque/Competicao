@@ -51,8 +51,11 @@ class RankingController extends Controller
      */
     public function show($competition_id)
     {
-        $this->makeRanking($competition_id);
-
+        
+        
+        dd($this->makeRanking($competition_id));
+        
+dd("aqui",'RankingController@show');
         $ranking = Ranking::find($competition_id);
 
         return view('list.ranking')->with('ranking', $ranking);
@@ -65,14 +68,15 @@ class RankingController extends Controller
 
     public function makeRanking($competition_id){
 
-        $competition = Competition::findOrNew($competition_id);
 
+        $competition = Competition::findOrNew($competition_id);
+        
+        return $competition->problems;
+/*
         foreach($competition->problems as $problem){
             echo $problem->code.'</br>';
         }
-
-        dd('RankingController@makeRanking',$competition->toJson());
-
+        
         $problem = new ProblemCompetition();
 
 
@@ -83,6 +87,7 @@ class RankingController extends Controller
         $problem->problem = 1;
 
         return array('ranking' => new Ranking());
+        */
     }
     /**
      * Show the form for editing the specified resource.

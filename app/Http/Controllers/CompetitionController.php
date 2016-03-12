@@ -2,63 +2,68 @@
 
 namespace App\Http\Controllers;
 
+//use App\Repository;
 use App\Competition;
-use App\Http\Requests;
+//use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers;
 
-class CompetitionController extends Controller
-{
+//use App\Http\Controllers;
+
+class CompetitionController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
-    {
-        return Competition::all();
+    public function index() {
+        $competitions = Competition::all();
+        return view('list.competition')->with('competitions', $competitions);
     }
 
-    public function listCompetition()
-    {
+    public function listCompetition() {
         return view('list.competition');
     }
 
-    public function competitionUsers($competiton_id)
-    {
+    public function competitionUsers($competiton_id) {
         $competition = Competition::find($competiton_id);
-//        $competition->users()->attach(48);
         return $competition->users;
     }
 
-    public function competitionUserStore(Request $request)
-    {
-//        dd($request->all());
-
+    public function competitionUserStore(Request $request) {
         $competition = Competition::find($request->input('competition_id'));
 
         $competition->users()->attach($request->input('user_id'));
 
         return $this->competitionUser($competition->id);
-
     }
-
 
     /**
      * Show the form for creating a new resource.
      *        return view('edit.competition', compact('competition'));
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         return view('register.competition');
     }
 
-    public function competitionUser($competition_id)
-    {
-        return  view('register.competitionUser', compact('competition_id'));
-//        return view('register.competitionUser');
+    /**
+     * Exibir view de usuários de uma competição
+     * @param type $competition_id
+     * @return type
+     */
+    public function competitionUser($competition_id) {
+        $competition = Competition::findOrNew($competition_id);
+        $users = $competition->users;
+        $allUsers = User::all();
+
+        return view('register.competitionUser', [
+            'competition' => $competition,
+            'users' => $users,
+            'allUsers' => $allUsers
+                ]
+        );
     }
 
     /**
@@ -67,8 +72,7 @@ class CompetitionController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $competition = new Competition($request->all());
 
         $competition->dateBegin = date('Y-m-d', strtotime($request->input('dateBegin')));
@@ -84,8 +88,7 @@ class CompetitionController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $competition = Competition::find($id);
         foreach ($competition->problems as $i) {
             $i->repository;
@@ -99,10 +102,19 @@ class CompetitionController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+        
+        
         $competition = Competition::find($id);
-        return view('edit.competition', compact('competition'));
+        
+        return view('edit.competition', [
+            'competition' => $competition,
+            'problems' => $competition->problems,
+            'users' => $competition->users
+        ]);
+
+
+//        return view('edit.competition', compact('competition'));
     }
 
     /**
@@ -112,8 +124,7 @@ class CompetitionController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $competition = Competition::find($id);
         $competition->fill($request->all());
 
@@ -131,8 +142,7 @@ class CompetitionController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($competition_id)
-    {
+    public function destroy($competition_id) {
         $competition = Competition::find($competition_id);
         $problemController = new ProblemController();
 
@@ -141,7 +151,7 @@ class CompetitionController extends Controller
         }
 
         foreach ($competition->users as $i) {
-            $temp[] = $this->toUserDestroy($competition_id,$i->id);
+            $temp[] = $this->toUserDestroy($competition_id, $i->id);
         }
 
         $competition->delete();
@@ -149,17 +159,18 @@ class CompetitionController extends Controller
         return view('list.competition');
     }
 
-    public function userDestroy($competition_id,$user_id)
-    {
-        $this->toUserDestroy($competition_id,$user_id);
+    public function userDestroy($competition_id, $user_id) {
 
-        return view('register.competitionUser', compact('competition_id'));
+        $this->toUserDestroy($competition_id, $user_id);
+        return $this->competitionUser($competition_id);
+//        return view('register.competitionUser', compact('competition_id'));
     }
 
-    public function toUserDestroy($competition_id,$user_id)
-    {
+    public function toUserDestroy($competition_id, $user_id) {
+
         $competition = Competition::find($competition_id);
         $competition->users()->detach($user_id);
         return $competition_id;
     }
+
 }

@@ -235,9 +235,9 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://uniararas.br/');
 
-//        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
+        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
 //        $html = file_get_contents('http://br.spoj.com/users/sameque/');//GET USERNAME, USER
-        $html = file_get_contents('http://br.spoj.com/status/sameque/');//GET PROBLEM, USER
+//        $html = file_get_contents('http://br.spoj.com/status/sameque/');//GET PROBLEM, USER
 //        $html = file_get_contents('http://br.spoj.com/problems/BAFO/');//GET PROBLEM, PROBLEM
 
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
@@ -287,7 +287,8 @@ class SubmissionController extends Controller
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('div > div > table')->eq(2)->filter('td');//PROBLEM UNSOLVED
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('p');//PROBLEM CONTENT
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('pre')->eq(0)->filter('br');//PROBLEM EXEMPLE
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('td');//->extract(array('_text', 'href'));//PROBLEM USER
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('td');//->extract(array('_text', 'href'));//PROBLEM USER
+        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);//VALIDADE PROMEM 2
 
 
 
@@ -311,6 +312,20 @@ class SubmissionController extends Controller
 //        }
 
 
+//        echo $crawler->attr('href');
+        
+        $url = $crawler->attr('href');
+        $url = substr($url,8,100);
+        $url = substr($url,0,strlen($url)-1);
+        
+        echo $url;
+        
+        foreach ($crawler as  $domElement) {
+            
+            //echo $domElement->nodeValue.'</br>';
+//            echo $domElement->extract(array('_text', 'href'));
+//            echo $domElement->attr('href');
+        }
 
 //        $crawler = $crawler
 //            ->filter('body > p')
@@ -319,41 +334,41 @@ class SubmissionController extends Controller
 //                return ($i % 2) == 0;
 //            });
 
-        $userAuxi='';
-        $i = 2;
-        $y = 1;
-        $k = 3;
-        $j = 6;
-        $w = 2;
+//        $userAuxi='';
+//        $i = 2;
+//        $y = 1;
+//        $k = 3;
+//        $j = 6;
+//        $w = 2;
 
 //        $crawler = $crawler->filterXPath('//body/article')->extract(array('_text', 'href'));
 //        dd($crawler);
 
 //        dd($html);
-        $html2='';
+//        $html2='';
+//
+//        foreach ($crawler as $key => $domElement) {
 
-        foreach ($crawler as $key => $domElement) {
-
-            $html2=$domElement->ownerDocument->saveHTML($domElement);
+//            $html2=$domElement->ownerDocument->saveHTML($domElement);
 //            echo $domElement->nodeValue.'</br>';
 
 
-            if ($key == $w) {
-
-                $crawler2 = new Crawler($html2);
-                $crawler2 = $crawler2->filter('a');
-                $problem = $crawler2->attr('href');
-
-
-                $problem = substr($problem,10,100);
+//            if ($key == $w) {
 //
-                $leanString = strlen($problem);
-                $problem = substr($problem,0,$leanString-1);
+//                $crawler2 = new Crawler($html2);
+//                $crawler2 = $crawler2->filter('a');
+//                $problem = $crawler2->attr('href');
 //
-                echo $problem.'</br>';
-                $w = $w + 7;
-            }
-        }
+//
+//                $problem = substr($problem,10,100);
+//
+//                $leanString = strlen($problem);
+//                $problem = substr($problem,0,$leanString-1);
+//
+//                echo $problem.'</br>';
+//                $w = $w + 7;
+//            }
+//        }
 
 
 

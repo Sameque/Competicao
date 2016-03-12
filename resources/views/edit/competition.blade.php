@@ -2,20 +2,7 @@
 @section('content')
 
 
-
-    <script>
-        angular.module("competicao").controller("userrepositoryLoadCtrl", function ($scope) {
-
-            var loadId = function () {
-                setGlobal_id(<?php echo $competition->id; ?>);
-            };
-            loadId();
-        });
-    </script>
-
-    <div ng-controller="userrepositoryLoadCtrl"></div>
-
-    <div ng-controller="competitionCtrl" xmlns="http://www.w3.org/1999/html">
+    <div>
         <div class="row formCompetition">
 
             <div class="title">
@@ -46,7 +33,6 @@
                         echo Form::label('name', 'Nome da Competição') . '<br/>';
                         echo Form::text('name', null, [
                                 'class' => 'form-control',
-                                'ng-required' => 'true',
                                 'placeholder' => 'Digite o Nome da Competição',
                                 'id' => 'name'
                         ]);
@@ -58,28 +44,24 @@
                         echo Form::label('dateBegin', 'Data de Início');
                         echo Form::date('dateBegin', null,[
                                 'class' => 'form-control',
-                                'ng-required' => 'true'
                         ]);
 
                         echo '<br/>';
                         echo Form::label('dateEnd', 'Data de Termino');
                         echo Form::date('dateEnd', null, [
                                 'class' => 'form-control',
-                                'ng-required' => 'true'
                         ]);
                         echo '</br >' . '</div>' . '<div class="col-md-6 ">';
 
                         echo Form::label('hoursBegin', 'Horário de Inicio');
                         echo Form::time('hoursBegin', null, [
                                 'class' => 'form-control',
-                                'ng-required' => 'true'
                         ]);
 
                         echo '<br/>';
                         echo Form::label('hoursEnd', 'Horário de Termino');
                         echo Form::time('hoursEnd', null, [
                                 'class' => 'form-control',
-                                'ng-required' => 'true'
                         ]);
                             echo '</br >'.'</br >'.'</br >'.'</div>'.'</div>';
 
@@ -104,12 +86,14 @@
                 <div class="listCompetition">
                     <table class="table table-striped table-bordered table-responsive">
                         <thead>
-                        <th colspan="2">Problemas</th>
+                            <th colspan="2">Problemas</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="i in problems">
-                            <td>{{i.code}}</td>
-                        </tr>
+                            @foreach ($problems as $problem)
+                                <tr>
+                                    <td>{!!$problem->code!!}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -123,14 +107,17 @@
                             <th >Participantes</th>
                             </thead>
                         </tr>
-
+                            
                         <tbody>
-                        <tr ng-repeat="y in users">
-                            <td>{{y.name}}</td>
-                        </tr>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{!!$user->name!!}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 @stop

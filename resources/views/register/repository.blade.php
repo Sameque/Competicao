@@ -13,18 +13,14 @@
 
             echo Form::label('name', 'Nome') . '<br/>';
             echo Form::text('name', null, array(
-//                            'ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite o nome do repositório',
-//                            'ng-model' => 'repository.name',
                     )) . '<br/>';
 
             echo Form::label('url', 'URL') . '<br/>';
             echo Form::text('url', null, array(
-//                          'ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite o endereço do repositório',
-//                            'ng-model' => 'repository.url'
                     )) . '<br/>';
             echo Form::submit('Enviar', array('class' => 'btn btn-primary btn-block'));
 

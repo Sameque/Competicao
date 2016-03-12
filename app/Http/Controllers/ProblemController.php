@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Competition;
-use App\Http\Requests;
+//use App\Http\Requests;
 use App\Problem;
 use App\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+class ProblemController extends Controller {
 
-class ProblemController extends Controller
-{
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -27,9 +25,18 @@ class ProblemController extends Controller
      *
      * @return Response
      */
-    public function create($competition_id)
-    {
-        return view('register.problem', compact('competition_id'));
+    public function create($competition_id) {
+
+        $competition = Competition::findOrNew($competition_id);
+
+        $problems = $competition->problems;
+        $repositorys = Repository::all();
+
+        return view('register.problem', [
+            'repositorys' => $repositorys,
+            'problems' => $problems,
+            'competition_id' => $competition_id
+        ]);
     }
 
     /**
@@ -38,36 +45,28 @@ class ProblemController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'code' => 'required',
+                    'code' => 'required',
 //            'dificult' => 'required',
-            'repository_id' => 'required',
+                    'repository_id' => 'required',
         ]);
-
-
-
 
         $validator->sometimes('code', 'problemspoj', function($input) {
             return $input->repository_id > 0;
         });
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()
-                ->withErrors($validator->errors())
-                ->withInput($request->all());
+                            ->withErrors($validator->errors())
+                            ->withInput($request->all());
         }
 
-
         $problem = new Problem($request->all());
-
         $problem->save();
 
-        $competition_id = $problem->competition_id;
-
-        return view('register.problem', compact('competition_id'));
+        return $this->create($problem->competition_id);
     }
 
     /**
@@ -76,15 +75,13 @@ class ProblemController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $problem = Problem::find($id);
         $problem->repository;
         return $problem;
     }
 
-    public function showProblemCompetition($competition_id)
-    {
+    public function showProblemCompetition($competition_id) {
         $competition = Competition::find($competition_id);
         return $competition->problems;
     }
@@ -95,8 +92,7 @@ class ProblemController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -107,8 +103,7 @@ class ProblemController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -118,18 +113,20 @@ class ProblemController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
-    {
-        $competition_id = $this->toDestroy($id);
-        return view('register.problem', compact('competition_id'));
-    }
-
-    public function toDestroy($id)
-    {
+    public function destroy($id) {
         $problem = Problem::find($id);
+
+
+        if ($problem == null) {
+            return redirect()->back()
+                            ->withErrors('Registro não encontrado')
+                            ->withInput([]);
+        }
+
         $competition_id = $problem->competition_id;
         $problem->delete();
-        return $competition_id;
-    }
 
+        return $this->create($competition_id);
+    }
+    
 }

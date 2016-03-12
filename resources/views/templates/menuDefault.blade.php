@@ -45,7 +45,7 @@
             </li>
             <li>
                 <?php
-                echo link_to('competition/index', $title = 'Competições', $attributes = array(), $secure = null);
+                echo link_to('competition/list', $title = 'Competições', $attributes = array(), $secure = null);
                 ?>
             </li>
             <li>

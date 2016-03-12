@@ -42,24 +42,23 @@ class RepositoryController extends Controller
     {
 //        $messages = ['urlvalid'=>'Ops muleki ta errado esse treco!!!'];
 //
-//        Validator::extend('urlvalid',function($attribute,$value,$parameters){
-//
-//            return false;
-//        });
+        Validator::extend('urlvalid',function($attribute,$value,$parameters){
 
-//
-//        $validator = Validator::make($request->all(),[
-//            'url' => 'required|urlvalid'
-//        ]);
+            return false;
+        });
+
+
+        $validator = Validator::make($request->all(),[
+            'url' => 'required|urlvalid'
+        ]);
 
 //        var_dump($validator->errors());
 
-//        if($validator->fails()){
-//            return redirect()->back()
-//                ->withErrors($validator->errors())
-//                ->withInput($request->all());
-//        }
-
+        if($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator->errors())
+                ->withInput($request->all());
+        }
 
 
         dd('Registro gravado no banco!!!');
