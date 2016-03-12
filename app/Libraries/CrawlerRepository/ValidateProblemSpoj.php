@@ -27,22 +27,23 @@ class ValidateProblemSpoj
     }
 
     private function validateProblem($url,$problem){
-
+         
         $html = file_get_contents($url);
-
+            
         $crawler = new Crawler($html);
 
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);
+//        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('h2')->eq(1);
+        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);
 
-        $userAuxi = '';
+        $urlAuxi = $crawler->attr('href');
 
-        foreach ($crawler as $domElement) {
-            $userAuxi = $domElement->nodeValue;
-        }
+        $urlAuxi = substr($urlAuxi,8,100);
 
-        $userAuxi = substr($userAuxi, 10, strlen($problem));
+        $urlAuxi = substr($urlAuxi,0,strlen($urlAuxi)-1);
 
-        if($userAuxi == $problem)
+//        $userAuxi = substr($userAuxi, 10, strlen($problem));
+
+        if($urlAuxi == $problem)
             return true;
         else
             return false;

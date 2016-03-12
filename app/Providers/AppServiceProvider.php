@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\CrawlerRepository\ValidateUsers;
+use App\Libraries\CrawlerRepository\ValidateUsers;
 use App\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;

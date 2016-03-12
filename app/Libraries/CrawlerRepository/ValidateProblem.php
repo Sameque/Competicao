@@ -15,7 +15,6 @@ class ValidateProblem
     public function validate($repository_id, $problem)
     {
         $validator = null;
-
         if ($repository_id == 1) {
             $repository = new ValidateProblemSpoj();
         } elseif ($repository_id == 2) {
