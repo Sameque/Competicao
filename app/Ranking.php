@@ -24,7 +24,9 @@ class Ranking extends Model
     protected $fillable = [
         'id',
         'competition_id',
-        'user_id'
+        'user_id',
+        'problem_id',
+        ''
     ];
 
     protected $hidden = [

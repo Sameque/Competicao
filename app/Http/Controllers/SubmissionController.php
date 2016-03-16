@@ -74,6 +74,7 @@ class SubmissionController extends Controller
     {
         $competition = App\Competition::findOrNew($competition_id);
 
+
         /**
          * PEGAR TODOS OS PROBLEMAS DA COMPETICAO
          */
@@ -81,6 +82,7 @@ class SubmissionController extends Controller
         foreach($competition->problems as $i){
             $register['code'] = $i->code;
             $register['repository_id'] = $i->repository_id;
+            $register['id'] = $i->id;
             $problemCompetition[] = $register;
         }
         /**
@@ -96,7 +98,9 @@ class SubmissionController extends Controller
          * Anda no array de usuários da competição
          *
          */
+
         foreach($usersCompetiton as $user){
+
             /**
              * Anda no array de repositórios do usuário
              */
@@ -110,9 +114,12 @@ class SubmissionController extends Controller
                 $problems = '';
                 foreach($problemCompetition as $problem){
                     if($userRepository->reposytory_id = $problem['repository_id']){
-                        $problems[] = $problem['code'];
+                        $item['code'] = $problem['code'];
+                        $item['id'] = $problem['id'];
+                        $problems[] = $item;
                     }
                 }
+
 
                 $submission = $this->getProblemUser(
                     $competition->dateBegin,
@@ -122,6 +129,7 @@ class SubmissionController extends Controller
                     $problems
                 );
 
+
 //                $submissionModel2 = App\Submission::create($submission);
 
                 DB::table('submission')
@@ -130,6 +138,7 @@ class SubmissionController extends Controller
                     ->delete();
 
                 foreach ($submission as $item){
+
                     $submissionModel = new App\Submission();
 
                     $submissionModel->date = $item['date'];
@@ -141,13 +150,13 @@ class SubmissionController extends Controller
                     $submissionModel->competition_id = $competition->id;
 
                     $submissionModel->save();
+                    $submissionModels[] =$submissionModel;
                 }
             }
         }
 
-        dd('SubmissionController');
+        return $submissionModels;
 
-        return $competition;
     }
 
     /**
@@ -165,36 +174,30 @@ class SubmissionController extends Controller
          */
         $submisions = RepositoryProblem::getRepositoryProblem($repository_id,$problems,$username);
 
-
         /**
          * Anda no array de registros de submissões
          */
         $auxSubmission = '';
-        foreach($submisions as $key => $submision) {
-
+        foreach($submisions as $submision) {
 
             foreach ($problems as $problem) {
                 /**
                  * verifica se o respectivo problema pertence a essa competição e se
                  * os registros estão dentro do periodo da competição.
                  */
-                if ($submision['problem'] == $problem and
 
-                    (
-                        $submision['date'] >= $competitionBegin_dt and
-                        $submision['date'] <= $competitionEnd_dt
-                    )
+                if ($submision['problem'] == $problem['code'] and
+                        ( $submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt )
                     )
                          {
+                             $submision['problem_id'] = $problem['id'];
                              $auxSubmission[] = $submision;
                          }
             }
-
         }
 
         return $auxSubmission;
     }
-
 
     /**
      * Remove the specified resource from storage.

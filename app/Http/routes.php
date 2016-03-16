@@ -101,6 +101,12 @@ Route::get(
 Route::get('crawler', ['as' => 'submission', 'uses' => 'SubmissionController@crawler']);
 Route::get('submission', ['as' => 'submission', 'uses' => 'SubmissionController@index']);
 
+//RANKING
+Route::get('ranking/{competition_id}', ['as' => 'ranking', 'uses' => 'RankingController@index']);
+
+
+
+
 
 
 // Authentication routes...

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Competition;
 use App\ProblemCompetition;
 use App\Ranking;
+use App\Submission;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -17,9 +17,21 @@ class RankingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($competition_id)
     {
-        //
+        $submission = new SubmissionController();
+        $submissions = $submission->update($competition_id);
+
+        foreach( $submissions as $iten){
+            echo $iten->id;
+        }
+
+
+
+        dd($submissions);
+
+        echo $competition_id;
+
     }
 
     /**

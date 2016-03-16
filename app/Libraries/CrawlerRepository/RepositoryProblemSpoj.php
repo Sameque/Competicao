@@ -36,6 +36,7 @@ class RepositoryProblemSpoj
 //                'content' => $this->getProblemContent(),
 //            );
         } else{
+
             $attributes = $this->getProblemUsers();
         }
 

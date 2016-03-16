@@ -16,6 +16,8 @@ class Competition extends Model
         return $this->belongsToMany('App\User');
     }
 
+
+
     protected $fillable = [
         'id',
         'name',
