@@ -146,9 +146,9 @@ class SubmissionController extends Controller
                     $submissionModel->problem = $item['problem'];
                     $submissionModel->result = $item['result'];
                     $submissionModel->language = $item['language'];
+                    $submissionModel->problem_id = $item['problem_id'];
                     $submissionModel->user_id = $user->id;
                     $submissionModel->competition_id = $competition->id;
-
                     $submissionModel->save();
                     $submissionModels[] =$submissionModel;
                 }

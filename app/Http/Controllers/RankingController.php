@@ -19,14 +19,45 @@ class RankingController extends Controller
      */
     public function index($competition_id)
     {
+        $competition = Competition::findOrNew($competition_id);
         $submission = new SubmissionController();
         $submissions = $submission->update($competition_id);
+        $rankings = '';
 
-        foreach( $submissions as $iten){
-            echo $iten->id;
+
+        foreach ($competition->users as $user){
+
+            $ranking['name'] = $user->name;
+
+            $rankingProblem = '';
+
+            foreach($competition->problems as $problem){
+                $item['code'] = $problem->code;
+                $item['qt'] = 0;
+                $item['resp'] = false;
+                foreach ($submissions as $i){
+
+                    if ($i['problem_id'] == $problem->id and  $user->id == $i['user_id']){
+
+                        if($i->result == 'accepted'){
+                            echo $i->result.' = '.$i->problem.'</br>';
+                            $item['resp'] = true;
+                        }
+
+                        $item['qt'] = $item['qt']+1;
+                    }
+                }
+
+                $rankingProblem[]=$item;
+            }
+
+            $ranking['problems'] = $rankingProblem;
+
+            $rankings[]=$ranking;
         }
 
 
+        dd('RankingController@update',$rankings);
 
         dd($submissions);
 

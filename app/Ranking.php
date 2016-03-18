@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ranking extends Model
 {
+
+    /*
     public function problemSolveds()
     {
         return $this->hasMany('App\ProblemSolved');
@@ -20,6 +22,7 @@ class Ranking extends Model
     {
         return $this->belongsTo('App\User');
     }
+*/
 
     protected $fillable = [
         'id',
