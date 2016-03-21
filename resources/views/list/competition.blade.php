@@ -16,18 +16,19 @@
                 <th>Hora Fim</th>
                 <th>Problemas</th>
                 <th>Usuários</th>
+                <th>Ranking</th>
                 <th>Editar</th>
 
             </tr>
         @foreach ($competitions as $competition)
 
             <tr>
-                <td><%$competition->id%></td>
-                <td><%$competition->name%></td>
-                <td><%$competition->dateBegin%></td>
-                <td><%$competition->hoursBegin%></td>
-                <td><%$competition->dateEnd%></td>
-                <td><%$competition->hoursEnd%></td>
+                <td>{!! $competition->id  !!}</td>
+                <td>{!! $competition->name  !!}</td>
+                <td>{!! $competition->dateBegin  !!}</td>
+                <td>{!! $competition->hoursBegin  !!}</td>
+                <td>{!! $competition->dateEnd  !!}</td>
+                <td>{!! $competition->hoursEnd  !!}</td>
                 <td>
                     <a href="/problem/create/<%$competition->id%>" class="btn btn-primary" method="GET">
                         <i class="glyphicon glyphicon-th-list"></i>
@@ -36,15 +37,21 @@
 
                 <td>
                     <a href="/competition/competitionUser/<%$competition->id%>" class="btn btn-primary" method="GET">
-                        <i class="glyphicon glyphicon-th-list"></i>
+                        <i class="glyphicon glyphicon-user"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/competition/edit/<%$competition->id%>" class="btn btn-success" method="GET">
+                        <i class="glyphicon glyphicon-list-alt"></i>
                     </a>
                 </td>
 
                 <td>
                     <a href="/competition/edit/<%$competition->id%>" class="btn btn-success" method="GET">
-                        <i class="glyphicon glyphicon-pencil"></i>
+                        <i class="glyphicon glyphicon-cog"></i>
                     </a>
                 </td>
+
             </tr>
         @endforeach
             </tbody>

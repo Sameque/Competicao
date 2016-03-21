@@ -65,7 +65,7 @@
                         <input name="dificult" id="dificult" type="number" class="form-control"
                                placeholder='Dificuldade do problema'/>
 
-                        <input value="<% 1 %>" name="competition_id" id="competition_id" type="hidden"
+                        <input value="{!! $competition_id !!}" name="competition_id" id="competition_id" type="hidden"
                                class="form-control"/></br >
 
                         <?php
