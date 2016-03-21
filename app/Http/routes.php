@@ -191,7 +191,14 @@ Route::get('dashboard3/{competition_id}',['as' => 'rankingShow', 'uses' => 'Rank
 
 Route::get('dashboard1', function () {
 
+    $competiton = \App\Competition::findOrNew(2);
+    $dateTime = new \App\Libraries\DateTime\DateTime();
 
+    dd( $competiton->hoursBegin, $dateTime->diffTimeRepository($competiton->hoursBegin,'spoj'));
+
+    dd( getdate()['hours'] );
+
+    return $dateTime->timeElapsed($competiton->hoursBegin,$competiton->hoursEnd);
 
 //    $user = User::all();
 //
@@ -202,16 +209,16 @@ Route::get('dashboard1', function () {
 //    return $user;
 //
 
-    $submission  = App\Submission::all();
-
-    foreach ($submission as $i){
-
-        $i->competition;
-        foreach($i->user->userRepository as $j){$j->repository;}
-
-    }
-
-    return $submission;
+//    $submission  = App\Submission::all();
+//
+//    foreach ($submission as $i){
+//
+//        $i->competition;
+//        foreach($i->user->userRepository as $j){$j->repository;}
+//
+//    }
+//
+//    return $submission;
 
 
 //    $userRepository = UserRepository::find(14);

@@ -1,21 +1,30 @@
 @extends('templates.default')
 @section('content')
 
-    <h2>Lista de Usuários</h2></br>
-    <div class="listUser">
+    <h2>Ranking</h2></br>
+    <div class="listRanking">
         <table class="table table-striped">
             <tbody>
             <tr>
                 <th>Nome</th>
+                @foreach ($problems as $problem)
+                    <th>{!! $problem->code !!}</th>
+                @endforeach
             </tr>
-            @foreach ($ranking as $user)
+            @foreach ($rankings as $ranking)
                 <tr>
-                    <td>{!! $user->name !!}</td>
+                    <td>{!! $ranking['name'] !!}</td>
+                    @foreach ($ranking['problems'] as $problem)
+                        <td>
 
-                    @foreach($user as $problem)
-                        <td>{!! $problem->pt !!}
-                        {!! $problem->time !!}</td>
+                            @if ($problem['resp'])
+                                B - {!! $problem['qt'].'/'.$problem['time'] !!}
+                                @else
+                                 {!! $problem['qt'].'/-' !!}
+                            @endif
+                        </td>
                     @endforeach
+
                 </tr>
             @endforeach
             </tbody>

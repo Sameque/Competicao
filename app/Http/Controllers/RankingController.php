@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Competition;
+use App\Libraries\DateTime\DateTime;
 use App\ProblemCompetition;
 use App\Ranking;
 use App\Submission;
@@ -22,6 +23,7 @@ class RankingController extends Controller
         $competition = Competition::findOrNew($competition_id);
         $submission = new SubmissionController();
         $submissions = $submission->update($competition_id);
+        $dateTime = new DateTime();
         $rankings = '';
 
 
@@ -33,18 +35,20 @@ class RankingController extends Controller
 
             foreach($competition->problems as $problem){
                 $item['code'] = $problem->code;
-                $item['qt'] = 0;
+                $item['time'] = $item['qt'] = 0;
                 $item['resp'] = false;
                 foreach ($submissions as $i){
 
                     if ($i['problem_id'] == $problem->id and  $user->id == $i['user_id']){
 
                         if($i->result == 'accepted'){
-                            echo $i->result.' = '.$i->problem.'</br>';
                             $item['resp'] = true;
+                            $item['time'] = $dateTime->timeElapsed($competition->hoursBegin,$i->hours);
+
                         }
 
                         $item['qt'] = $item['qt']+1;
+
                     }
                 }
 
@@ -56,12 +60,9 @@ class RankingController extends Controller
             $rankings[]=$ranking;
         }
 
+//        dd('RankingController@update',$rankings);
 
-        dd('RankingController@update',$rankings);
-
-        dd($submissions);
-
-        echo $competition_id;
+        return view('list.ranking')->with(['rankings'=> $rankings,'problems'=> $competition->problems]);
 
     }
 
