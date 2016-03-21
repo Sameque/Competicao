@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Libraries\CrawlerRepository\RepositoryProblem;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Libraries\DateTime\DateTime;
 
 class SubmissionController extends Controller
 {
@@ -73,7 +74,7 @@ class SubmissionController extends Controller
     public function update($competition_id)
     {
         $competition = App\Competition::findOrNew($competition_id);
-
+        $dateTime = new DateTime();
 
         /**
          * PEGAR TODOS OS PROBLEMAS DA COMPETICAO
@@ -105,6 +106,8 @@ class SubmissionController extends Controller
              * Anda no array de repositórios do usuário
              */
             foreach($user->userRepository as $userRepository){
+
+                $repository = App\Repository::findOrNew($userRepository->reposytory_id);
                 //          ==>>
 
                 /**
@@ -142,7 +145,7 @@ class SubmissionController extends Controller
                     $submissionModel = new App\Submission();
 
                     $submissionModel->date = $item['date'];
-                    $submissionModel->hours = $item['hours'];
+                    $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repository->name);
                     $submissionModel->problem = $item['problem'];
                     $submissionModel->result = $item['result'];
                     $submissionModel->language = $item['language'];

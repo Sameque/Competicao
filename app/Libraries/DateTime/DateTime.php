@@ -24,4 +24,20 @@ class DateTime {
 
         return $elapsed;
     }
+
+    /**
+     * Corrige a diferença de horas do repositório
+     *
+     * @param $time
+     * @param $repository
+     * @return bool|string
+     */
+    public function diffTimeRepository($time,$repository){
+
+        if($repository == 'Spoj'){
+            $hrDiff = 240;
+            return date('H:i:s', strtotime('+ '.$hrDiff.' minute', strtotime($time)));
+        }
+        return $time;
+    }
 } 
