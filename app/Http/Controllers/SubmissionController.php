@@ -107,9 +107,7 @@ class SubmissionController extends Controller
              */
             foreach($user->userRepository as $userRepository){
 
-                $repository = App\Repository::findOrNew($userRepository->reposytory_id);
-                //          ==>>
-
+                $repository = App\Repository::findOrNew($userRepository->repository_id);
                 /**
                  * Filtrar os problemas referente ao repositório do usuário repositório "vigente/selecionado"
                  */
@@ -145,6 +143,7 @@ class SubmissionController extends Controller
                     $submissionModel = new App\Submission();
 
                     $submissionModel->date = $item['date'];
+                    $submissionModel->hours = $item['hours'];
                     $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repository->name);
                     $submissionModel->problem = $item['problem'];
                     $submissionModel->result = $item['result'];

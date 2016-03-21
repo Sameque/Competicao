@@ -36,6 +36,7 @@ class DateTime {
 
         if($repository == 'Spoj'){
             $hrDiff = 240;
+
             return date('H:i:s', strtotime('+ '.$hrDiff.' minute', strtotime($time)));
         }
         return $time;
