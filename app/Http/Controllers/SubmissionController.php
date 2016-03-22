@@ -130,6 +130,10 @@ class SubmissionController extends Controller
                     $problems
                 );
 
+                if(!$submission){
+                    return $submission;
+                }
+
 
 //                $submissionModel2 = App\Submission::create($submission);
 
@@ -179,7 +183,7 @@ class SubmissionController extends Controller
         /**
          * Anda no array de registros de submissões
          */
-        $auxSubmission = '';
+        $auxSubmission = false;
         foreach($submisions as $submision) {
 
             foreach ($problems as $problem) {

@@ -30,24 +30,24 @@
                 <td>{!! $competition->dateEnd  !!}</td>
                 <td>{!! $competition->hoursEnd  !!}</td>
                 <td>
-                    <a href="/problem/create/<%$competition->id%>" class="btn btn-primary" method="GET">
+                    <a href="/problem/create/{!! $competition->id !!}" class="btn btn-primary" method="GET">
                         <i class="glyphicon glyphicon-th-list"></i>
                     </a>
                 </td>
 
                 <td>
-                    <a href="/competition/competitionUser/<%$competition->id%>" class="btn btn-primary" method="GET">
+                    <a href="/competition/competitionUser/{!! $competition->id !!}" class="btn btn-primary" method="GET">
                         <i class="glyphicon glyphicon-user"></i>
                     </a>
                 </td>
                 <td>
-                    <a href="/competition/edit/<%$competition->id%>" class="btn btn-success" method="GET">
+                    <a href="/ranking/{!! $competition->id !!}" class="btn btn-success" method="GET">
                         <i class="glyphicon glyphicon-list-alt"></i>
                     </a>
                 </td>
 
                 <td>
-                    <a href="/competition/edit/<%$competition->id%>" class="btn btn-success" method="GET">
+                    <a href="/competition/edit/{!! $competition->id !!}" class="btn btn-success" method="GET">
                         <i class="glyphicon glyphicon-cog"></i>
                     </a>
                 </td>
