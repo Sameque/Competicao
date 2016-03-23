@@ -19,10 +19,10 @@ class ValidateUsersSpoj
     public function validateUser($username)
     {
         $urlValidate = URL_USER_SPOJ_VALIDATE.$username.'/';
+
         if($this->getHTML($urlValidate) != '200' ){
             return false;
         } else {
-
             return $this->validateUserName($urlValidate,$username);
         }
     }
@@ -31,19 +31,23 @@ class ValidateUsersSpoj
 
         $html = file_get_contents($url);
         $crawler = new Crawler($html);
-        $crawler = $crawler->filter('body > div > div')->eq(1)
-            ->filter('div > div > table')->eq(0)->filter('tr > td')->eq(1);
+
+        $crawler = $crawler->filter('body > div > div > div > div > div > div > div h4')->eq(0);
 
         $userAuxi = '';
 
         foreach ($crawler as $domElement) {
-            $userAuxi = $domElement->nodeValue;
+            $userAuxi = $this->formatName($domElement->nodeValue);
         }
 
         if($userAuxi == $userRepository)
             return true;
         else
             return false;
+    }
+
+    public function formatName($name){
+        return substr($name,1,strlen($name)-1);
     }
 
     private function getHTML($url) {
