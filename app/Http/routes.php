@@ -136,8 +136,8 @@ Route::post('oauth/acess_token',function(){
 
 Route::group(['before' => 'oauth'], function () {
 
-    Route::get('teste/{user_id}', ['as' => 'user.teste', 'uses' => function ($user_id) {
-        return App\User::find($user_id);
+    Route::get('teste', ['as' => 'user.teste', 'uses' => function ($user_id) {
+        return ;
     }]);
     //Route::resource('post', 'ApiController', ['except' => ['create', 'edit']]);
 });
@@ -152,14 +152,7 @@ Route::group(['before' => 'oauth'], function () {
 
 
 Route::get('/teste', ['as' => 'user.teste', 'uses' => function () {
-
-    $arrayTeste = RepositoryProblem::getRepositoryProblem(1,'BAFO','sameque');
-
-    foreach($arrayTeste as $i){
-
-        echo $i['result'].'</br>';
-    }
-//    return $arrayTeste;
+    return View::make('teste', array('name' => 'Taylor'));
 }]);
 
 Route::get('dashboard2/{competition_id}',['as' => 'submissionUpdate', 'uses' => 'SubmissionController@update']);

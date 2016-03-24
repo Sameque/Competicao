@@ -17,62 +17,101 @@ use Symfony\Component\DomCrawler\Crawler;
 class RepositoryProblemSpoj
 {   
     private $htmlProblemUser;
+    private $htmlSubmission;
     private $htmlProblem;
 
 
 
-    public function getProblem($problem,$username)
+    public function getProblem($problems,$username)
     {
 
-        $this->htmlProblemUser = file_get_contents(URL_PROBLEMS__USER_SPOJ.$username.'/');
+        if($username != null and $problems == null) {
+            dd('Ferro');
+            $this->htmlProblemUser = file_get_contents(URL_PROBLEMS__USER_SPOJ.$username.'/');
+            return $this->getProblemUsers();
 
-//        $this->htmlProblem = file_get_contents(URL_PROBLEMS_SPOJ.$problem.'/');
+        } else if ( $username != null and $problems != null){
 
-        if($username == null) {
+            $submissions=null;
+            foreach($problems as $problem){
+                $this->htmlSubmission = file_get_contents(URL_PROBLEMS__USER_SPOJ.$problem['code'].','.$username.'/');
+
+                $submissions = $this->getSubmissions();
+
+            }
+            return $submissions;
+        } else {
             dd('[RepositoryProblemSpoj] => '.' {não implementado}');
+//        $this->htmlProblem = file_get_contents(URL_PROBLEMS_SPOJ.$problem.'/');
 //            $attributes = array(
 //                'name' => $this->getName(),
 //                'code' => $problem,
 //                'content' => $this->getProblemContent(),
 //            );
-        } else{
 
-            $attributes = $this->getProblemUsers();
         }
 
 //        dd($attributes);
 
-        return $attributes;
+        return false;
     }
 
-    private function getName(){
+    private function getSubmissions(){
 
+        $crawler = new Crawler($this->htmlSubmission);
 
-        $crawler = new Crawler($this->htmlProblem);
+        $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');
 
+        $i=1;
+        $k=2;
+        $p=3;
+        $y=6;
 
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('h1');
+        $problems = null;
 
-        $userAuxi ='';
-        foreach ($crawler as $domElement) {
-            $userAuxi = $domElement->nodeValue;
+        foreach($crawler as $key => $domElement){
+
+            $problem = null;
+            echo $key.' => '.$domElement->nodeValue.'<br/>';
+
+            if ($key == $i){
+                $problem['date'] = substr($domElement->nodeValue, 2,10);
+                $problem['hours'] = substr($domElement->nodeValue, 13,8);
+                $i+=7;
+            }
+
+            if ($key == $k){
+                $problem['name'] =$domElement->nodeValue;
+
+                $html2=$domElement->ownerDocument->saveHTML($domElement);
+                $crawler2 = new Crawler($html2);
+                $crawler2 = $crawler2->filter('a');
+
+                $code = $crawler2->attr('href');
+                $code = substr($code,10,100);
+
+                $problem['code'] = $code;
+
+                $k+=7;
+            }
+
+            if ($key == $p){
+                $problem['result'] = $domElement->nodeValue;
+                $p+=7;
+            }
+            if ($key == $y){
+                $problem['language'] =$domElement->nodeValue;
+            }
+
+            if($key == $y){
+                $problems[]=$problem;
+                $y+=7;
+            }
         }
 
-        return $userAuxi;
+        dd($problems);
+        return $problems;
     }
-    private function getProblemContent(){
-
-        $crawler = new Crawler($this->htmlProblem);
-
-        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('p');
-
-        $userAuxi ='';
-        foreach ($crawler as $domElement) {
-            $userAuxi = $userAuxi.$domElement->nodeValue.'</br></br>';
-        }
-        return $userAuxi;
-    }
-
 
 
 
@@ -86,6 +125,7 @@ class RepositoryProblemSpoj
         $w = 2;
         $k = 3;
         $j = 6;
+
         $userAuxi ='';
         $register='';
 
@@ -206,4 +246,34 @@ class RepositoryProblemSpoj
         }
         return $userAuxi;
     }
+
+    private function getName(){
+
+
+        $crawler = new Crawler($this->htmlProblem);
+
+
+        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('h1');
+
+        $userAuxi ='';
+        foreach ($crawler as $domElement) {
+            $userAuxi = $domElement->nodeValue;
+        }
+
+        return $userAuxi;
+    }
+    private function getProblemContent(){
+
+        $crawler = new Crawler($this->htmlProblem);
+
+        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('p');
+
+        $userAuxi ='';
+        foreach ($crawler as $domElement) {
+            $userAuxi = $userAuxi.$domElement->nodeValue.'</br></br>';
+        }
+        return $userAuxi;
+    }
+
+
 }

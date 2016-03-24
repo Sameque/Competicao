@@ -12,18 +12,18 @@ namespace App\Libraries\CrawlerRepository;
 class RepositoryProblem
 {
 
-    public static function getRepositoryProblem($repository_id,$problem,$username=null)
+    public static function getRepositoryProblem($repositoryName,$problems,$username=null)
     {
-        if ($repository_id == 1) {
+        if ($repositoryName == 'Spoj') {
             $repository = new RepositoryProblemSpoj();
-        } elseif ($repository_id == 2) {
+        } elseif ($repositoryName == 'Uri') {
             $repository = new RepositoryProblemUri();
-        } elseif ($repository_id == 3) {
+        } elseif ($repositoryName == 'Uva') {
             $repository = new RepositoryProblemUva();
         } else $repository = null;
 
         if (!empty($repository)) {
-            return $repository->getProblem($problem,$username);
+            return $repository->getProblem($problems,$username);
         } else
             return false;
     }

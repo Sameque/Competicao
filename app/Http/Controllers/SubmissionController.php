@@ -76,56 +76,21 @@ class SubmissionController extends Controller
         $competition = App\Competition::findOrNew($competition_id);
         $dateTime = new DateTime();
 
-        /**
-         * PEGAR TODOS OS PROBLEMAS DA COMPETICAO
-         */
-        $problemCompetition = '';
-        foreach($competition->problems as $i){
-            $register['code'] = $i->code;
-            $register['repository_id'] = $i->repository_id;
-            $register['id'] = $i->id;
-            $problemCompetition[] = $register;
-        }
-        /**
-         * PEGAR TODOS OS USUÁRO DA COMPETICAO
-         *
-         */
-        $usersCompetiton = '';
-        foreach($competition->users as $i){
-            $i->userRepository;
-            $usersCompetiton[] = $i;
-        }
-        /**
-         * Anda no array de usuários da competição
-         *
-         */
+        $problemCompetition = $this->getProblemsCompetition($competition_id);
+        $usersCompetiton = $this->getUsersCompetition($competition_id);
 
         foreach($usersCompetiton as $user){
 
-            /**
-             * Anda no array de repositórios do usuário
-             */
             foreach($user->userRepository as $userRepository){
 
-                $repository = App\Repository::findOrNew($userRepository->repository_id);
-                /**
-                 * Filtrar os problemas referente ao repositório do usuário repositório "vigente/selecionado"
-                 */
+                $repositoryName = App\Repository::findOrNew($userRepository->repository_id)->name;
 
-                $problems = '';
-                foreach($problemCompetition as $problem){
-                    if($userRepository->reposytory_id = $problem['repository_id']){
-                        $item['code'] = $problem['code'];
-                        $item['id'] = $problem['id'];
-                        $problems[] = $item;
-                    }
-                }
-
+                $problems = $this->getProblemInRepository($problemCompetition,$userRepository->repository_id);
 
                 $submission = $this->getProblemUser(
                     $competition->dateBegin,
                     $competition->dateEnd,
-                    $userRepository->reposytory_id,
+                    $repositoryName,
                     $userRepository->username,
                     $problems
                 );
@@ -133,9 +98,6 @@ class SubmissionController extends Controller
                 if(!$submission){
                     return $submission;
                 }
-
-
-//                $submissionModel2 = App\Submission::create($submission);
 
                 DB::table('submission')
                     ->where('competition_id', '=', $competition->id)
@@ -148,7 +110,7 @@ class SubmissionController extends Controller
 
                     $submissionModel->date = $item['date'];
                     $submissionModel->hours = $item['hours'];
-                    $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repository->name);
+                    $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repositoryName);
                     $submissionModel->problem = $item['problem'];
                     $submissionModel->result = $item['result'];
                     $submissionModel->language = $item['language'];
@@ -166,6 +128,66 @@ class SubmissionController extends Controller
     }
 
     /**
+     * PEGAR TODOS OS PROBLEMAS DA COMPETICAO
+     *
+     * @param $competition_id
+     * @return array|string
+     */
+    private function getProblemsCompetition($competition_id){
+
+        $competition = App\Competition::findOrNew($competition_id)->problems;
+
+        $problemCompetition = '';
+        foreach($competition as $i){
+            $register['code'] = $i->code;
+            $register['repository_id'] = $i->repository_id;
+            $register['id'] = $i->id;
+            $problemCompetition[] = $register;
+        }
+        return $problemCompetition;
+    }
+
+    /**
+     * PEGAR TODOS OS USUÁRO DA COMPETICAO
+     *
+     * @param $competition_id
+     * @return array|string
+     */
+    private function getUsersCompetition($competition_id){
+
+        $competition = App\Competition::findOrNew($competition_id)->users;
+
+        $usersCompetiton = '';
+
+        foreach($competition as $i){
+            $i->userRepository;
+            $usersCompetiton[] = $i;
+        }
+
+        return $usersCompetiton;
+    }
+
+    /**
+     * Filtrar os problemas referente ao repositório do usuário repositório "vigente/selecionado"
+     *
+     * @param $problems
+     * @param $repository_id
+     * @return array|string
+     */
+    private function getProblemInRepository($problems,$repository_id){
+
+        $problemsRepository = '';
+        foreach($problems as $problem){
+            if($problem['repository_id'] == $repository_id){
+                $item['code'] = $problem['code'];
+                $item['id'] = $problem['id'];
+                $problemsRepository[] = $item;
+            }
+        }
+        return $problemsRepository;
+    }
+
+    /**
      * @param Date $competitionBegin_dt
      * @param Date $competitionEnd_dt
      * @param int $repository_id
@@ -173,17 +195,15 @@ class SubmissionController extends Controller
      * @param string $problem
      * @return array
      */
-    private function getProblemUser($competitionBegin_dt,$competitionEnd_dt,$repository_id,$username,$problems){
+    private function getProblemUser($competitionBegin_dt,$competitionEnd_dt,$repositoryName,$username,$problems){
 
-        /**
-         * Pegaos registros de submissão do problema($problem) no usuário de repositório ($username)
-         */
-        $submisions = RepositoryProblem::getRepositoryProblem($repository_id,$problems,$username);
+        $submisions = RepositoryProblem::getRepositoryProblem($repositoryName,$problems,$username);
 
         /**
          * Anda no array de registros de submissões
          */
         $auxSubmission = false;
+
         foreach($submisions as $submision) {
 
             foreach ($problems as $problem) {
@@ -244,10 +264,12 @@ class SubmissionController extends Controller
 
 //        $html = file_get_contents('http://uniararas.br/');
 
-        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
+//        $html = file_get_contents('http://br.spoj.com/problems/PLACAR/');
 //        $html = file_get_contents('http://br.spoj.com/users/sameque/');//GET USERNAME, USER
+//        $html = file_get_contents('http://br.spoj.com/users/moj/');//VALIDATE USER
 //        $html = file_get_contents('http://br.spoj.com/status/sameque/');//GET PROBLEM, USER
 //        $html = file_get_contents('http://br.spoj.com/problems/BAFO/');//GET PROBLEM, PROBLEM
+        $html = file_get_contents('http://br.spoj.com/status/JGANGO14,sameque/');//GET SUBMIT, PROBLEM
 
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
@@ -297,9 +319,9 @@ class SubmissionController extends Controller
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('p');//PROBLEM CONTENT
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('pre')->eq(0)->filter('br');//PROBLEM EXEMPLE
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('td');//->extract(array('_text', 'href'));//PROBLEM USER
-        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);//VALIDADE PROMEM 2
-
-
+//        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);//VALIDADE PROMEM 2
+//        $crawler = $crawler->filter('body > div > div > div > div > div > div > div h4')->eq(0);//VALIDADE USER 2
+        $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');////GET SUBMIT, PROBLEM
 
 //
 //        $crawler = $crawler->filter('div');
@@ -323,17 +345,54 @@ class SubmissionController extends Controller
 
 //        echo $crawler->attr('href');
         
-        $url = $crawler->attr('href');
-        $url = substr($url,8,100);
-        $url = substr($url,0,strlen($url)-1);
+//        $url = $crawler->attr('href');
+//        $url = substr($url,8,100);
+//        $url = substr($url,0,strlen($url)-1);
         
-        echo $url;
-        
-        foreach ($crawler as  $domElement) {
-            
-            //echo $domElement->nodeValue.'</br>';
+//        echo $url;
+
+        $i=1;
+        $k=2;
+        $p=3;
+        $y=6;
+
+        $problems = null;
+
+        foreach ($crawler as  $key => $domElement) {
+
+            echo $key.' => '.$domElement->nodeValue.'<br/>';
+
+            /*
+            if ($key == $i){
+                echo 'Data: '.$domElement->nodeValue.'</br>';
+                $i+=7;
+            }
+
+            if ($key == $k){
+                echo 'Nome: '.$domElement->nodeValue.'</br>';
+                $k+=7;
+                $html2=$domElement->ownerDocument->saveHTML($domElement);
+                $crawler2 = new Crawler($html2);
+                $crawler2 = $crawler2->filter('a');
+                echo 'Code: '.$crawler2->attr('href').'</br>';
+
+            }
+
+            if ($key == $p){
+                echo 'Resultado: '.$domElement->nodeValue.'</br>';
+                $p+=7;
+            }
+
+            if ($key == $y){
+                echo 'Linguagem: '.$domElement->nodeValue.'</br>';
+                $y+=7;
+            }
+
+
+//            echo $key.' => '.$domElement->nodeValue.'</br>';
 //            echo $domElement->extract(array('_text', 'href'));
 //            echo $domElement->attr('href');
+        */
         }
 
 //        $crawler = $crawler
