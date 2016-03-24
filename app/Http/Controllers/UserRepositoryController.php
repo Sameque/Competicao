@@ -62,7 +62,7 @@ class UserRepositoryController extends Controller
 
         $id = $request->input('user_id');
 
-        return view('register.userrepository', compact('id'));
+        return $this->edit($id);
     }
 
     public function updateUserRepository(UserRepository $userRepository){
@@ -98,12 +98,23 @@ class UserRepositoryController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
-//        $userRepositorys =  User::findOrFail($id)->userRepository;
+        $repositorysAll = Repository::all();
+        $repositorys=false;
+        $userRepositorys = User::findOrNew($user_id)->userRepository;
 
-        return view('register.userrepository', compact('id'));
-//        return 'Teste userrepository';
+        foreach ($userRepositorys as $userRepository) {
+            $userRepository->repository;
+        }
+        foreach($repositorysAll as $repository){
+            $repositorys[$repository->id] = $repository->name;
+        }
+
+        return view('register.userrepository', [
+            'user_id'=>$user_id,
+            'repositorys'=>$repositorys,
+            'userRepositorys'=>$userRepositorys]);
     }
 
     /**
@@ -123,7 +134,7 @@ class UserRepositoryController extends Controller
         $userRepository =  RepositoryUser::getRepositoryUser($userRepository);
         $id = $userRepository->user_id;
 
-        return view('register.userrepository', compact('id'));
+        return $this->edit($id);
 
     }
 
@@ -137,13 +148,11 @@ class UserRepositoryController extends Controller
     {
         $userRepository = UserRepository::find($userRep_id);
 
-        $id = $userRepository->user->id;
+        $id = $userRepository->user_id;
         $userRepository->problemUnsolvedUser()->delete();
         $userRepository->problemSolvedUser()->delete();
         $userRepository->delete();
 
-
-
-        return view('register.userrepository', compact('id'));
+        return $this->edit($id);
     }
 }

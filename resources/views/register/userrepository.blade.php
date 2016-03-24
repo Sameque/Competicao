@@ -1,20 +1,5 @@
 @extends('templates.default')
 @section('content')
-
-    <script>
-
-        angular.module("competicao").controller("userrepositoryLoadCtrl", function ($scope) {
-            var loadId = function () {
-                setGlobal_id(<?php echo $id; ?>);
-            };
-            loadId();
-        });
-    </script>
-
-
-    <div ng-controller="userrepositoryLoadCtrl"></div>
-
-    <div ng-controller="userrepositoryCtrl" xmlns="http://www.w3.org/1999/html">
         <div class="row">
             <div class="col-md-4">
                 <div class="listCompetition">
@@ -22,16 +7,18 @@
                         <thead>
                         <th>Repositóri</th>
                         <th>Usuário</th>
-                        <th>ID</th>
+                        <th>Apagar</th>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="i in userRepositorys">
-                            <td>{{i.repository.name}}</td>
-                            <td>{{i.username}}</td>
-                            <td>
-                                <a href="/listuserrepository/delete/{{i.id}}" class="btn btn-danger" method="DELETE">Apagar</a>
-                            </td>
-                        </tr>
+                        @foreach ($userRepositorys as $userRepository)
+                            <tr>
+                                <td>{!!  $userRepository->repository->name !!}</td>
+                                <td>{!! $userRepository->username !!}</td>
+                                <td>
+                                    <a href="/listuserrepository/delete/{!! $userRepository->id !!}" class="btn btn-danger" method="DELETE">Apagar</a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -55,7 +42,9 @@
                                 'url' => 'userrepository/store',
                                 'method' => 'POST'));
                         ?>
+
                         <br/>
+                        <!--
                         <label for="username">Repositário</label>
 
                         <select name="repository_id" id="repository_id" class="form-control">
@@ -63,17 +52,26 @@
                             <option ng-required="true" ng-repeat="repository in repositorys" value={{repository.id}}>
                                 {{repository.name}}
                             </option>
-                        </select>
 
+                        </select>
+-->
                         </br >
                         <?php
+                        echo Form::label('repository_id', 'Repositário') . '<br/>';
+                        echo Form::select('repository_id', $repositorys,null,[
+                                'placeholder' => 'Selecione um Repositório',
+                                'class' => 'form-control']);
+                        echo '<br/>';
+
+                        echo '<br/>';
                         echo Form::label('username', 'Usuário') . '<br/>';
                         echo Form::text('username', null, array(
                                         'class' => 'form-control',
                                         'placeholder' => 'Digite o nome do repositório',
                                 )) . '<br/>';
                         ?>
-                        <input value={{user_id}} name="user_id" id="user_id" type="hidden" class="form-control"
+
+                        <input value={!! $user_id !!} name="user_id" id="user_id" type="hidden" class="form-control"
                                ng-model="user.id"/>
 
                         </br >
@@ -88,5 +86,5 @@
             </div>
         </div>
         </br>
-    </div>
+
 @stop
