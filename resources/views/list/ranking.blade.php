@@ -7,26 +7,32 @@
             <tbody>
             <tr>
                 <th>Nome</th>
-                @foreach ($problems as $problem)
-                    <th>{!! $problem->code !!}</th>
-                @endforeach
-            </tr>
-            @foreach ($rankings as $ranking)
-                <tr>
-                    <td>{!! $ranking['name'] !!}</td>
-                    @foreach ($ranking['problems'] as $problem)
-                        <td>
-
-                            @if ($problem['resp'])
-                                B - {!! $problem['qt'].'/'.$problem['time'] !!}
-                                @else
-                                 {!! $problem['qt'].'/-' !!}
-                            @endif
-                        </td>
+                
+                @if($problems)
+                    @foreach ($problems as $problem)
+                        <th>{!! $problem->code !!}</th>
                     @endforeach
+                @endif
+            </tr>
+            @if($rankings)        
+                @foreach ($rankings as $ranking)
+                    <tr>
+                        <td>{!! $ranking['name'] !!}</td>
+                        @foreach ($ranking['problems'] as $problem)
+                            <td>
 
-                </tr>
-            @endforeach
+                                @if ($problem['resp'])
+                                    B - {!! $problem['qt'].'/'.$problem['time'] !!}
+                                    @else
+                                     {!! $problem['qt'].'/-' !!}
+                                @endif
+                            </td>
+                        @endforeach
+
+                    </tr>
+                @endforeach
+           @endif
+
             </tbody>
         </table>
     </div>

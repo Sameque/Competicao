@@ -75,10 +75,16 @@ class SubmissionController extends Controller
     {
         $competition = App\Competition::findOrNew($competition_id);
         $dateTime = new DateTime();
+        $submissionModels='';
 
         $problemCompetition = $this->getProblemsCompetition($competition_id);
         $usersCompetiton = $this->getUsersCompetition($competition_id);
 
+        if(!$usersCompetiton){
+            return $usersCompetiton;
+
+        }
+        
         foreach($usersCompetiton as $user){
 
             foreach($user->userRepository as $userRepository){
@@ -103,7 +109,7 @@ class SubmissionController extends Controller
                     ->where('competition_id', '=', $competition->id)
                     ->where('user_id', '=', $user->id)
                     ->delete();
-
+                
                 foreach ($submission as $item){
 
                     $submissionModel = new App\Submission();
@@ -118,7 +124,7 @@ class SubmissionController extends Controller
                     $submissionModel->user_id = $user->id;
                     $submissionModel->competition_id = $competition->id;
                     $submissionModel->save();
-                    $submissionModels[] =$submissionModel;
+                    $submissionModels[] = $submissionModel;
                 }
             }
         }
@@ -156,8 +162,8 @@ class SubmissionController extends Controller
     private function getUsersCompetition($competition_id){
 
         $competition = App\Competition::findOrNew($competition_id)->users;
-
-        $usersCompetiton = '';
+            
+        $usersCompetiton = null;
 
         foreach($competition as $i){
             $i->userRepository;
