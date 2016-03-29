@@ -22,24 +22,19 @@ class RepositoryProblemSpoj
 
 
 
-    public function getProblem($problems,$username)
+    public function getProblem($problem,$username)
     {
 
-        if($username != null and $problems == null) {
-            dd('Ferro');
+        if($username != null and $problem == null) {
             $this->htmlProblemUser = file_get_contents(URL_PROBLEMS__USER_SPOJ.$username.'/');
             return $this->getProblemUsers();
 
-        } else if ( $username != null and $problems != null){
+        } else if ( $username != null and $problem != null){
+            $this->htmlSubmission = file_get_contents(
+            URL_PROBLEMS__USER_SPOJ.$problem['code'].','.$username.'/'
+                    );
 
-            $submissions=null;
-            foreach($problems as $problem){
-                $this->htmlSubmission = file_get_contents(URL_PROBLEMS__USER_SPOJ.$problem['code'].','.$username.'/');
-
-                $submissions = $this->getSubmissions();
-
-            }
-            return $submissions;
+            return $this->getSubmissions();
         } else {
             dd('[RepositoryProblemSpoj] => '.' {não implementado}');
 //        $this->htmlProblem = file_get_contents(URL_PROBLEMS_SPOJ.$problem.'/');
@@ -59,7 +54,7 @@ class RepositoryProblemSpoj
     private function getSubmissions(){
 
         $crawler = new Crawler($this->htmlSubmission);
-
+        
         $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');
 
         $i=1;
@@ -68,11 +63,11 @@ class RepositoryProblemSpoj
         $y=6;
 
         $problems = null;
+        $problem = null;
 
         foreach($crawler as $key => $domElement){
 
-            $problem = null;
-            echo $key.' => '.$domElement->nodeValue.'<br/>';
+//            echo $key.' => '.$domElement->nodeValue.'<br/>';
 
             if ($key == $i){
                 $problem['date'] = substr($domElement->nodeValue, 2,10);
@@ -85,35 +80,35 @@ class RepositoryProblemSpoj
 
                 $html2=$domElement->ownerDocument->saveHTML($domElement);
                 $crawler2 = new Crawler($html2);
-                $crawler2 = $crawler2->filter('a');
 
-                $code = $crawler2->attr('href');
+                $code = $crawler2->filter('a')->attr('href');
                 $code = substr($code,10,100);
+                $code = substr($code,0,strlen($code)-1);
 
                 $problem['code'] = $code;
 
                 $k+=7;
-            }
 
+            }
+            
             if ($key == $p){
-                $problem['result'] = $domElement->nodeValue;
+                $problem['result'] = $this->formatField($domElement->nodeValue);
                 $p+=7;
             }
+
             if ($key == $y){
-                $problem['language'] =$domElement->nodeValue;
+                $problem['language'] = $this->formatField($domElement->nodeValue);
             }
 
             if($key == $y){
                 $problems[]=$problem;
+                $problem = null;
                 $y+=7;
+
             }
         }
-
-        dd($problems);
         return $problems;
     }
-
-
 
     private function getProblemUsers(){
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 //use App\CrawleRepository\ValidateUsers;
 use App;
-use App\Http\Requests;
+//use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Libraries\CrawlerRepository\RepositoryProblem;
 use Illuminate\Support\Facades\DB;
@@ -84,7 +84,7 @@ class SubmissionController extends Controller
             return $usersCompetiton;
 
         }
-        
+
         foreach($usersCompetiton as $user){
 
             foreach($user->userRepository as $userRepository){
@@ -92,7 +92,7 @@ class SubmissionController extends Controller
                 $repositoryName = App\Repository::findOrNew($userRepository->repository_id)->name;
 
                 $problems = $this->getProblemInRepository($problemCompetition,$userRepository->repository_id);
-
+                
                 $submission = $this->getProblemUser(
                     $competition->dateBegin,
                     $competition->dateEnd,
@@ -143,7 +143,7 @@ class SubmissionController extends Controller
 
         $competition = App\Competition::findOrNew($competition_id)->problems;
 
-        $problemCompetition = '';
+        $problemCompetition = null;
         foreach($competition as $i){
             $register['code'] = $i->code;
             $register['repository_id'] = $i->repository_id;
@@ -182,7 +182,7 @@ class SubmissionController extends Controller
      */
     private function getProblemInRepository($problems,$repository_id){
 
-        $problemsRepository = '';
+        $problemsRepository = null;
         foreach($problems as $problem){
             if($problem['repository_id'] == $repository_id){
                 $item['code'] = $problem['code'];
@@ -201,16 +201,27 @@ class SubmissionController extends Controller
      * @param string $problem
      * @return array
      */
-    private function getProblemUser($competitionBegin_dt,$competitionEnd_dt,$repositoryName,$username,$problems){
+    private function getProblemUser(
+            $competitionBegin_dt,
+            $competitionEnd_dt,
+            $repositoryName,
+            $username,
+            $problems){
 
-        $submisions = RepositoryProblem::getRepositoryProblem($repositoryName,$problems,$username);
-
+        $submisions =null;
+        foreach ($problems as $problem){
+            $submisions[] = RepositoryProblem::getRepositoryProblem(
+                    $repositoryName,
+                    $problem,
+                    $username);
+        }
         /**
          * Anda no array de registros de submissões
          */
-        $auxSubmission = false;
+        $auxSubmission = null;
 
         foreach($submisions as $submision) {
+        dd($submision['code']);
 
             foreach ($problems as $problem) {
                 /**
@@ -218,7 +229,7 @@ class SubmissionController extends Controller
                  * os registros estão dentro do periodo da competição.
                  */
 
-                if ($submision['problem'] == $problem['code'] and
+                if ($submision['code'] == $problem['code'] and
                         ( $submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt )
                     )
                          {
@@ -275,7 +286,7 @@ class SubmissionController extends Controller
 //        $html = file_get_contents('http://br.spoj.com/users/moj/');//VALIDATE USER
 //        $html = file_get_contents('http://br.spoj.com/status/sameque/');//GET PROBLEM, USER
 //        $html = file_get_contents('http://br.spoj.com/problems/BAFO/');//GET PROBLEM, PROBLEM
-        $html = file_get_contents('http://br.spoj.com/status/JGANGO14,sameque/');//GET SUBMIT, PROBLEM
+        $html = file_get_contents('http://br.spoj.com/status/SOMA,sameque/');//GET SUBMIT, PROBLEM
 
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
