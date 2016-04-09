@@ -117,7 +117,7 @@ class SubmissionController extends Controller
                     $submissionModel->date = $item['date'];
                     $submissionModel->hours = $item['hours'];
                     $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repositoryName);
-                    $submissionModel->problem = $item['problem'];
+                    $submissionModel->problem = $item['code'];
                     $submissionModel->result = $item['result'];
                     $submissionModel->language = $item['language'];
                     $submissionModel->problem_id = $item['problem_id'];
@@ -206,22 +206,24 @@ class SubmissionController extends Controller
             $competitionEnd_dt,
             $repositoryName,
             $username,
-            $problems){
+            $problems)
+    {
 
-        $submisions =null;
-        foreach ($problems as $problem){
-            $submisions[] = RepositoryProblem::getRepositoryProblem(
-                    $repositoryName,
-                    $problem,
-                    $username);
+        $problemSubmisions = null;
+
+        foreach ($problems as $problem) {
+            $problemSubmisions[] = RepositoryProblem::getRepositoryProblem(
+                $repositoryName,
+                $problem['code'],
+                $username);
         }
         /**
          * Anda no array de registros de submissões
          */
         $auxSubmission = null;
+    foreach($problemSubmisions as $submisions){
 
-        foreach($submisions as $submision) {
-        dd($submision['code']);
+        foreach ($submisions as $submision) {
 
             foreach ($problems as $problem) {
                 /**
@@ -230,15 +232,14 @@ class SubmissionController extends Controller
                  */
 
                 if ($submision['code'] == $problem['code'] and
-                        ( $submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt )
-                    )
-                         {
-                             $submision['problem_id'] = $problem['id'];
-                             $auxSubmission[] = $submision;
-                         }
+                    ($submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt)
+                ) {
+                    $submision['problem_id'] = $problem['id'];
+                    $auxSubmission[] = $submision;
+                }
             }
         }
-
+    }
         return $auxSubmission;
     }
 
