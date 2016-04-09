@@ -12,7 +12,7 @@ class CreateDatabasetesteDatabase extends Migration
      */
     public function up()
     {
-        DB::getConnection()->statement('CREATE DATABASE :schema', array('schema' => 'competicao'));
+        //DB::getConnection()->statement('CREATE DATABASE :schema', array('schema' => 'competicao'));
     }
 
     /**
