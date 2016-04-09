@@ -31,7 +31,7 @@ class RepositoryProblemSpoj
 
         } else if ( $username != null and $problem != null){
             $this->htmlSubmission = file_get_contents(
-            URL_PROBLEMS__USER_SPOJ.$problem['code'].','.$username.'/'
+            URL_PROBLEMS__USER_SPOJ.$problem.','.$username.'/'
                     );
 
             return $this->getSubmissions();
@@ -107,6 +107,7 @@ class RepositoryProblemSpoj
 
             }
         }
+//        dd($problems);
         return $problems;
     }
 
