@@ -36,10 +36,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-
-            "rm vendor\\laravel\\framework\\src\\Illuminate\\View\\Compilers\\BladeCompiler.php",
-            "copy UTL\\BladeCompiler.php vendor\\laravel\\framework\\src\\Illuminate\\View\\Compilers",
-            "copy UTL\\.htaccess ..\\"
+            "php artisan migrate:install || S",
+            "php artisan migrate",
+            "php artisan db:seed"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"

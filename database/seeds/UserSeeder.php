@@ -15,9 +15,6 @@ class UserSeeder extends Seeder
 
         DB::table('users')->delete();
 
-//        dd(User::all());
-
-
         User::create([
             'name'=>'userTeste',
             'accessLevel'=>1,
