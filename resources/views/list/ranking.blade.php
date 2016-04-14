@@ -7,12 +7,13 @@
             <tbody>
             <tr>
                 <th>Nome</th>
-                
                 @if($problems)
                     @foreach ($problems as $problem)
                         <th>{!! $problem->code !!}</th>
                     @endforeach
                 @endif
+                <th>Total</th>
+
             </tr>
             @if($rankings)        
                 @foreach ($rankings as $ranking)
@@ -28,6 +29,12 @@
                                 @endif
                             </td>
                         @endforeach
+                        <td>
+                            {!! $ranking['acceptTotal'] !!}
+                            /
+                            {!! $ranking['timeTotal'] !!}
+
+                        </td>
 
                     </tr>
                 @endforeach

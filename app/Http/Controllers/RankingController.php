@@ -31,7 +31,8 @@ class RankingController extends Controller
         foreach ($competition->users as $user){
 
             $ranking['name'] = $user->name;
-
+            $ranking['timeTotal'] = 0;
+            $ranking['acceptTotal'] = 0;
             $rankingProblem = '';
 
             foreach($competition->problems as $problem){
@@ -43,10 +44,10 @@ class RankingController extends Controller
                 if($submissions){
                     foreach ($submissions as $i){
                         if ($i['problem_id'] == $problem->id and  $user->id == $i['user_id']){
-
                             if($i->result == 'accepted'){
                                 $item['resp'] = true;
                                 $item['time'] = $dateTime->timeElapsed($competition->hoursBegin,$i->hours);
+                                $ranking['acceptTotal'] = $ranking['acceptTotal'] + 1;
                             }
                             $item['qt'] = $item['qt']+1;
                         }
@@ -54,6 +55,8 @@ class RankingController extends Controller
                 }
 
                 $rankingProblem[]=$item;
+                $ranking['timeTotal'] = $ranking['timeTotal']+$item['time'];
+
             }
 
             $ranking['problems'] = $rankingProblem;
