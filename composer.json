@@ -36,9 +36,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php artisan migrate:install || S",
-            "php artisan migrate",
-            "php artisan db:seed"
+            "php artisan migrate:install",
+            "php artisan migrate --force",
+            "php artisan db:seed --force"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
