@@ -16,7 +16,10 @@ class Competition extends Model
         return $this->belongsToMany('App\User');
     }
 
-
+    protected $casts = [
+        'dateBegin' => 'date',
+        'dateEnd' => 'date',
+    ];
 
     protected $fillable = [
         'id',

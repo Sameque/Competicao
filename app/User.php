@@ -45,7 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'cpf',
         'rg',
         'yearCourse',
-//        'birthDate',
+        'birthDate',
         'graduated'
     ];
 

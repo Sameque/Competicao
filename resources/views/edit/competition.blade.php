@@ -1,16 +1,14 @@
 @extends('templates.default')
 @section('content')
-
-<script>
-    $(document).ready(function(){
-        $('h2').fadeOut(2000);
-        //$('h1').fadeOut(2000);
-        //$('#dateBegin').mask("99/99/9999",{placeholder:"99/99/9999"});
-    });
-
-</script>
-
     <div>
+        <script>
+            $(document).ready(function(){
+                $('h2').fadeOut(2000);
+                //$('h1').fadeOut(2000);
+                //$('#dateBegin').mask("99/99/9999",{placeholder:"99/99/9999"});
+            });
+        </script>
+
         <div class="row formCompetition">
 
             <div class="title">
@@ -57,13 +55,15 @@
 
 
                         echo Form::label('dateBegin', 'Data de Início');
-                        echo Form::date('dateBegin', $competition->dateBegin->format('d/m/Y'),[
+                        echo Form::date('dateBegin',
+                                $competition->dateBegin->format('d/m/Y'),[
                                 'class' => 'form-control',
                         ]);
 
                         echo '<br/>';
                         echo Form::label('dateEnd', 'Data de Termino');
-                        echo Form::date('dateEnd', $competition->dateEnd->format('d/m/Y'), [
+                        echo Form::date('dateEnd',
+                                $competition->dateEnd->format('d/m/Y'),[
                                 'class' => 'form-control',
                         ]);
                         echo '</br >' . '</div>' . '<div class="col-md-6 ">';
