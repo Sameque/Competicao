@@ -33,12 +33,10 @@
                 <div class="row">
                     <div class="inputNameCompetiton">
                         <label for="name">Nome da Competição</label>
-
                         <input name="name" type="text" class="form-control"
                                ng-required="true"
                                placeholder='Digite o Nome da Competição'/>
                         </br >
-
                     </div>
                     <div class="col-md-6 ">
 

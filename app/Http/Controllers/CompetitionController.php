@@ -75,9 +75,6 @@ class CompetitionController extends Controller {
     public function store(Request $request) {
         $competition = new Competition($request->all());
 
-        $competition->dateBegin = date('Y-m-d', strtotime($request->input('dateBegin')));
-        $competition->dateEnd = date('Y-m-d', strtotime($request->input('dateEnd')));
-
         $competition->save();
         return $this->edit($competition->id);
     }
@@ -127,6 +124,10 @@ class CompetitionController extends Controller {
     
     
     public function update(Request $request, $id) {
+
+//        $request->input('dateBegin') = '2001-01-01';
+//        $request->accepts('dateBein')= '2001-01-01';
+//        dd($request);
         $competition = Competition::find($id);
         $competition->fill($request->all());
 

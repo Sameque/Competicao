@@ -1,14 +1,6 @@
 @extends('templates.default')
 @section('content')
     <div>
-        <script>
-            $(document).ready(function(){
-                $('h2').fadeOut(2000);
-                //$('h1').fadeOut(2000);
-                //$('#dateBegin').mask("99/99/9999",{placeholder:"99/99/9999"});
-            });
-        </script>
-
         <div class="row formCompetition">
 
             <div class="title">
@@ -32,6 +24,7 @@
 //                echo $intervalo->format('%Y-%m-%d %H:%I:%S');//.'-'.$competition->dateBegin.$competition->hoursBegin;
 
 
+                //   dd(\Carbon\Carbon::createFromFormat('d/m/Y', '31/12/2015','America/Sao_Paulo'));
                 //dd($intervalo);
                 //echo $intervalo;
 
@@ -56,14 +49,19 @@
 
                         echo Form::label('dateBegin', 'Data de Início');
                         echo Form::date('dateBegin',
-                                $competition->dateBegin->format('d/m/Y'),[
+                                $competition->dateBegin->format('d/m/Y'),
+//                                null,
+                                [
                                 'class' => 'form-control',
+                                'maxlength'=>10
                         ]);
 
                         echo '<br/>';
                         echo Form::label('dateEnd', 'Data de Termino');
                         echo Form::date('dateEnd',
-                                $competition->dateEnd->format('d/m/Y'),[
+                                $competition->dateEnd->format('d/m/Y'),
+//                                null,
+                                [
                                 'class' => 'form-control',
                         ]);
                         echo '</br >' . '</div>' . '<div class="col-md-6 ">';
