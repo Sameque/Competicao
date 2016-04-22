@@ -57,7 +57,7 @@
                         
                         
                         </br >
-                        <input value="<% $competition->id %>" name="competition_id" id="competition_id" type="hidden"
+                        <input value="{!! $competition->id !!}" name="competition_id" id="competition_id" type="hidden"
                                class="form-control"/></br >
 
                         <?php

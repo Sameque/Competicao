@@ -27,13 +27,15 @@
                 <br/>
                 <?php
                 echo Form::model('competition', array('name' => 'cadForm', 'url' => 'competition/store', 'method' => 'POST'));
+
+
                 ?>
                 <br/>
 
                 <div class="row">
                     <div class="inputNameCompetiton">
                         <label for="name">Nome da Competição</label>
-                        <input name="name" type="text" class="form-control"
+                        <input id="name" name="name" type="text" class="form-control"
                                ng-required="true"
                                placeholder='Digite o Nome da Competição'/>
                         </br >
@@ -41,21 +43,21 @@
                     <div class="col-md-6 ">
 
                         <label for="dateBegin">Data de Início</label>
-                        <input name="dateBegin" type="date"
+                        <input id="dateBegin" name="dateBegin" maxlength=10 type="date"
                                class="form-control">
                         <br/>
                         <label for="dateEnd">Data de Termino</label>
-                        <input name="dateEnd" type="date" class="form-control"/>
+                        <input id="dateEnd" name="dateEnd" maxlength=10 type="date" class="form-control"/>
                         </br >
 
                     </div>
                     <div class="col-md-6 ">
 
                         <label for="hoursBegin">Horário de Inicio</label>
-                        <input name="hoursBegin" type="time" class="form-control"/>
+                        <input id="hoursBegin" name="hoursBegin" type="time" class="form-control"/>
                         </br >
                         <label for="hoursEnd">Horário de Termino</label>
-                        <input name="hoursEnd" type="time" class="form-control"/>
+                        <input id="hoursEnd" name="hoursEnd" type="time" class="form-control"/>
                         </br >
                     </div>
                 </div>

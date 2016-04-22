@@ -89,7 +89,7 @@
 
         echo Form::submit('Enviar', array('class' => 'btn btn-primary btn-block', 'ng-disabled' => 'false'));
         echo '</br>';
-        echo Form::submit('Cadastrar Repositório!', array('class' => 'btn btn btn-success btn-block btn-block', 'ng-disabled' => 'true'));
+        echo Form::submit('Cadastrar Repositório1!', array('class' => 'btn btn btn-success btn-block btn-block', 'ng-disabled' => 'true'));
         echo Form::close();
         echo '</br>';
 

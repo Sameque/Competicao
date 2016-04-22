@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Competition extends Model
 {
     protected $table = 'competitions';
+
+    protected $dateFormat = 'd/m/Y';
 
     public function problems(){
         return $this->hasMany('App\Problem');
@@ -17,6 +20,20 @@ class Competition extends Model
     }
 
 
+    public function setDateBeginAttribute($date)
+    {
+        $this->attributes['dateBegin'] = Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+    public function setDateEndAttribute($date)
+    {
+        $this->attributes['dateEnd'] = Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+    protected $casts = [
+        'dateBegin' => 'date',
+        'dateEnd' => 'date',
+    ];
 
     protected $fillable = [
         'id',
@@ -28,11 +45,6 @@ class Competition extends Model
     ];
 
     protected $hidden = [
-//        'id',
-//        'dateBegin',
-//        'hoursBegin',
-//        'dateEnd',
-//        'hourEnd',
         'created_at',
         'updated_at'
     ];

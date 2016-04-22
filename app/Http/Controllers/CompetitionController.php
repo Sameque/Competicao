@@ -31,9 +31,9 @@ class CompetitionController extends Controller {
         return $competition->users;
     }
 
+
     public function competitionUserStore(Request $request) {
         $competition = Competition::find($request->input('competition_id'));
-
         $competition->users()->attach($request->input('user_id'));
 
         return $this->competitionUser($competition->id);
@@ -75,9 +75,6 @@ class CompetitionController extends Controller {
     public function store(Request $request) {
         $competition = new Competition($request->all());
 
-        $competition->dateBegin = date('Y-m-d', strtotime($request->input('dateBegin')));
-        $competition->dateEnd = date('Y-m-d', strtotime($request->input('dateEnd')));
-
         $competition->save();
         return $this->edit($competition->id);
     }
@@ -112,9 +109,6 @@ class CompetitionController extends Controller {
             'problems' => $competition->problems,
             'users' => $competition->users
         ]);
-
-
-//        return view('edit.competition', compact('competition'));
     }
 
     /**
@@ -138,10 +132,13 @@ class CompetitionController extends Controller {
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return Response
+     * @return Response 
      */
     public function destroy($competition_id) {
+
+
         $competition = Competition::find($competition_id);
+
         $problemController = new ProblemController();
 
         foreach ($competition->problems as $i) {
@@ -154,7 +151,7 @@ class CompetitionController extends Controller {
 
         $competition->delete();
 
-        return view('list.competition');
+        return $this->index();
     }
 
     public function userDestroy($competition_id, $user_id) {
