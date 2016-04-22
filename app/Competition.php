@@ -30,12 +30,6 @@ class Competition extends Model
         $this->attributes['dateEnd'] = Carbon::createFromFormat('d/m/Y', $date);
     }
 
-
-//    protected function getDateFormat()
-//    {
-//        dd($this);
-//        return 'Y-m-d';
-//    }
     protected $casts = [
         'dateBegin' => 'date',
         'dateEnd' => 'date',
@@ -51,11 +45,6 @@ class Competition extends Model
     ];
 
     protected $hidden = [
-//        'id',
-//        'dateBegin',
-//        'hoursBegin',
-//        'dateEnd',
-//        'hourEnd',
         'created_at',
         'updated_at'
     ];

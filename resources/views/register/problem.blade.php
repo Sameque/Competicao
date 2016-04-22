@@ -44,13 +44,17 @@
                         <br/>
                         <?php
                         echo Form::model('', array('name' => 'cadForm1', 'url' => 'problem/store', 'method' => 'POST'));
+
+
+
+
                         ?>
                         <br/>
                         <label for="repository_id">Repositório</label>
                         <select name="repository_id" id="repository_id" class="form-control">
                             <option value=""> Selecione um Repositório</option>
-                        @foreach ($repositorys as $repository)    
-                            <option value={!!$repository->id!!}>
+                        @foreach ($repositorys as $repository)
+                            <option value={!! $repository->id !!}>
                                 {!!$repository->name!!}
                             </option>
                         @endforeach    
@@ -59,6 +63,7 @@
                         </br >
                         <label for="code">Código</label>
                         <input name="code" id="code" type="text" class="form-control"
+                               value=""
                                placeholder='Digite o código do problema'/><br/>
                    
                         <label for="dificult">Dificuldade</label>

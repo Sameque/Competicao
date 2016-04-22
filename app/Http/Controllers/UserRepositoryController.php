@@ -100,6 +100,7 @@ class UserRepositoryController extends Controller
      */
     public function edit($user_id)
     {
+//        dd($user_id);
         $repositorysAll = Repository::all();
         $repositorys=false;
         $userRepositorys = User::findOrNew($user_id)->userRepository;

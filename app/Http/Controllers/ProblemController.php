@@ -115,10 +115,7 @@ class ProblemController extends Controller {
      */
     public function destroy($id) {
         
-
         $problem = Problem::find($id);
-//                dd($problem);
-
 
         if ($problem == null) {
             return redirect()->back()
@@ -131,5 +128,11 @@ class ProblemController extends Controller {
 
         return $this->create($competition_id);
     }
-    
+
+    public function toDestroy($id){
+        $problem = Problem::find($id);
+        $competition_id = $problem->competition_id;
+        $problem->delete();
+        return $competition_id;
+    }
 }

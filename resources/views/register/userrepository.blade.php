@@ -44,17 +44,6 @@
                         ?>
 
                         <br/>
-                        <!--
-                        <label for="username">Repositário</label>
-
-                        <select name="repository_id" id="repository_id" class="form-control">
-                            <option value=""> Selecione um Repositório</option>
-                            <option ng-required="true" ng-repeat="repository in repositorys" value={{repository.id}}>
-                                {{repository.name}}
-                            </option>
-
-                        </select>
--->
                         </br >
                         <?php
                         echo Form::label('repository_id', 'Repositário') . '<br/>';

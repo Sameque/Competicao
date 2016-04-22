@@ -31,7 +31,6 @@
                 $dateBegin = DateTime::createFromFormat('Y-m-d', $competition->dateBegin);
                    // dd($competition->dateBegin);
 //                    $competition->hoursBegin->format('H:I');
-                $competition->hoursBegin = '12:00';
                     echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
                     echo '<div class="row">'
                                 .'<div class="inputNameCompetiton">';
@@ -50,7 +49,6 @@
                         echo Form::label('dateBegin', 'Data de Início');
                         echo Form::date('dateBegin',
                                 $competition->dateBegin->format('d/m/Y'),
-//                                null,
                                 [
                                 'class' => 'form-control',
                                 'maxlength'=>10
@@ -60,9 +58,9 @@
                         echo Form::label('dateEnd', 'Data de Termino');
                         echo Form::date('dateEnd',
                                 $competition->dateEnd->format('d/m/Y'),
-//                                null,
                                 [
                                 'class' => 'form-control',
+                                'maxlength'=>10
                         ]);
                         echo '</br >' . '</div>' . '<div class="col-md-6 ">';
 
