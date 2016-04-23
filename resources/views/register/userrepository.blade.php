@@ -32,9 +32,7 @@
 
                     <div class="formCompetition">
 
-                        @include('templates.message')
-
-                        </br>
+                            </br>
 
                         <br/>
                         <?php

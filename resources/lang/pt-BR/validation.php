@@ -12,7 +12,11 @@ return [
     | such as the size rules. Feel free to tweak each of these messages.
     |
     */
+    'problemuva'       => 'O campo :attribute não contém um problema válido no respectivo repositório',
+    'problemuri'       => 'O campo :attribute não contém um problema válido no respectivo repositório',
     'problemspoj'      => 'O campo :attribute não contém um problema válido no respectivo repositório',
+    'useruva'         => 'O campo :attribute não contém um usuário válido no respectivo repositório',
+    'useruri'         => 'O campo :attribute não contém um usuário válido no respectivo repositório',
     'userspoj'         => 'O campo :attribute não contém um usuário válido no respectivo repositório',
     'urlvalid'         => 'O campo :attribute não contém um URL válido',
     "accepted"         => "O campo :attribute deve ser aceito.",
@@ -106,6 +110,7 @@ return [
     */
 
     'attributes' => [
+        'date'                  =>  '<strong>Data</strong>',
         'code'                  =>  '<strong>Código</strong>',
         'username'              =>  '<strong>Usuário</strong>',
         'name'                  =>  '<strong>Nome</strong>',

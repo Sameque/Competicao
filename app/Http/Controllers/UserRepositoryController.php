@@ -40,7 +40,6 @@ class UserRepositoryController extends Controller
      */
     public function store(Request $request)
     {
-//        dd('store',$request->repository_id);
 
         $validator = Validator::make($request->all(), [
             'username' => 'required',
@@ -49,20 +48,18 @@ class UserRepositoryController extends Controller
 
         if($request->repository_id == 1) {
             $validator->sometimes('username', 'userspoj', function ($input) {
-//                dd('store >> $validator >> 1', $input);
                 return $input->repository_id > 0;
             });
         }elseif ($request->repository_id == 2){
             $validator->sometimes('username', 'useruri', function ($input) {
-//                dd('store >> $validator >> 2', $input);
                 return $input->repository_id > 0;
             });
         }elseif ($request->repository_id == 3){
             $validator->sometimes('username', 'useruva', function ($input) {
-                dd('store >> $validator >> 3', $input);
                 return $input->repository_id > 0;
             });
         }
+
 
         if($validator->fails()){
             return redirect()->back()
@@ -72,13 +69,18 @@ class UserRepositoryController extends Controller
 
         $userRepository = UserRepository::create($request->all());
 
-        $this->updateUserRepository($userRepository);
+//        $this->updateUserRepository($userRepository);
+
 
         $id = $request->input('user_id');
 
         return $this->edit($id);
     }
 
+    /**
+     * DESCONTINUADO
+     * @param UserRepository $userRepository
+     */
     public function updateUserRepository(UserRepository $userRepository){
 
         $problemSolvedController = new ProblemSolvedUserController();
@@ -114,7 +116,6 @@ class UserRepositoryController extends Controller
      */
     public function edit($user_id)
     {
-//        dd($user_id);
         $repositorysAll = Repository::all();
         $repositorys=false;
         $userRepositorys = User::findOrNew($user_id)->userRepository;
@@ -162,7 +163,6 @@ class UserRepositoryController extends Controller
     public function destroy($userRep_id)
     {
         $userRepository = UserRepository::find($userRep_id);
-
         $id = $userRepository->user_id;
         $userRepository->problemUnsolvedUser()->delete();
         $userRepository->problemSolvedUser()->delete();

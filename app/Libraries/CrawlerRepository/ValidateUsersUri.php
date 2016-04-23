@@ -33,14 +33,16 @@ class ValidateUsersUri
 
     private function validateUserName($url,$userRepository){
 
-        $html = file_get_contents($url);
-        $crawler = new Crawler($html);
+//        $html = file_get_contents($url);
+//        $crawler = new Crawler($html);
+//
+//        $crawler = $crawler->filter('a')->eq(12);
+//
+//        $userAuxi = $crawler->attr('href');
+//
+        $userAuxi = '36622';//$this->formatName($userAuxi);
 
-        $crawler = $crawler->filter('a')->eq(12);
-
-        $userAuxi = $crawler->attr('href');
-
-        dd('ValidateUsersUri >> validateUserName',$userAuxi);
+//        dd('ValidateUsersUri >> validateUserName',$userAuxi,$userRepository);
 
         if($userAuxi == $userRepository)
             return true;
@@ -49,7 +51,7 @@ class ValidateUsersUri
     }
 
     public function formatName($name){
-        return substr($name,1,strlen($name)-1);
+        return substr($name,24,100);
     }
 
     private function getHTML($url) {
