@@ -4,16 +4,16 @@
     <div class="formCad" ng-controller="cadUserCtrl">
         <h2>Cadastro de Usuário</h2></br>
 
-        <?php
+    <?php
         echo Form::open(array('name' => 'cadForm', 'url' => 'store', 'method' => 'POST'));
 
-        echo Form::label('username', 'Usuário') . '<br/>';
-        echo Form::text('username', '', array('ng-required' => 'true',
-                        'class' => 'form-control',
-                        'placeholder' => 'Digite um nome de usuário',
-                        'ng-model' => 'user.username',
-                        'ng-show' => 'true'
-                )) . '<br/>';
+//        echo Form::label('username', 'Usuário') . '<br/>';
+//        echo Form::text('username', '', array('ng-required' => 'true',
+//                        'class' => 'form-control',
+//                        'placeholder' => 'Digite um nome de usuário',
+//                        'ng-model' => 'user.username',
+//                        'ng-show' => 'true'
+//                )) . '<br/>';
 
         echo Form::label('name', 'Nome') . '<br/>';
         echo Form::text('name', '', array('ng-required' => 'true',

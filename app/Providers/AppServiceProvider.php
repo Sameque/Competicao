@@ -17,22 +17,69 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Validator::extend('urlvalid', function ($attribute, $value, $parameters) {
             $value = $this->formatUrl($value);
             return checkdnsrr($value);
         });
 
+
         Validator::extend('userspoj', function ($attribute, $value, $parameters) {
 
+            dd('AppServiceProvider >> boot >> spoj',$attribute,$value,$parameters);
+
             $validateUser = App::make('ValidateUsers');
-            return $validateUser->validate(1,$value);
+
+            $validation = $validateUser->validate(1,$value);
+
+            return $validation;
+
         });
+
+        Validator::extend('useruri', function ($attribute, $value, $parameters) {
+
+//            dd('AppServiceProvider >> boot >> uri',$attribute,$value,$parameters);
+
+            $validateUser = App::make('ValidateUsers');
+
+            $validation = $validateUser->validate(2,$value);
+
+            return $validation;
+
+        });
+
+        Validator::extend('useruva', function ($attribute, $value, $parameters) {
+
+            dd('AppServiceProvider >> boot uva',$attribute,$value,$parameters);
+
+            $validateUser = App::make('ValidateUsers');
+
+            $validation = $validateUser->validate(3,$value);
+
+            return $validation;
+
+        });
+
+
+
 
         Validator::extend('problemspoj', function ($attribute, $value, $parameters) {
 
             $validateProblem = App::make('ValidateProblem');
             return $validateProblem->validate(1,$value);
         });
+
+        Validator::extend('problemuri', function ($attribute, $value, $parameters) {
+
+            $validateProblem = App::make('ValidateProblem');
+            return $validateProblem->validate(2,$value);
+        });
+        Validator::extend('problemuva', function ($attribute, $value, $parameters) {
+
+            $validateProblem = App::make('ValidateProblem');
+            return $validateProblem->validate(3,$value);
+        });
+
     }
 
     public function formatUrl($url)

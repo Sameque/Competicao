@@ -11,16 +11,49 @@
 namespace App\Libraries\CrawlerRepository;
 //namespace App;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 class ValidateUsersUri
 {
-    public function validate($user)
+    public function validateUser($username)
     {
-        if($user->repository_id = 1){
-            return 'Spoj';
-        }elseif ($user->repository_id = 2){
-            return 'Uri';
-        }elseif ($user->repository_id = 3){
-            return 'Uva';
-        }else return 'Fudeu';
+//        dd('ValidateUsersUri >> validateUser',$username);
+
+        $urlValidate = URL_USER_URI_VALIDATE.$username.'/';
+
+//        dd('ValidateUsersUri >> validateUser',$urlValidate);
+
+
+        if($this->getHTML($urlValidate) != '200' ){
+            return false;
+        } else {
+            return $this->validateUserName($urlValidate,$username);
+        }
+    }
+
+    private function validateUserName($url,$userRepository){
+
+        $html = file_get_contents($url);
+        $crawler = new Crawler($html);
+
+        $crawler = $crawler->filter('a')->eq(12);
+
+        $userAuxi = $crawler->attr('href');
+
+        dd('ValidateUsersUri >> validateUserName',$userAuxi);
+
+        if($userAuxi == $userRepository)
+            return true;
+        else
+            return false;
+    }
+
+    public function formatName($name){
+        return substr($name,1,strlen($name)-1);
+    }
+
+    private function getHTML($url) {
+        $headers = get_headers($url);
+        return substr($headers[0], 9, 3);
     }
 }

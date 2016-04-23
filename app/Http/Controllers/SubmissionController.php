@@ -287,8 +287,13 @@ class SubmissionController extends Controller
 //        $html = file_get_contents('http://br.spoj.com/users/moj/');//VALIDATE USER
 //        $html = file_get_contents('http://br.spoj.com/status/sameque/');//GET PROBLEM, USER
 //        $html = file_get_contents('http://br.spoj.com/problems/BAFO/');//GET PROBLEM, PROBLEM
-        $html = file_get_contents('http://br.spoj.com/status/SOMA,sameque/');//GET SUBMIT, PROBLEM
+//        $html = file_get_contents('http://br.spoj.com/status/SOMA,sameque/');//GET SUBMIT, PROBLEM
 
+        //URI
+        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/users/profile/36622/');//Validate User
+
+
+//        dd($html);
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/judge/en/profile/6566');
 //        $result = file_get_contents('https://www.urionlinejudge.com.br/repository/UOJ_1013.html');
@@ -339,7 +344,10 @@ class SubmissionController extends Controller
 //        $crawler = $crawler->filter('body > div > div')->eq(1)->filter('table')->eq(1)->filter('td');//->extract(array('_text', 'href'));//PROBLEM USER
 //        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);//VALIDADE PROMEM 2
 //        $crawler = $crawler->filter('body > div > div > div > div > div > div > div h4')->eq(0);//VALIDADE USER 2
-        $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');////GET SUBMIT, PROBLEM
+//        $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');////GET SUBMIT, PROBLEM
+
+        //URI
+        $crawler = $crawler->filter('a')->eq(12);////Validate User
 
 //
 //        $crawler = $crawler->filter('div');
@@ -349,6 +357,8 @@ class SubmissionController extends Controller
 //        $crawler->addHtmlContent('http://br.spoj.com/');
 //        $crawler = $crawler->filter('body > article')->eq(1)->filter('h1')->eq(0);
 
+
+        dd($crawler->attr('href'));
 //        foreach ($crawler as $key => $domElement) {
 //            echo $domElement->nodeValue.'</br>';
 //        }
@@ -368,51 +378,51 @@ class SubmissionController extends Controller
 //        $url = substr($url,0,strlen($url)-1);
         
 //        echo $url;
+        /*
+                $i=1;
+                $k=2;
+                $p=3;
+                $y=6;
 
-        $i=1;
-        $k=2;
-        $p=3;
-        $y=6;
+                $problems = null;
 
-        $problems = null;
+                foreach ($crawler as  $key => $domElement) {
 
-        foreach ($crawler as  $key => $domElement) {
-
-            echo $key.' => '.$domElement->nodeValue.'<br/>';
-
-            /*
-            if ($key == $i){
-                echo 'Data: '.$domElement->nodeValue.'</br>';
-                $i+=7;
-            }
-
-            if ($key == $k){
-                echo 'Nome: '.$domElement->nodeValue.'</br>';
-                $k+=7;
-                $html2=$domElement->ownerDocument->saveHTML($domElement);
-                $crawler2 = new Crawler($html2);
-                $crawler2 = $crawler2->filter('a');
-                echo 'Code: '.$crawler2->attr('href').'</br>';
-
-            }
-
-            if ($key == $p){
-                echo 'Resultado: '.$domElement->nodeValue.'</br>';
-                $p+=7;
-            }
-
-            if ($key == $y){
-                echo 'Linguagem: '.$domElement->nodeValue.'</br>';
-                $y+=7;
-            }
+                    echo $key.' => '.$domElement->nodeValue.'<br/>';
 
 
-//            echo $key.' => '.$domElement->nodeValue.'</br>';
-//            echo $domElement->extract(array('_text', 'href'));
-//            echo $domElement->attr('href');
+                    if ($key == $i){
+                        echo 'Data: '.$domElement->nodeValue.'</br>';
+                        $i+=7;
+                    }
+
+                    if ($key == $k){
+                        echo 'Nome: '.$domElement->nodeValue.'</br>';
+                        $k+=7;
+                        $html2=$domElement->ownerDocument->saveHTML($domElement);
+                        $crawler2 = new Crawler($html2);
+                        $crawler2 = $crawler2->filter('a');
+                        echo 'Code: '.$crawler2->attr('href').'</br>';
+
+                    }
+
+                    if ($key == $p){
+                        echo 'Resultado: '.$domElement->nodeValue.'</br>';
+                        $p+=7;
+                    }
+
+                    if ($key == $y){
+                        echo 'Linguagem: '.$domElement->nodeValue.'</br>';
+                        $y+=7;
+                    }
+
+
+        //            echo $key.' => '.$domElement->nodeValue.'</br>';
+        //            echo $domElement->extract(array('_text', 'href'));
+        //            echo $domElement->attr('href');
+
+                }
         */
-        }
-
 //        $crawler = $crawler
 //            ->filter('body > p')
 //            ->reduce(function (Crawler $node, $i) {

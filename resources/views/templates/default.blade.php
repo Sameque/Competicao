@@ -30,8 +30,11 @@
         ?>
     </div>
     <br/>
+
     @include('templates.menuDefault')
 </header>
+
+@include('templates.message')
 
 @yield('content')
 

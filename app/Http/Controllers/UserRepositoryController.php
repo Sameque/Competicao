@@ -40,15 +40,29 @@ class UserRepositoryController extends Controller
      */
     public function store(Request $request)
     {
+//        dd('store',$request->repository_id);
+
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'repository_id' => 'required',
         ]);
 
-
-        $validator->sometimes('username', 'userspoj', function($input) {
-            return $input->repository_id > 0;
-        });
+        if($request->repository_id == 1) {
+            $validator->sometimes('username', 'userspoj', function ($input) {
+//                dd('store >> $validator >> 1', $input);
+                return $input->repository_id > 0;
+            });
+        }elseif ($request->repository_id == 2){
+            $validator->sometimes('username', 'useruri', function ($input) {
+//                dd('store >> $validator >> 2', $input);
+                return $input->repository_id > 0;
+            });
+        }elseif ($request->repository_id == 3){
+            $validator->sometimes('username', 'useruva', function ($input) {
+                dd('store >> $validator >> 3', $input);
+                return $input->repository_id > 0;
+            });
+        }
 
         if($validator->fails()){
             return redirect()->back()
