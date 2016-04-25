@@ -290,7 +290,9 @@ class SubmissionController extends Controller
 //        $html = file_get_contents('http://br.spoj.com/status/SOMA,sameque/');//GET SUBMIT, PROBLEM
 
         //URI
-        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/users/profile/36622/');//Validate User
+//        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/users/profile/36622/');//Validate User
+//        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');//Validate Problem
+        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/runs?problem_id=1003');//Problem Solved
 
 
 //        dd($html);
@@ -313,7 +315,7 @@ class SubmissionController extends Controller
 //            <body>
 //
 //                <article class="123">
-//                    <h1>Samer</h1>
+//                    <h1 class="456">Samer</h1>
 //                    <h1>Maria</h1>
 //                </article>
 //
@@ -347,7 +349,8 @@ class SubmissionController extends Controller
 //        $crawler = $crawler->filter('body > div > div > div > div > div > form > table > tr > td');////GET SUBMIT, PROBLEM
 
         //URI
-        $crawler = $crawler->filter('a')->eq(12);////Validate User
+//        $crawler = $crawler->filterXPath('//body/article');//->attr('456');//->filter('body > article')->attr('456');////Validate User
+        $crawler = $crawler->filter('form');////Validate User
 
 //
 //        $crawler = $crawler->filter('div');
@@ -358,10 +361,12 @@ class SubmissionController extends Controller
 //        $crawler = $crawler->filter('body > article')->eq(1)->filter('h1')->eq(0);
 
 
-        dd($crawler->attr('href'));
-//        foreach ($crawler as $key => $domElement) {
-//            echo $domElement->nodeValue.'</br>';
-//        }
+//        dd($crawler->attr('href'));
+//        dd($crawler->attr('class'));
+//        dd($crawler->extract(array('_text', 'class')));
+        foreach ($crawler as $domElement) {
+            echo $domElement->nodeValue.'</br>';
+        }
 
         //
 //        $crawler = $crawler->filter('body > div > div')->eq(1);//PROBL//E//M USER

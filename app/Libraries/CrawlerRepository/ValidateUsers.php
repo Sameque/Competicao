@@ -18,11 +18,11 @@ class ValidateUsers
 //        dd('ValidateUsers >> validate',$repository_id,$user);
         $validator = null;
 
-        if ($repository_id == 1) {
+        if ($repository_id == 'spoj') {
             $validator = new ValidateUsersSpoj();
-        } elseif ($repository_id == 2) {
+        } elseif ($repository_id == 'uri') {
             $validator = new ValidateUsersUri();
-        } elseif ($repository_id == 3) {
+        } elseif ($repository_id == 'uva') {
             $validator = new ValidateUsersUva();
         } else $validator = null;
 

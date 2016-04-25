@@ -14,12 +14,13 @@ class ValidateProblem
 {
     public function validate($repository_id, $problem)
     {
+//        dd('ValidateProblem >> validate',$repository_id,$problem);
         $validator = null;
-        if ($repository_id == 1) {
+        if ($repository_id == 'spoj') {
             $repository = new ValidateProblemSpoj();
-        } elseif ($repository_id == 2) {
+        } elseif ($repository_id == 'uri') {
             $repository = new ValidateProblemUri();
-        } elseif ($repository_id == 3) {
+        } elseif ($repository_id == 'uva') {
             $repository = new ValidateProblemUva();
         } else $repository = null;
 
