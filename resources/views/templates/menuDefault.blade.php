@@ -8,14 +8,10 @@
                 echo link_to('/', $title = 'Home', $attributes = array(), $secure = null);
                 ?>
             </li>
+
             <li>
                 <?php
                 echo link_to('auth/login', $title = 'Efetuar Login', $attributes = array('method'=>'GET'), $secure = null);
-                ?>
-            </li>
-            <li>
-                <?php
-                echo link_to('register/competition', $title = 'Cadastro de Competições', $attributes = array(), $secure = null);
                 ?>
             </li>
             <li>
@@ -25,12 +21,18 @@
             </li>
             <li>
                 <?php
-                echo link_to('#', $title = 'Ranking', $attributes = array(), $secure = null);
+                echo link_to('register/competition', $title = 'Cadastro de Competições', $attributes = array(), $secure = null);
+                ?>
+            </li>
+
+            <li>
+                <?php
+//                echo link_to('#', $title = 'Ranking', $attributes = array(), $secure = null);
                 ?>
             </li>
             <li>
                 <?php
-                echo link_to('submission', $title = 'Submissão', $attributes = array(), $secure = null);
+//                echo link_to('submission', $title = 'Submissão', $attributes = array(), $secure = null);
                 ?>
             </li>
             <li>
