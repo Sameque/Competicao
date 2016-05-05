@@ -16,19 +16,19 @@ class CompetitionSeeder extends Seeder
         DB::table('competitions')->delete();
 
         Competition::create([
-            'name'=>'Competi��o_Teste-01',
-            'dateBegin'=>'2001-01-01 11:11',
-            'hoursBegin'=>'2001-01-01 11:11',
-            'dateEnd'=>'2001-01-01 11:11',
-            'hoursEnd'=>'2001-01-01 11:11'
+            'name'=>'Competicao_Teste-01',
+            'dateBegin'=>'01/01/2001',
+            'hoursBegin'=>'11:11',
+            'dateEnd'=>'01/01/2001',
+            'hoursEnd'=>'11:11'
         ]);
 
         Competition::create([
-            'name'=>'Competi��o_Teste-02',
-            'dateBegin'=>'2001-01-01 12:12',
-            'hoursBegin'=>'2001-01-01 12:12',
-            'dateEnd'=>'2001-01-01 12:12',
-            'hoursEnd'=>'2001-01-01 12:12'
+            'name'=>'Competicao_Teste-02',
+            'dateBegin'=>'02/02/2002',
+            'hoursBegin'=>'12:12',
+            'dateEnd'=>'02/02/2001',
+            'hoursEnd'=>'12:12'
         ]);
     }
 }
