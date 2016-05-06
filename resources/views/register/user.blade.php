@@ -7,13 +7,13 @@
     <?php
         echo Form::open(array('name' => 'cadForm', 'url' => 'store', 'method' => 'POST'));
 
-//        echo Form::label('username', 'Usuário') . '<br/>';
-//        echo Form::text('username', '', array(
-//                        'class' => 'form-control',
-//                        'placeholder' => 'Digite um nome de usuário',
-//
-//
-//                )) . '<br/>';
+        echo Form::label('username', 'Usuário') . '<br/>';
+        echo Form::text('username', '', array(
+                        'class' => 'form-control',
+                        'placeholder' => 'Digite um nome de usuário',
+
+
+                )) . '<br/>';
 
         echo Form::label('name', 'Nome') . '<br/>';
         echo Form::text('name', '', array(

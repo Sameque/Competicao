@@ -6,8 +6,6 @@
     <div class="formLog">
         <form method="POST" action="/auth/login">
             {!! csrf_field() !!}
-            @include('templates.message')
-
             <div>
                 Email
                 <input type="email" name="email" value="{{ old('email') }}" class="form-control">
