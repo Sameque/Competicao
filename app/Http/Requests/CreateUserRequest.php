@@ -26,7 +26,7 @@ class CreateUserRequest extends Request
         return [
                 'name' =>'required',
                 'password' => 'required',
-//                'username' => 'required',
+                'username' => 'required',
                 'email' => 'required',
 //                'cpf' => 'required',
 //                'rg' => 'required',

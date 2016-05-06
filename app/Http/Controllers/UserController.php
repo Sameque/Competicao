@@ -9,6 +9,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\EventDispatcher\Tests\EventDispatcherTest;
 
@@ -19,9 +20,6 @@ class UserController extends Controller
         $user = new User();
         $users = $user->all();
         return view('list.user')->with('users', $users);
-//        return view('list.users');
-
-        //User::all();
     }
 
     /**
@@ -49,6 +47,9 @@ class UserController extends Controller
             $user->graduated = 1;
         else
             $user->graduated = 0;
+
+        $user->fill(['password' => bcrypt($request->password)]);
+
         $user->save();
 
         return $user->id;
@@ -64,10 +65,6 @@ class UserController extends Controller
         $user = User::find($id);
 
         return view('edit.user', compact('user'));
-//        return view('edit.user', compact('user'));
-//        $user = User::find($id);
-//        return view('edit.user')->with('user',$user);
-
     }
 
     public function update(EditUserRequest $request, $id)
@@ -84,13 +81,9 @@ class UserController extends Controller
             $user->graduated = 0;
         }
 
-//        dd($user);
-
         $user->save();
-//
 
         return redirect()->route('list.users');
-//        return $request;
     }
 
     public function destroy($id)
@@ -98,29 +91,11 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-
         return redirect()->route('list.users');
     }
 
     public function users()
     {
         return User::all();
-    }
-
-//    public function userrepository(CreateUserRequest $request){
-//
-////        $this->insert($request);
-////        return $request;
-//        return 'Teste!!!';
-//    }
-    public function teste(){
-        $user = User::findOrFail(28);
-
-        return view('register.repository', compact('user'));
-//        return $user;
-
-//        return redirect()->route('list.users');
-//          return view('index');
-//        return User::all();
     }
 }
