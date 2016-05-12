@@ -23,8 +23,6 @@ class SubmissionController extends Controller
         return view('list.submission');
     }
 
-
-
     public function create()
     {
         //
@@ -82,7 +80,6 @@ class SubmissionController extends Controller
 
         if(!$usersCompetiton){
             return $usersCompetiton;
-
         }
 
         foreach($usersCompetiton as $user){
@@ -92,39 +89,41 @@ class SubmissionController extends Controller
                 $repositoryName = App\Repository::findOrNew($userRepository->repository_id)->name;
 
                 $problems = $this->getProblemInRepository($problemCompetition,$userRepository->repository_id);
-                
-                $submission = $this->getProblemUser(
-                    $competition->dateBegin,
-                    $competition->dateEnd,
-                    $repositoryName,
-                    $userRepository->username,
-                    $problems
-                );
 
-                if(!$submission){
-                    return $submission;
-                }
+                if ($problems) {
+                    $submission = $this->getProblemUser(
+                        $competition->dateBegin,
+                        $competition->dateEnd,
+                        $repositoryName,
+                        $userRepository->username,
+                        $problems
+                    );
 
-                DB::table('submission')
-                    ->where('competition_id', '=', $competition->id)
-                    ->where('user_id', '=', $user->id)
-                    ->delete();
-                
-                foreach ($submission as $item){
+                    if (!$submission) {
+                        return $submission;
+                    }
 
-                    $submissionModel = new App\Submission();
+                    DB::table('submission')
+                        ->where('competition_id', '=', $competition->id)
+                        ->where('user_id', '=', $user->id)
+                        ->delete();
 
-                    $submissionModel->date = $item['date'];
-                    $submissionModel->hours = $item['hours'];
-                    $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'],$repositoryName);
-                    $submissionModel->problem = $item['code'];
-                    $submissionModel->result = $item['result'];
-                    $submissionModel->language = $item['language'];
-                    $submissionModel->problem_id = $item['problem_id'];
-                    $submissionModel->user_id = $user->id;
-                    $submissionModel->competition_id = $competition->id;
-                    $submissionModel->save();
-                    $submissionModels[] = $submissionModel;
+                    foreach ($submission as $item) {
+
+                        $submissionModel = new App\Submission();
+
+                        $submissionModel->date = $item['date'];
+                        $submissionModel->hours = $item['hours'];
+                        $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'], $repositoryName);
+                        $submissionModel->problem = $item['code'];
+                        $submissionModel->result = $item['result'];
+                        $submissionModel->language = $item['language'];
+                        $submissionModel->problem_id = $item['problem_id'];
+                        $submissionModel->user_id = $user->id;
+                        $submissionModel->competition_id = $competition->id;
+                        $submissionModel->save();
+                        $submissionModels[] = $submissionModel;
+                    }
                 }
             }
         }
