@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
          $this->call(RepositoryTableSeeder::class);
          $this->call(UserRepositorySeeder::class);
          $this->call(CompetitionSeeder::class);
+         $this->call(CompetitionUserSeeder::class);
+         $this->call(ProblemSeeder::class);
 
         Model::reguard();
 
