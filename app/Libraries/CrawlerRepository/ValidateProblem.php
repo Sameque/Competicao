@@ -14,7 +14,6 @@ class ValidateProblem
 {
     public function validate($repository_id, $problem)
     {
-//        dd('ValidateProblem >> validate',$repository_id,$problem);
         $validator = null;
         if ($repository_id == 'spoj') {
             $repository = new ValidateProblemSpoj();

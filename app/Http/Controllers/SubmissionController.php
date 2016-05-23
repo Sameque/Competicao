@@ -290,9 +290,9 @@ class SubmissionController extends Controller
 
         //URI
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/users/profile/36622/');//Validate User
-//        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');//Validate Problem
-        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/runs?problem_id=1003');//Problem Solved
-
+        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');//Validate Problem
+//        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/runs?problem_id=1003');//Problem Solved
+dd('teste > crawler');
 
 //        dd($html);
 //        $html = file_get_contents('https://www.urionlinejudge.com.br/judge/pt/problems/view/1001/');

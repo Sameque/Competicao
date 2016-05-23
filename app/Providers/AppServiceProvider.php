@@ -30,7 +30,9 @@ class AppServiceProvider extends ServiceProvider
             return $validation;
         });
 
+
         Validator::extend('useruri', function ($attribute, $value, $parameters) {
+//            dd('AppServiceProvider >> boot',$value);
             $validateUser = App::make('ValidateUsers');
             $validation = $validateUser->validate('uri',$value);
             return $validation;
@@ -50,8 +52,11 @@ class AppServiceProvider extends ServiceProvider
             return $validateProblem->validate('spoj',$value);
         });
 
+
         Validator::extend('problemuri', function ($attribute, $value, $parameters) {
             $validateProblem = App::make('ValidateProblem');
+//            dd('AppServiceProvider > boot 1',$value);
+
             return $validateProblem->validate('uri',$value);
         });
 

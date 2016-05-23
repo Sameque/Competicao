@@ -17,11 +17,10 @@ class ValidateProblemUri
 
     public function validationProblem($problem)
     {
-//        dd('ValidateProblemUri >> validationProblem',$problem);
+
+        dd('validationProblem >> validateProblem',$problem);
 
         $urlProblem = URL_PROBLEMS_URI.$problem.'/';
-
-//        dd('ValidateProblemUri >> validationProblem',$urlProblem);
 
         if($this->getHTML($urlProblem) != '200' ){
             return false;
@@ -32,25 +31,25 @@ class ValidateProblemUri
 
     private function validateProblem($url,$problem){
 
-//        dd('validationProblem >> validateProblem',$url,$problem);
         $html = file_get_contents($url);
-        
+
         $crawler = new Crawler($html);
-        
+
+                dd('validationProblem >> validateProblem',$url,$problem,$html);
+
 //        $crawler = $crawler->filter('body > div > div > div > div > div > table > tr > td a')->eq(0);
 
         $crawler = $crawler->filter('a')->eq(13);
 
-
         $urlAuxi = $crawler->attr('href');
 
-//        dd('validationProblem >> validateProblem',$urlAuxi);
+        dd('validationProblem >> validateProblem',$url,$problem,$html,$urlAuxi);
 
+//        dd('validationProblem >> validateProblem',$urlAuxi);
 
         $urlAuxi = $this->formatName($urlAuxi);
 
 //        dd('validationProblem >> validateProblem',$urlAuxi,$problem);
-
 
         if($urlAuxi == $problem)
             return true;

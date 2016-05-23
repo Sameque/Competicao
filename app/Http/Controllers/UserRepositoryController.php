@@ -46,6 +46,7 @@ class UserRepositoryController extends Controller
             'repository_id' => 'required',
         ]);
 
+
         if($request->repository_id == 1) {
             $validator->sometimes('username', 'userspoj', function ($input) {
                 return $input->repository_id > 0;
@@ -60,6 +61,8 @@ class UserRepositoryController extends Controller
             });
         }
 
+//        dd('UserRepositoryController >> store');
+
 
         if($validator->fails()){
             return redirect()->back()
@@ -67,12 +70,16 @@ class UserRepositoryController extends Controller
                 ->withInput($request->all());
         }
 
+//        dd('UserRepositoryController >> store');
+
         $userRepository = UserRepository::create($request->all());
 
 //        $this->updateUserRepository($userRepository);
+//        dd('UserRepositoryController >> store');
 
 
         $id = $request->input('user_id');
+//        dd('UserRepositoryController >> store', $id);
 
         return $this->edit($id);
     }
@@ -116,9 +123,12 @@ class UserRepositoryController extends Controller
      */
     public function edit($user_id)
     {
+
         $repositorysAll = Repository::all();
         $repositorys=false;
         $userRepositorys = User::findOrNew($user_id)->userRepository;
+
+//        dd('UserRepositoryController >> edit');
 
         foreach ($userRepositorys as $userRepository) {
             $userRepository->repository;
