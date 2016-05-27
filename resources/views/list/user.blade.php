@@ -6,6 +6,7 @@
         <table class="table table-striped">
             <tbody>
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Usuário</th>
                 <th>Email</th>
@@ -18,6 +19,7 @@
             </tr>
             @foreach ($users as $user)
                 <tr>
+                    <td>{!! $user->id !!}</td>
                     <td>{!! $user->name !!}</td>
                     <td>{!! $user->username !!}</td>
                     <td>{!! $user->email !!}</td>
