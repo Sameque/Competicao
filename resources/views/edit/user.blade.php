@@ -54,7 +54,7 @@
                             'ng-show' => 'true',
                             /*'ng-model' => 'user.username',*/
 
-                    )) . '<br/>';
+                    ));
 
 
             echo Form::label('name', 'Nome') . '<br/>';
@@ -63,14 +63,14 @@
                             'class' => 'form-control',
                             'placeholder' => 'Digite seu nome',
                             /*'ng-model' => 'user.name'*/
-                    )) . '<br/>';
+                    ));
 
             echo Form::label('email', 'Email') . '<br/>';
             echo Form::email('email', null, array('ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Digite seu email',
                             /*'ng-model' => 'user.email'*/
-                    )) . '<br/>';
+                    ));
 
             echo Form::label('cpf', 'CPF') . '<br/>';
             echo Form::text('cpf', null, array(
@@ -78,7 +78,7 @@
                             'placeholder' => 'Digite seu CPF',
                            /* 'ng-model' => 'user.cpf',*/
                             'mask' => '999.999.999-99',
-                    )) . '<br/>';
+                    ));
 
             echo Form::label('rg', 'RG') . '<br/>';
             echo Form::text('rg', null, array('class' => 'form-control',
@@ -98,9 +98,9 @@
             echo '<div class="form-control">';
             echo Form::checkbox('graduated', 'value', false, array(
                                     /*'ng-model' => 'user.graduated',*/
-            )) . ' ';
+            ));
             echo Form::label('graduated', 'É formado na área?') . '<br/>' . '<br/>';
-            echo '</div>' . '</br>';
+            echo '</div>';
 
             echo Form::label('yearCourse', 'Ano de Formação') . '<br/>';
             echo Form::number('yearCourse', '', array(
@@ -108,30 +108,30 @@
                             'placeholder' => 'Diite o ano da ultima formação',
                             /*'ng-model' => 'user.yearCourse',*/
                             'ng-disabled' => '!user.graduated',
-                    )) . '<br/>';
+                    ));
 
-            echo '<div ng-show="admin()">';
+            //echo '<div ng-show="admin()">';
             echo Form::label('accessLevel', 'Nivel de Acesso') . '<br/>';
             echo Form::number('accessLevel', '', array(
                             'class' => 'form-control',
                             'placeholder' => 'Defina o nivel de acesso',
                             'ng-model' => 'user.accessLevel'
-                    )) . '<br/>';
-            echo '</div>';
+                    ));
+            //echo '</div>';
 
-            echo Form::label('password', 'Senha') . '<br/>';
+            echo Form::label('password', 'Senha');
             echo Form::password('password', array('ng-required' => 'true',
                             'class' => 'form-control',
                             'placeholder' => 'Defina sua senha',
                             'ng-model' => 'user.password'
                     )) . '<br/>';
 
-            echo Form::label('passwordConf', 'Confirmar Senha') . '<br/>';
-            echo Form::password('passwordConf', array(
-                            'class' => 'form-control', '
-                        placeholder' => 'Digite sua senha novamente',
-                            'ng-model' => 'user.passwordConf'
-                    )) . '<br/>';
+//            echo Form::label('passwordConf', 'Confirmar Senha') . '<br/>';
+//            echo Form::password('passwordConf', array(
+//                            'class' => 'form-control', '
+//                        placeholder' => 'Digite sua senha novamente',
+//                            'ng-model' => 'user.passwordConf'
+//                    )) . '<br/>';
 
 
             echo Form::submit('Enviar', array('class' => 'btn btn-primary btn-block', 'ng-disabled' => 'false'));
