@@ -1,36 +1,6 @@
 @extends('templates.default')
 @section('content')
     <script>
-        angular.module("competicao", ['ngMask', 'ngRoute'])
-        angular.module('competicao', []).controller('updateCtrl', function ($scope, $http, $location) {
-            var id = <?php echo $user->id ?>;
-
-            $scope.user_id = id;
-            $scope.teste = 0;
-            $scope.url = '';
-
-            $scope.user = [];
-            var loadUsers = function () {
-                url = 'http://localhost:8000/show/' + id.toString();
-                $http.get(url).success(function (data) {
-                    $scope.user = data;
-                    $scope.user.graduated = isGraduated($scope.user.graduated);
-                    $scope.user.passwordConf = $scope.user.password;
-                });
-                var isGraduated = function (graduated) {
-                    if ($scope.user.graduated == 0) {
-                        $scope.user.yearCourse = 0;
-                        return false
-                    } else return true;
-                }
-            };
-            var loadMsg = function(){
-               // alert(id);
-            };
-            loadUsers();
-            loadMsg();
-
-        });
 
     </script>
 
@@ -105,7 +75,7 @@
             echo Form::label('yearCourse', 'Ano de Formação') . '<br/>';
             echo Form::number('yearCourse', '', array(
                             'class' => 'form-control',
-                            'placeholder' => 'Diite o ano da ultima formação',
+                            'placeholder' => 'Digite o ano da ultima formação',
                             /*'ng-model' => 'user.yearCourse',*/
                             'ng-disabled' => '!user.graduated',
                     ));
