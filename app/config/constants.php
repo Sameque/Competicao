@@ -12,3 +12,4 @@ define("URL_SPOJ_RANKING", 'http://br.spoj.com/users/');
 define("URL_USER_URI_VALIDATE", 'https://www.urionlinejudge.com.br/judge/pt/users/profile/');
 define("URL_PROBLEMS_URI", 'https://www.urionlinejudge.com.br/judge/pt/problems/view/');
 
+ini_set('max_execution_time', 35);
