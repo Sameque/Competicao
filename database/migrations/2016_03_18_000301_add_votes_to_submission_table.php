@@ -13,7 +13,7 @@ class AddVotesToSubmissionTable extends Migration
     public function up()
     {
         Schema::table('submission', function (Blueprint $table) {
-            $table->integer('problem_id')->unsigned()->after('competition_id');
+            $table->integer('problem_id')->unsigned();
 
             $table->foreign('problem_id')->references('id')->on('problems');
 
@@ -28,8 +28,7 @@ class AddVotesToSubmissionTable extends Migration
     public function down()
     {
         Schema::table('submission', function (Blueprint $table) {
-            $table->dropForeign('submission_problems_id_foreign');
-            $table->dropUnique('problem_id');
+            $table->dropForeign(['problem_id']);
         });
     }
 }
