@@ -24,17 +24,16 @@ class EditUserRequest extends Request
     public function rules()
     {
         return [
-//            'id' =>'required|unique:user,id',
             'name' =>'required',
-//            'accessLevel' => 'required',
+            'accessLevel' => 'required',
             'password' => 'required',
-            'username' => 'required',
+            'username' => '',
             'email' => 'required',
-//            'cpf' => 'required',
-//            'rg' => 'required',
-//            'yearCourse' => 'required',
-//            'birthDate' => 'required',
-//            'graduated' => 'required'
+            'cpf' => '',
+            'rg' => '',
+            'yearCourse' => '',
+            'birthDate' => '',
+            'graduated' => ''
         ];
     }
 }

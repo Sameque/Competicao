@@ -29,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('register.user');
+        $user = new User();
+        return view('register.user', compact('user'));
     }
 
     public function store(CreateUserRequest $request)
@@ -67,19 +68,12 @@ class UserController extends Controller
         return view('edit.user', compact('user'));
     }
 
-    public function update(EditUserRequest $request, $id)
+    public function update(EditUserRequest $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
 
         $user->fill($request->all());
         $user->password = bcrypt($request->input('password'));
-
-        if ($request->input('graduated') == 'value'){
-            $user->graduated = 1;
-        }
-        else {
-            $user->graduated = 0;
-        }
 
         $user->save();
 

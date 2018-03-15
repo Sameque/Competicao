@@ -25,8 +25,8 @@ Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@in
 
 //Users
 Route::get('user/create', ['as' => 'create.user', 'uses' => 'UserController@create']);
-Route::post('store', 'UserController@store');
-Route::put('update/{id}', ['as' => 'update.user', 'uses' => 'UserController@update']);
+Route::post('store', ['as' => 'store.user', 'uses' => 'UserController@store']);
+Route::put('update', ['as' => 'update.user', 'uses' => 'UserController@update']);
 Route::get('edit/{id}', ['as' => 'edit.user', 'uses' => 'UserController@edit']);
 Route::delete('delete/{id}', ['as' => 'delete.user', 'uses' => 'UserController@destroy']);
 Route::get('listuser', ['as' => 'list.users', 'uses' => 'UserController@index']);

@@ -20,11 +20,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\UserRepository');
     }
 
-//    public function competition()
-//    {
-//        return $this->hasMany('App\Competition');
-//    }
-
     public function competitions()
     {
         return $this->belongsToMany('App\Competition');
@@ -36,11 +31,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     protected $fillable = [
-//        'id',
+        'id',
         'name',
         'username',
         'email',
-//        'accessLevel',
+        'accessLevel',
         'password',
         'cpf',
         'rg',
@@ -50,7 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     protected $hidden = [
-//        'id',
+        'id',
         'accessLevel',
         'password',
 //        'cpf',
@@ -60,6 +55,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'updated_at',
         'created_at',
         'remember_token',
-//        'pivot'
     ];
 }
