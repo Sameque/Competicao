@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 70);
             $table->integer('accessLevel');
-            $table->string('cpf');
+            $table->string('cpf')->nullable($value = true);
             $table->string('rg');
             $table->integer('yearCourse');
             $table->date('birthDate');
