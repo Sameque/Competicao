@@ -8,78 +8,22 @@ use App\Repository;
 use App\User;
 use App\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class UserRepositoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  Request $request
      * @return Response
+     *
+     * Requests\CreateUserRepositoryRequest
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'repository_id' => 'required',
-        ]);
-
-
-        if($request->repository_id == 1) {
-            $validator->sometimes('username', 'userspoj', function ($input) {
-                return $input->repository_id > 0;
-            });
-        }elseif ($request->repository_id == 2){
-            $validator->sometimes('username', 'useruri', function ($input) {
-                return $input->repository_id > 0;
-            });
-        }elseif ($request->repository_id == 3){
-            $validator->sometimes('username', 'useruva', function ($input) {
-                return $input->repository_id > 0;
-            });
-        }
-
-//        dd('UserRepositoryController >> store');
-
-
-        if($validator->fails()){
-            return redirect()->back()
-                ->withErrors($validator->errors())
-                ->withInput($request->all());
-        }
-
-//        dd('UserRepositoryController >> store');
-
-        $userRepository = UserRepository::create($request->all());
-
-//        $this->updateUserRepository($userRepository);
-//        dd('UserRepositoryController >> store');
-
-
+        dd($request,$id);
         $id = $request->input('user_id');
-//        dd('UserRepositoryController >> store', $id);
 
         return $this->edit($id);
     }
@@ -123,12 +67,10 @@ class UserRepositoryController extends Controller
      */
     public function edit($user_id)
     {
-
+        $userrepository = new UserRepository();
         $repositorysAll = Repository::all();
         $repositorys=false;
         $userRepositorys = User::findOrNew($user_id)->userRepository;
-
-//        dd('UserRepositoryController >> edit');
 
         foreach ($userRepositorys as $userRepository) {
             $userRepository->repository;
@@ -140,7 +82,10 @@ class UserRepositoryController extends Controller
         return view('register.userrepository', [
             'user_id'=>$user_id,
             'repositorys'=>$repositorys,
-            'userRepositorys'=>$userRepositorys]);
+            'userRepositorys'=>$userRepositorys,
+            'userrepository'=>$userrepository
+            ]
+        );
     }
 
     /**
@@ -150,10 +95,6 @@ class UserRepositoryController extends Controller
      * @param  int $id
      * @return Response
      */
-//    public function update(Request $request, $id)
-//    {
-//
-//    }
 
     public function update($userRepository)
     {

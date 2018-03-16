@@ -19,11 +19,16 @@ use Illuminate\Support\Facades\Artisan;
 use App\Libraries\CrawlerRepository\RepositoryUser;
 use App\Libraries\CrawlerRepository\RepositoryProblem;
 
-//App\Libraries\DateTimeCompetition
+/*
+ * Index
+ */
 Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 //Route::get('/home', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 
-//Users
+/*
+ * Users
+ */
+
 Route::post('store',            ['as' => 'store.user',  'uses' => 'UserController@store']);
 Route::get('user/create',       ['as' => 'create.user', 'uses' => 'UserController@create']);
 Route::post('update/{id}',      ['as' => 'update.user', 'uses' => 'UserController@update']);
@@ -36,25 +41,29 @@ Route::get('user/userrepository/{id}',
                                 ['as' => 'user.userrepository',
                                                         'uses' => 'UserController@userrepository']);
 
-//Repositorys -> repository
-Route::get('repository/create', ['as' => 'create.repository', 'uses' => 'RepositoryController@create']);
-Route::get('repository/show/{id}', ['as' => 'show.repository', 'uses' => 'RepositoryController@show']);
-Route::post('repository/store', 'RepositoryController@store');
-Route::get('repository/index', 'RepositoryController@index');
+/*
+ * Repositorys -> repository
+*/
 
-//UserRepository
-Route::get('userrepository/{user_id}', ['as' => 'userrepository.user', 'uses' => 'UserRepositoryController@edit']);
-Route::post('userrepository/store', ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
+Route::get('repository/create',     ['as' => 'create.repository',   'uses' => 'RepositoryController@create']);
+Route::get('repository/show/{id}',  ['as' => 'show.repository',     'uses' => 'RepositoryController@show']);
+Route::post('repository/store',     ['as' => 'store.repository',     'uses' => 'RepositoryController@store']);
+Route::get('repository/index',      ['as' => 'index.repository',     'uses' => 'RepositoryController@index']);
+
+/*
+ * UserRepository
+*/
+
+Route::get('userrepository/{user_id}',      ['as' => 'edit.userrepository', 'uses' => 'UserRepositoryController@edit']);
+Route::post('userrepository/store',         ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
 Route::get('userrepository/show/{user_id}', ['as' => 'user.userrepositoryshow', 'uses' => 'UserRepositoryController@show']);
-Route::get('listuserrepository', ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
+Route::get('listuserrepository',            ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
 
 Route::get('listuserrepository/delete/{userRep_id}',
-            ['as' => 'delete.userrepositorys',
-                'uses' => 'UserRepositoryController@destroy'
-            ]);
-    //Route::get('listuserrepository/delete/{id}', ['as' => 'delete.userrepositorys', 'uses' => function(){
-//    echo 'Teste';
-//}]);
+    ['as' => 'delete.userrepositorys',
+        'uses' => 'UserRepositoryController@destroy'
+    ]);
+
 
 //COMPETICAO
 Route::get('competition/show/{id}', ['as' => 'competition.show', 'uses' => 'CompetitionController@show']);

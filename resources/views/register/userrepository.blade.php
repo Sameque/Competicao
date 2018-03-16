@@ -26,48 +26,13 @@
             </div>
 
             <div class=" col-md-8">
-
                 <div class="formCad">
                     <h2>Cadastro de Repositório</h2></br>
 
                     <div class="formCompetition">
 
-                            </br>
+                        @include('templates.userrepository')
 
-                        <br/>
-                        <?php
-                        echo Form::open(array('name' => 'cadForm1',
-                                'url' => 'userrepository/store',
-                                'method' => 'POST'));
-                        ?>
-
-                        <br/>
-                        </br >
-                        <?php
-                        echo Form::label('repository_id', 'Repositário') . '<br/>';
-                        echo Form::select('repository_id', $repositorys,null,[
-                                'placeholder' => 'Selecione um Repositório',
-                                'class' => 'form-control']);
-                        echo '<br/>';
-
-                        echo '<br/>';
-                        echo Form::label('username', 'Usuário') . '<br/>';
-                        echo Form::text('username', null, array(
-                                        'class' => 'form-control',
-                                        'placeholder' => 'Digite o nome do repositório',
-                                )) . '<br/>';
-                        ?>
-
-                        <input value={!! $user_id !!} name="user_id" id="user_id" type="hidden" class="form-control"
-                               ng-model="user.id"/>
-
-                        </br >
-
-                        <?php
-                        echo Form::submit('Adicionar', array('class' => 'btn btn-primary btn-block'));
-                        echo Form::close();
-                        echo '<br/>';
-                        ?>
                     </div>
                 </div>
             </div>

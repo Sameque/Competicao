@@ -10,6 +10,7 @@
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Nivel de Acesso</th>
+                <th>Repositório</th>
                 <th>Editar</th>
 
             </tr>
@@ -21,7 +22,12 @@
                     <td>{!! $user->accessLevel !!}</td>
                     <td>
                         <?php
-                            echo link_to_route('edit.user', $title = 'Editar', $parameters = array($user->id), $attributes = array('class' => 'btn  btn-primary '));
+                            echo link_to_route('edit.userrepository',   $title = 'Repositório!', $parameters = array($user->id), $attributes = array('class' => 'btn btn-success btn-block'));
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                            echo link_to_route('edit.user',             $title = 'Editar',      $parameters = array($user->id), $attributes = array('class' => 'btn  btn-primary btn-block'));
                         ?>
                     </td>
 

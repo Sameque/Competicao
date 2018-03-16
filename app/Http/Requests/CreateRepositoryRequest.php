@@ -19,7 +19,6 @@ class CreateRepositoryRequest extends Request
 
     public function authorize()
     {
-
         return true;
     }
 
@@ -32,8 +31,7 @@ class CreateRepositoryRequest extends Request
     {
         return [
             'name' => 'required',
-            'url' => 'required|urlvalid'
-//            'url' => 'required|active_url'
+            'url' => 'required|active_url'
         ];
     }
 

@@ -25,7 +25,11 @@ class CreateUserRepositoryRequest extends Request
     {
 
         return [
-            ['username' =>'required|userrepository'],
+            [
+                'username' => 'required',
+                'repository_id' => 'required',
+                'user_id' => 'required'
+            ],
         ];
     }
 }
