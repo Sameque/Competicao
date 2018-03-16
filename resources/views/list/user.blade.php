@@ -8,11 +8,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Usuário</th>
                 <th>Email</th>
-                <th>CPF</th>
-                <th>RG</th>
-                <th>Ano Formação</th>
                 <th>Nivel de Acesso</th>
                 <th>Editar</th>
 
@@ -21,11 +17,7 @@
                 <tr>
                     <td>{!! $user->id !!}</td>
                     <td>{!! $user->name !!}</td>
-                    <td>{!! $user->username !!}</td>
                     <td>{!! $user->email !!}</td>
-                    <td>{!! $user->cpf !!}</td>
-                    <td>{!! $user->rg !!}</td>
-                    <td>{!! $user->yearCourse !!}</td>
                     <td>{!! $user->accessLevel !!}</td>
                     <td>
                         <?php
