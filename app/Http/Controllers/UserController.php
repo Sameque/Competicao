@@ -68,9 +68,9 @@ class UserController extends Controller
         return view('edit.user', compact('user'));
     }
 
-    public function update(EditUserRequest $request)
+    public function update(EditUserRequest $request, $id)
     {
-        $user = User::findOrFail($request->id);
+        $user = User::findOrFail($id);
 
         $user->fill($request->all());
         $user->password = bcrypt($request->input('password'));

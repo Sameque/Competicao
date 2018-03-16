@@ -4,7 +4,7 @@
     <div class="formCad" >
         <h2>Cadastro de Usuário</h2></br>
         <?php
-        echo Form::model($user,['route' => ['update.user'], 'method' => 'POST']);
+        echo Form::model($user,['route' => ['update.user', $user->id], 'method' => 'POST']);
         ?>
 
         @include('templates.registerUser')

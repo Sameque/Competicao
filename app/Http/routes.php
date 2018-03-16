@@ -24,16 +24,17 @@ Route::get('/', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@in
 //Route::get('/home', ['as' => 'competicao.index', 'uses' =>  'CompeticaoController@index']);
 
 //Users
-Route::get('user/create', ['as' => 'create.user', 'uses' => 'UserController@create']);
-Route::post('store', ['as' => 'store.user', 'uses' => 'UserController@store']);
-Route::put('update', ['as' => 'update.user', 'uses' => 'UserController@update']);
-Route::get('edit/{id}', ['as' => 'edit.user', 'uses' => 'UserController@edit']);
-Route::delete('delete/{id}', ['as' => 'delete.user', 'uses' => 'UserController@destroy']);
-Route::get('listuser', ['as' => 'list.users', 'uses' => 'UserController@index']);
-Route::get('users', ['as' => 'users', 'uses' => 'UserController@users']);
-Route::get('show/{id}', ['as' => 'show.user', 'uses' => 'UserController@show']);
-Route::get('user/userrepository/{id}', ['as' => 'user.userrepository', 'uses' => 'UserController@userrepository']);
-
+Route::post('store',            ['as' => 'store.user',  'uses' => 'UserController@store']);
+Route::get('user/create',       ['as' => 'create.user', 'uses' => 'UserController@create']);
+Route::post('update/{id}',      ['as' => 'update.user', 'uses' => 'UserController@update']);
+Route::get('edit/{id}',         ['as' => 'edit.user',   'uses' => 'UserController@edit']);
+Route::delete('delete/{id}',    ['as' => 'delete.user', 'uses' => 'UserController@destroy']);
+Route::get('listuser',          ['as' => 'list.users',  'uses' => 'UserController@index']);
+Route::get('users',             ['as' => 'users',       'uses' => 'UserController@users']);
+Route::get('show/{id}',         ['as' => 'show.user',   'uses' => 'UserController@show']);
+Route::get('user/userrepository/{id}',
+                                ['as' => 'user.userrepository',
+                                                        'uses' => 'UserController@userrepository']);
 
 //Repositorys -> repository
 Route::get('repository/create', ['as' => 'create.repository', 'uses' => 'RepositoryController@create']);
