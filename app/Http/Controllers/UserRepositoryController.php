@@ -22,10 +22,10 @@ class UserRepositoryController extends Controller
      */
     public function store(Request $request,$id)
     {
-        dd($request,$id);
-        $id = $request->input('user_id');
+        $userRepository = new UserRepository($request->all());
+        $userRepository->save();
 
-        return $this->edit($id);
+        return $this->edit($userRepository->id);
     }
 
     /**
@@ -71,10 +71,8 @@ class UserRepositoryController extends Controller
         $repositorysAll = Repository::all();
         $repositorys=false;
         $userRepositorys = User::findOrNew($user_id)->userRepository;
+        $repositorys = [];
 
-        foreach ($userRepositorys as $userRepository) {
-            $userRepository->repository;
-        }
         foreach($repositorysAll as $repository){
             $repositorys[$repository->id] = $repository->name;
         }

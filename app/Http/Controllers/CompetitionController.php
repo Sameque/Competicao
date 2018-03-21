@@ -73,6 +73,7 @@ class CompetitionController extends Controller {
      * @return Response
      */
     public function store(Request $request) {
+
         $competition = new Competition($request->all());
 
         $competition->save();
@@ -101,13 +102,12 @@ class CompetitionController extends Controller {
      */
     public function edit($id) {
         
-        
         $competition = Competition::find($id);
         
         return view('edit.competition', [
-            'competition' => $competition,
-            'problems' => $competition->problems,
-            'users' => $competition->users
+            'competition' => $competition
+            ,'problems' => $competition->problems
+            ,'users' => $competition->users
         ]);
     }
 

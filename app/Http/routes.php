@@ -55,7 +55,7 @@ Route::get('repository/index',      ['as' => 'index.repository',     'uses' => '
 */
 
 Route::get('userrepository/{user_id}',      ['as' => 'edit.userrepository', 'uses' => 'UserRepositoryController@edit']);
-Route::post('userrepository/store',         ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
+Route::post('userrepository/store/{id}',         ['as' => 'store.userrepository', 'uses' => 'UserRepositoryController@store']);
 Route::get('userrepository/show/{user_id}', ['as' => 'user.userrepositoryshow', 'uses' => 'UserRepositoryController@show']);
 Route::get('listuserrepository',            ['as' => 'list.userrepositorys', 'uses' => 'UserRepositoryController@show']);
 

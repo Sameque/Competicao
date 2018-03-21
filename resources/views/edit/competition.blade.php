@@ -13,7 +13,6 @@
                 //$inicio = DateTime::createFromFormat('Y-m-d H:i:s', $competition->dateBegin.$competition->hoursBegin);
                $inicio = DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
                 $hrs =  DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
-                //dd($inicio);
                 $intervalo = $inicio->diff($hrs);
 
                 if($inicio > $hrs){echo 'Falta: '.$intervalo->format('%Y-%m-%d %H:%I:%S');}
@@ -31,6 +30,7 @@
                 $dateBegin = DateTime::createFromFormat('Y-m-d', $competition->dateBegin);
                    // dd($competition->dateBegin);
 //                    $competition->hoursBegin->format('H:I');
+
                     echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
                     echo '<div class="row">'
                                 .'<div class="inputNameCompetiton">';

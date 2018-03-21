@@ -12,6 +12,7 @@
                 <th>Nivel de Acesso</th>
                 <th>Repositório</th>
                 <th>Editar</th>
+                <th>Excluir</th>
 
             </tr>
             @foreach ($users as $user)
@@ -27,18 +28,17 @@
                     </td>
                     <td>
                         <?php
-                            echo link_to_route('edit.user',             $title = 'Editar',      $parameters = array($user->id), $attributes = array('class' => 'btn  btn-primary btn-block'));
+                            echo link_to_route('edit.user',             $title = 'Editar',      $parameters = array($user->id), $attributes = array('class' => 'btn  btn-primary btn-block' ,'method'=>'delete'));
                         ?>
                     </td>
 
+                    <td class="">
                         <?php
-//                        echo '<td>';
-//                        echo Form::open(array('route' => ['delete.user', $user->id], 'method' => 'DELETE'));
-//                        echo Form::submit('Excluir!', array('class' => 'btn btn-danger'));
-//                        echo Form::close();
-//                        echo '</td>';
-//                        ?>
-
+                            echo Form::open(array('route' => ['delete.user', $user->id], 'method' => 'DELETE'));
+                            echo Form::submit('Excluir!', array('class' => 'btn btn-danger'));
+                            echo Form::close();
+                        ?>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

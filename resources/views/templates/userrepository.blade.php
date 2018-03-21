@@ -9,6 +9,7 @@
     echo Form::text('username', null, array('placeholder' => 'Nome do repositório','class' => 'form-control'));
     echo '<br/>';
 
+    echo Form::hidden('user_id', $user_id,['placeholder' => 'Repositório','class' => 'form-control']);
     echo Form::submit('Adicionar', array('class' => 'btn btn-primary btn-block'));
     echo Form::close();
     ?>
