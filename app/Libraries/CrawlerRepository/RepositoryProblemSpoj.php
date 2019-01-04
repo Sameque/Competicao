@@ -24,7 +24,6 @@ class RepositoryProblemSpoj
 
     public function getProblem($problem,$username)
     {
-
         if($username != null and $problem == null) {
             $this->htmlProblemUser = file_get_contents(URL_PROBLEMS__USER_SPOJ.$username.'/');
             return $this->getProblemUsers();
@@ -68,6 +67,7 @@ class RepositoryProblemSpoj
         foreach($crawler as $key => $domElement){
 
 //            echo $key.' => '.$domElement->nodeValue.'<br/>';
+            $problem['problem_id'] = 0;
 
             if ($key == $i){
                 $problem['date'] = substr($domElement->nodeValue, 2,10);
@@ -107,7 +107,7 @@ class RepositoryProblemSpoj
 
             }
         }
-//        dd($problems);
+        //dd($problems);
         return $problems;
     }
 

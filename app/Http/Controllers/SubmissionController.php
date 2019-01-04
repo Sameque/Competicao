@@ -23,11 +23,6 @@ class SubmissionController extends Controller
         return view('list.submission');
     }
 
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -78,17 +73,34 @@ class SubmissionController extends Controller
         $problemCompetition = $this->getProblemsCompetition($competition_id);
         $usersCompetiton = $this->getUsersCompetition($competition_id);
 
+
+
         if(!$usersCompetiton){
             return $usersCompetiton;
         }
 
         foreach($usersCompetiton as $user){
-
+            $user->userRepository;
+            
             foreach($user->userRepository as $userRepository){
 
                 $repositoryName = App\Repository::findOrNew($userRepository->repository_id)->name;
 
                 $problems = $this->getProblemInRepository($problemCompetition,$userRepository->repository_id);
+
+
+                //$dateTime = date('Y-m-d',$competition->dateBegin);
+                $dateTime = date('Y-m-d',strtotime('2000-02-02'));
+
+
+                dd($competition->dateBegin,$dateTime);
+                
+
+
+
+                if( date($competition->dateBegin) >= '2000-02-02' ){
+                    dd($competition->dateBegin);
+                }
 
                 if ($problems) {
                     $submission = $this->getProblemUser(
@@ -121,9 +133,11 @@ class SubmissionController extends Controller
                         $submissionModel->problem_id = $item['problem_id'];
                         $submissionModel->user_id = $user->id;
                         $submissionModel->competition_id = $competition->id;
+
                         $submissionModel->save();
                         $submissionModels[] = $submissionModel;
                     }
+
                 }
             }
         }
@@ -210,35 +224,44 @@ class SubmissionController extends Controller
 
         $problemSubmisions = null;
 
-        foreach ($problems as $problem) {
+        foreach ((array) $problems as $problem) {
             $problemSubmisions[] = RepositoryProblem::getRepositoryProblem(
                 $repositoryName,
                 $problem['code'],
                 $username);
         }
+
+
         /**
          * Anda no array de registros de submissões
          */
-        $auxSubmission = null;
-    foreach($problemSubmisions as $submisions){
+        $auxSubmission = array();
+        
 
-        foreach ($submisions as $submision) {
+        foreach((array) $problemSubmisions as $submisions){
 
-            foreach ($problems as $problem) {
-                /**
-                 * verifica se o respectivo problema pertence a essa competição e se
-                 * os registros estão dentro do periodo da competição.
-                 */
+            foreach ((array) $submisions as $submision) {
 
-                if ($submision['code'] == $problem['code'] and
-                    ($submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt)
-                ) {
-                    $submision['problem_id'] = $problem['id'];
-                    $auxSubmission[] = $submision;
+                foreach ($problems as $problem) {
+                    /**
+                     * verifica se o respectivo problema pertence a essa competição e se
+                     * os registros estão dentro do periodo da competição.
+                     */
+
+
+                    if ((array) $submision['code'] == $problem['code'] and ($submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt)
+                    ) {
+        dd($problemSubmisions,$problems,$competitionBegin_dt,$competitionEnd_dt);
+
+                        $submision['problem_id'] = $problem['id'];
+                        $auxSubmission[] = $submision;
+
+                    }
+
                 }
             }
         }
-    }
+
         return $auxSubmission;
     }
 

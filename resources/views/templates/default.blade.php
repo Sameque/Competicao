@@ -10,9 +10,9 @@
     echo '';//Html::script('node_modules\angular\angular-route.min.js');
 
     echo '';//Html::script('js/app.js');
-    echo Html::script('js/jquery/jquery-1.12.3.min.js');
-    echo Html::script('js/jquery/dist/jquery.maskedinput.js');
-    echo Html::script('js/mask.js');
+    //echo Html::script('js/jquery/jquery-1.12.3.min.js');
+    //echo Html::script('js/jquery/dist/jquery.maskedinput.js');
+    //echo Html::script('js/mask.js');
 
     ?>
     <meta charset="UTF-8">

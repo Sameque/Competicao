@@ -1,24 +1,24 @@
 @extends('templates.default')
 @section('content')
+
     <div>
         <div class="row formCompetition">
 
             <div class="title">
                 <h2>Cadastro de Competição</h2></br>
             </div>
-
             <div class="col-md-4">
                 <br/>
                 <?php
                 //$inicio = DateTime::createFromFormat('Y-m-d H:i:s', $competition->dateBegin.$competition->hoursBegin);
-               $inicio = DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
-                $hrs =  DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
-                $intervalo = $inicio->diff($hrs);
+               //$inicio = DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
+                //$hrs =  DateTime::createFromFormat('Y-m-d H:i:s', '2015-10-11 10:00:00');
+                //$intervalo = $inicio->diff($hrs);
 
-                if($inicio > $hrs){echo 'Falta: '.$intervalo->format('%Y-%m-%d %H:%I:%S');}
-                else {
-                    echo 'Inicio '.$inicio->format('d/m/y h:i:s');
-                }
+               // if($inicio > $hrs){echo 'Falta: '.$intervalo->format('%Y-%m-%d %H:%I:%S');}
+                //else {
+                //    echo 'Inicio '.$inicio->format('d/m/y h:i:s');
+               // }
 
 //                echo $intervalo->format('%Y-%m-%d %H:%I:%S');//.'-'.$competition->dateBegin.$competition->hoursBegin;
 
@@ -27,11 +27,13 @@
                 //dd($intervalo);
                 //echo $intervalo;
 
-                $dateBegin = DateTime::createFromFormat('Y-m-d', $competition->dateBegin);
+                //$dateBegin = DateTime::createFromFormat('Y-m-d', $competition->dateBegin);
+
                    // dd($competition->dateBegin);
 //                    $competition->hoursBegin->format('H:I');
 
                     echo Form::model($competition, ['route' => ['competition.update', $competition], 'method' => 'PUT']);
+
                     echo '<div class="row">'
                                 .'<div class="inputNameCompetiton">';
 
@@ -48,7 +50,7 @@
 
                         echo Form::label('dateBegin', 'Data de Início');
                         echo Form::date('dateBegin',
-                                $competition->dateBegin->format('d/m/Y'),
+                                $competition->dateBegin,
                                 [
                                 'class' => 'form-control',
                                 'maxlength'=>10
@@ -57,7 +59,7 @@
                         echo '<br/>';
                         echo Form::label('dateEnd', 'Data de Termino');
                         echo Form::date('dateEnd',
-                                $competition->dateEnd->format('d/m/Y'),
+                                $competition->dateEnd,
                                 [
                                 'class' => 'form-control',
                                 'maxlength'=>10

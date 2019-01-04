@@ -123,8 +123,8 @@ class CompetitionController extends Controller {
     public function update(Request $request, $id) {
         $competition = Competition::find($id);
         $competition->fill($request->all());
-
         $competition->save();
+        
         return $this->edit($competition->id);
     }
 
