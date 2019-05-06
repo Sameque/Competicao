@@ -17,18 +17,18 @@ class CompetitionSeeder extends Seeder
 
         Competition::create([
             'name'=>'Competicao_Teste-01',
-            'dateBegin'=>'01/01/2001',
+            'dateBegin'=>'2001-01-01',
             'hoursBegin'=>'11:11',
-            'dateEnd'=>'01/01/2001',
+            'dateEnd'=>'2001-01-01',
             'hoursEnd'=>'11:11'
         ]);
-
-        Competition::create([
-            'name'=>'Competicao_Teste-02',
-            'dateBegin'=>'02/02/2002',
-            'hoursBegin'=>'12:12',
-            'dateEnd'=>'02/02/2001',
-            'hoursEnd'=>'12:12'
-        ]);
+//
+//        Competition::create([
+//            'name'=>'Competicao_Teste-02',
+//            'dateBegin'=>'02/02/2002',
+//            'hoursBegin'=>'12:12',
+//            'dateEnd'=>'02/02/2001',
+//            'hoursEnd'=>'12:12'
+//        ]);
     }
 }
