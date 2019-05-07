@@ -50,6 +50,6 @@ class ValidateProblemSpoj
 
     private function getHTML($url) {
         $headers = get_headers($url);
-        return substr($headers[0], 9, 3);
+        return substr($headers[9], 9, 3);
     }
 }
