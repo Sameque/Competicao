@@ -47,7 +47,6 @@ class ProblemController extends Controller {
      */
     public function store(Request $request) {
 
-//        dd('ProblemController >> store',$request);
         $validator = Validator::make($request->all(), [
                     'code' => 'required',
                     'repository_id' => 'required',
@@ -55,17 +54,14 @@ class ProblemController extends Controller {
 
         if ($request->repository_id == 1) {
             $validator->sometimes('code', 'problemspoj', function ($input) {
-//                dd('ProblemController >> store >> sometimes 1', $input);
                 return $input->repository_id > 0;
             });
         } elseif ($request->repository_id == 2){
             $validator->sometimes('code', 'problemuri', function ($input) {
-//                dd('ProblemController >> store >> sometimes 2', $input);
                 return $input->repository_id > 0;
             });
         } elseif ($request->repository_id == 3){
             $validator->sometimes('code', 'problemuva', function ($input) {
-//                dd('ProblemController >> 'store >> sometimes 3', $input);
                 return $input->repository_id > 0;
             });
         }
