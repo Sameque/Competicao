@@ -9,6 +9,8 @@
 namespace App\Libraries\DateTime;
 
 
+use Carbon\Carbon;
+
 class DateTime {
 
 
@@ -23,6 +25,11 @@ class DateTime {
         $elapsed = $timeEndMin - $timeInitMin;
 
         return $elapsed;
+    }
+
+    public  function  addTimeInDate($date, $time){
+        $time = new Carbon($time);
+        return Carbon::create($date->year,$date->month,$date->day,$time->hour,$time->minute,$time->second);
     }
 
     /**
