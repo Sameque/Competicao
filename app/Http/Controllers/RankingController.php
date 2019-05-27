@@ -20,6 +20,7 @@ class RankingController extends Controller
      */
     public function index($competition_id)
     {
+
         $competition = Competition::findOrNew($competition_id);
         $submission = new SubmissionController();
         $submissions = $submission->update($competition_id);
@@ -97,9 +98,9 @@ class RankingController extends Controller
     {
         
         
-        dd($this->makeRanking($competition_id));
-        
+
 dd("aqui",'RankingController@show');
+
         $ranking = Ranking::find($competition_id);
 
         return view('list.ranking')->with('ranking', $ranking);

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//use App\CrawleRepository\ValidateUsers;
+
 use App;
-//use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Libraries\CrawlerRepository\RepositoryProblem;
 use Illuminate\Support\Facades\DB;
@@ -23,47 +23,6 @@ class SubmissionController extends Controller
         return view('list.submission');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Atualizar a competição.
-     * Verifica as submições dos usuários para atualizar o ranking
-     *
-     * @param  Request $request
-     * @param  int $id
-     * @return Response
-     */
     public function update($competition_id)
     {
         $competition = App\Competition::findOrNew($competition_id);
@@ -73,34 +32,46 @@ class SubmissionController extends Controller
         $problemCompetition = $this->getProblemsCompetition($competition_id);
         $usersCompetiton = $this->getUsersCompetition($competition_id);
 
-
+        //CRIANDO USUÁRIO
+        $dateInitial = $dateTime->addTimeInDate($competition->dateBegin,$competition->hoursBegin);
 
         if(!$usersCompetiton){
             return $usersCompetiton;
         }
 
+
         foreach($usersCompetiton as $user){
-            $user->userRepository;
-            
+            //$user->userRepository;
+
             foreach($user->userRepository as $userRepository){
 
                 $repositoryName = App\Repository::findOrNew($userRepository->repository_id)->name;
 
                 $problems = $this->getProblemInRepository($problemCompetition,$userRepository->repository_id);
 
-
-                //$dateTime = date('Y-m-d',$competition->dateBegin);
-                $dateTime = date('Y-m-d',strtotime('2000-02-02'));
+//                dd($competition);
 
 
-                dd($competition->dateBegin,$dateTime);
-                
+//                dd(strtotime($competition->dateBegin) , $competition->hoursBegin);
+
+//                \DateTime::createFromFormat('Y-m-d', substr($domElement->nodeValue, 2,10));
 
 
 
-                if( date($competition->dateBegin) >= '2000-02-02' ){
-                    dd($competition->dateBegin);
-                }
+                dd(
+
+                        $competition->dateBegin
+                        ,$dateTime->addTimeInDate($competition->dateBegin,$competition->hoursBegin)
+                        ,Carbon::createFromTime(10, 23)
+                        ,$competition->dateBegin->createFromFormat('d/m/Y', '01/03/2010')
+                        ,date('Y-m-d H:i', strtotime('+30 minutes'))
+                        ,Carbon::create($competition->dateBegin->year,$competition->dateBegin->month,$competition->dateBegin->day,1,1,1)
+                        ,$competition->hoursBegin
+                    ,date($competition->dateBegin)
+                    ,date($competition->dateBegin)
+
+
+                );
 
                 if ($problems) {
                     $submission = $this->getProblemUser(
@@ -110,34 +81,35 @@ class SubmissionController extends Controller
                         $userRepository->username,
                         $problems
                     );
+//                    dd($problem['dateHours'],$domElement->nodeValue);
 
-                    if (!$submission) {
-                        return $submission;
+                    if ($submission) {
+
+
+                        DB::table('submission')
+                            ->where('competition_id', '=', $competition->id)
+                            ->where('user_id', '=', $user->id)
+                            ->delete();
+
+                        foreach ($submission as $item) {
+
+                            $submissionModel = new App\Submission();
+
+                            $submissionModel->date = $item['date'];
+                            $submissionModel->hours = $item['hours'];
+                            $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'], $repositoryName);
+                            $submissionModel->problem = $item['code'];
+                            $submissionModel->result = $item['result'];
+                            $submissionModel->language = $item['language'];
+                            $submissionModel->problem_id = $item['problem_id'];
+                            $submissionModel->user_id = $user->id;
+                            $submissionModel->competition_id = $competition->id;
+
+                            $submissionModel->save();
+                            $submissionModels[] = $submissionModel;
+
+                        }
                     }
-
-                    DB::table('submission')
-                        ->where('competition_id', '=', $competition->id)
-                        ->where('user_id', '=', $user->id)
-                        ->delete();
-
-                    foreach ($submission as $item) {
-
-                        $submissionModel = new App\Submission();
-
-                        $submissionModel->date = $item['date'];
-                        $submissionModel->hours = $item['hours'];
-                        $submissionModel->hours = $dateTime->diffTimeRepository($item['hours'], $repositoryName);
-                        $submissionModel->problem = $item['code'];
-                        $submissionModel->result = $item['result'];
-                        $submissionModel->language = $item['language'];
-                        $submissionModel->problem_id = $item['problem_id'];
-                        $submissionModel->user_id = $user->id;
-                        $submissionModel->competition_id = $competition->id;
-
-                        $submissionModel->save();
-                        $submissionModels[] = $submissionModel;
-                    }
-
                 }
             }
         }
@@ -236,23 +208,19 @@ class SubmissionController extends Controller
          * Anda no array de registros de submissões
          */
         $auxSubmission = array();
-        
 
         foreach((array) $problemSubmisions as $submisions){
 
             foreach ((array) $submisions as $submision) {
 
-                foreach ($problems as $problem) {
+                foreach ((array) $problems as $problem) {
                     /**
                      * verifica se o respectivo problema pertence a essa competição e se
                      * os registros estão dentro do periodo da competição.
                      */
 
-
-                    if ((array) $submision['code'] == $problem['code'] and ($submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt)
+                        if ( $submision['code'] == $problem['code'] and ($submision['date'] >= $competitionBegin_dt and $submision['date'] <= $competitionEnd_dt)
                     ) {
-        dd($problemSubmisions,$problems,$competitionBegin_dt,$competitionEnd_dt);
-
                         $submision['problem_id'] = $problem['id'];
                         $auxSubmission[] = $submision;
 

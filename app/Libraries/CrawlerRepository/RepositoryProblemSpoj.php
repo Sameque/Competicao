@@ -66,12 +66,12 @@ class RepositoryProblemSpoj
 
         foreach($crawler as $key => $domElement){
 
-//            echo $key.' => '.$domElement->nodeValue.'<br/>';
             $problem['problem_id'] = 0;
 
             if ($key == $i){
-                $problem['date'] = substr($domElement->nodeValue, 2,10);
+                $problem['date'] = \DateTime::createFromFormat('Y-m-d', substr($domElement->nodeValue, 2,10));
                 $problem['hours'] = substr($domElement->nodeValue, 13,8);
+                $problem['dateHours'] = \DateTime::createFromFormat('Y-m-d H:i:s', substr($domElement->nodeValue, 2,19));
                 $i+=7;
             }
 
@@ -104,10 +104,8 @@ class RepositoryProblemSpoj
                 $problems[]=$problem;
                 $problem = null;
                 $y+=7;
-
             }
         }
-        //dd($problems);
         return $problems;
     }
 
@@ -154,7 +152,6 @@ class RepositoryProblemSpoj
 
 
             if( $key == $k and $domElement->nodeValue <> '') {
-//                $register['result'] = $domElement->nodeValue;
                 $register['result'] = $this->formatField($domElement->nodeValue);
                 $k = $k +7;
             }
